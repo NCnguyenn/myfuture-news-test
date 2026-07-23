@@ -137,7 +137,7 @@ function findWorkspaceRoot(): string {
   ];
   for (const candidate of candidates) {
     if (
-      existsSync(path.join(candidate, 'md/content-research/manifest-codex-2026-07-23.json'))
+      existsSync(path.join(candidate, 'docs/research/manifest-codex-2026-07-23.json'))
     ) {
       return candidate;
     }
@@ -254,7 +254,7 @@ export function loadOfficialArticles(): OfficialArticleSeed[] {
   const workspaceRoot = findWorkspaceRoot();
   const manifestPath = path.join(
     workspaceRoot,
-    'md/content-research/manifest-codex-2026-07-23.json',
+    'docs/research/manifest-codex-2026-07-23.json',
   );
   const rawManifest = JSON.parse(readFileSync(manifestPath, 'utf8')) as RawManifest;
   const imageManifest = loadImageManifest(workspaceRoot);

@@ -75,7 +75,7 @@ function readManifest(): RawManifest {
   return JSON.parse(
     readFileSync(
       findWorkspaceFile(
-        'md/content-research/manifest-codex-2026-07-23.json',
+        'docs/research/manifest-codex-2026-07-23.json',
       ),
       'utf8',
     ),

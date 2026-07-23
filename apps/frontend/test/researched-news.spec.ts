@@ -78,8 +78,8 @@ test('does not reuse any source URL from the Antigravity manifest', () => {
     readFileSync(
       path.join(
         workspaceRoot,
-        'md',
-        'content-research',
+        'docs',
+        'research',
         'manifest-2026-07-23.json',
       ),
       'utf8',
