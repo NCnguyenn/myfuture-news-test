@@ -4,7 +4,7 @@ import {
   loadOfficialArticles,
   OFFICIAL_CATEGORY_ORDER,
   type OfficialArticleSeed,
-} from '../scripts/lib/official-news-data';
+} from '../../../scripts/lib/official-news-data';
 
 const prisma = new PrismaClient();
 

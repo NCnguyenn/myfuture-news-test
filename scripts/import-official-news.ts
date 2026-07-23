@@ -55,7 +55,11 @@ function workspaceRoot(): string {
     path.resolve(process.cwd()),
   ];
   for (const candidate of candidates) {
-    if (existsSync(path.join(candidate, 'prisma/schema.prisma'))) {
+    if (
+      existsSync(
+        path.join(candidate, 'apps/backend/prisma/schema.prisma'),
+      )
+    ) {
       return candidate;
     }
   }
@@ -90,13 +94,13 @@ function resolveEnv(): void {
     const dotenv = require('dotenv') as { config: (opts?: { path?: string }) => void };
     const root = workspaceRoot();
     dotenv.config({ path: path.join(root, '.env') });
-    dotenv.config({ path: path.join(root, 'apps/api/.env') });
+    dotenv.config({ path: path.join(root, 'apps/backend/.env') });
   } catch {
     // dotenv optional
   }
   const root = workspaceRoot();
   loadEnvFile(path.join(root, '.env'));
-  loadEnvFile(path.join(root, 'apps/api/.env'));
+  loadEnvFile(path.join(root, 'apps/backend/.env'));
 }
 
 function maskSecret(value: string): string {
