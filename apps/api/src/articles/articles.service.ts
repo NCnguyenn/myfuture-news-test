@@ -21,8 +21,12 @@ const listSelect = {
   slug: true,
   excerpt: true,
   thumbnailUrl: true,
+  imageAlt: true,
   publishedAt: true,
   viewCount: true,
+  authorName: true,
+  authorSlug: true,
+  authorType: true,
   category: { select: { name: true, slug: true } },
 } satisfies Prisma.ArticleSelect;
 
@@ -32,9 +36,15 @@ type ArticleListItem = {
   slug: string;
   excerpt: string;
   thumbnailUrl: string;
+  imageAlt: string;
   publishedAt: Date | string;
   viewCount: number;
   category: { name: string; slug: string };
+  author: {
+    name: string;
+    slug: string;
+    authorType: string;
+  };
 };
 
 type ArticleListResponse = {
@@ -49,6 +59,12 @@ type ArticleListResponse = {
   };
 };
 
+type ArticleEvidence = {
+  claim: string;
+  sourceUrl: string;
+  evidenceNote: string;
+};
+
 type ArticleDetailResponse = {
   data: {
     id: string;
@@ -58,6 +74,7 @@ type ArticleDetailResponse = {
     contentHtml: string;
     thumbnailUrl: string;
     coverImageUrl: string | null;
+    imageAlt: string;
     publishedAt: Date | string;
     viewCount: number;
     readingTime: number | null;
@@ -65,11 +82,79 @@ type ArticleDetailResponse = {
     sourceUrl: string | null;
     isFeatured: boolean;
     category: { name: string; slug: string };
+    author: {
+      name: string;
+      slug: string;
+      authorType: string;
+      verificationNote: string;
+    };
+    evidence: ArticleEvidence[];
+    imageProvenance: {
+      localPath: string;
+      originalImageUrl: string | null;
+      sourcePageUrl: string;
+      credit: string | null;
+      isPlaceholder: boolean;
+    };
     relatedArticles: ArticleListItem[];
-    previousArticle: null;
-    nextArticle: null;
+    previousArticle: ArticleListItem | null;
+    nextArticle: ArticleListItem | null;
   };
 };
+
+function mapListItem(article: {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  thumbnailUrl: string;
+  imageAlt: string | null;
+  publishedAt: Date;
+  viewCount: number;
+  authorName: string | null;
+  authorSlug: string | null;
+  authorType: string | null;
+  category: { name: string; slug: string };
+}): ArticleListItem {
+  return {
+    id: article.id,
+    title: article.title,
+    slug: article.slug,
+    excerpt: article.excerpt,
+    thumbnailUrl: article.thumbnailUrl,
+    imageAlt: article.imageAlt?.trim() || 'Ảnh minh họa',
+    publishedAt: article.publishedAt,
+    viewCount: article.viewCount,
+    category: article.category,
+    author: {
+      name: article.authorName?.trim() || 'MyFuture News',
+      slug: article.authorSlug?.trim() || 'myfuture-news',
+      authorType: article.authorType?.trim() || 'organization',
+    },
+  };
+}
+
+function asEvidenceArray(value: Prisma.JsonValue | null | undefined): ArticleEvidence[] {
+  if (!Array.isArray(value)) {
+    return [];
+  }
+  return value
+    .map((item) => {
+      if (!item || typeof item !== 'object' || Array.isArray(item)) {
+        return null;
+      }
+      const record = item as Record<string, unknown>;
+      const claim = typeof record.claim === 'string' ? record.claim : '';
+      const sourceUrl = typeof record.sourceUrl === 'string' ? record.sourceUrl : '';
+      const evidenceNote =
+        typeof record.evidenceNote === 'string' ? record.evidenceNote : '';
+      if (!claim && !sourceUrl) {
+        return null;
+      }
+      return { claim, sourceUrl, evidenceNote };
+    })
+    .filter((item): item is ArticleEvidence => item !== null);
+}
 
 @Injectable()
 export class ArticlesService {
@@ -103,7 +188,13 @@ export class ArticlesService {
       where.categoryId = category.id;
     }
 
-    const cacheKey = articleListCacheKey({ category: query.category, page, limit, featured: query.featured, sort });
+    const cacheKey = articleListCacheKey({
+      category: query.category,
+      page,
+      limit,
+      featured: query.featured,
+      sort,
+    });
     const cached = await this.cache.getJson<ArticleListResponse>(cacheKey);
     if (cached) {
       return cached;
@@ -119,8 +210,8 @@ export class ArticlesService {
       select: listSelect,
     });
 
-    const response = {
-      data: articles,
+    const response: ArticleListResponse = {
+      data: articles.map(mapListItem),
       meta: {
         page,
         limit,
@@ -152,12 +243,22 @@ export class ArticlesService {
         contentHtml: true,
         thumbnailUrl: true,
         coverImageUrl: true,
+        imageAlt: true,
+        imageCredit: true,
+        originalImageUrl: true,
+        imageSourcePageUrl: true,
+        imageIsPlaceholder: true,
         publishedAt: true,
         viewCount: true,
         readingTime: true,
         sourceName: true,
         sourceUrl: true,
         isFeatured: true,
+        authorName: true,
+        authorSlug: true,
+        authorType: true,
+        authorVerificationNote: true,
+        evidence: true,
         categoryId: true,
         category: { select: { name: true, slug: true } },
       },
@@ -170,36 +271,91 @@ export class ArticlesService {
       });
     }
 
-    const relatedArticles = await this.prisma.article.findMany({
+    const relatedRaw = await this.prisma.article.findMany({
       where: {
         isPublished: true,
         categoryId: article.categoryId,
         id: { not: article.id },
       },
       orderBy: [{ publishedAt: 'desc' }, { id: 'desc' }],
-      take: 5,
+      take: 3,
       select: listSelect,
     });
 
-    const response = {
+    // previous = older (lower publishedAt), next = newer (higher publishedAt)
+    // among all published articles ordered by publishedAt desc.
+    const previousRaw = await this.prisma.article.findFirst({
+      where: {
+        isPublished: true,
+        OR: [
+          { publishedAt: { lt: article.publishedAt } },
+          {
+            publishedAt: article.publishedAt,
+            id: { lt: article.id },
+          },
+        ],
+      },
+      orderBy: [{ publishedAt: 'desc' }, { id: 'desc' }],
+      select: listSelect,
+    });
+
+    const nextRaw = await this.prisma.article.findFirst({
+      where: {
+        isPublished: true,
+        OR: [
+          { publishedAt: { gt: article.publishedAt } },
+          {
+            publishedAt: article.publishedAt,
+            id: { gt: article.id },
+          },
+        ],
+      },
+      orderBy: [{ publishedAt: 'asc' }, { id: 'asc' }],
+      select: listSelect,
+    });
+
+    const listShape = {
+      id: article.id,
+      title: article.title,
+      slug: article.slug,
+      excerpt: article.excerpt,
+      thumbnailUrl: article.thumbnailUrl,
+      imageAlt: article.imageAlt,
+      publishedAt: article.publishedAt,
+      viewCount: article.viewCount,
+      authorName: article.authorName,
+      authorSlug: article.authorSlug,
+      authorType: article.authorType,
+      category: article.category,
+    };
+
+    const response: ArticleDetailResponse = {
       data: {
-        id: article.id,
-        title: article.title,
-        slug: article.slug,
-        excerpt: article.excerpt,
+        ...mapListItem(listShape),
         contentHtml: this.sanitizer.sanitize(article.contentHtml),
-        thumbnailUrl: article.thumbnailUrl,
         coverImageUrl: article.coverImageUrl,
-        publishedAt: article.publishedAt,
-        viewCount: article.viewCount,
         readingTime: article.readingTime,
         sourceName: article.sourceName,
         sourceUrl: article.sourceUrl,
         isFeatured: article.isFeatured,
-        category: article.category,
-        relatedArticles,
-        previousArticle: null,
-        nextArticle: null,
+        author: {
+          name: article.authorName?.trim() || 'MyFuture News',
+          slug: article.authorSlug?.trim() || 'myfuture-news',
+          authorType: article.authorType?.trim() || 'organization',
+          verificationNote: article.authorVerificationNote?.trim() || '',
+        },
+        evidence: asEvidenceArray(article.evidence),
+        imageProvenance: {
+          localPath: article.thumbnailUrl,
+          originalImageUrl: article.originalImageUrl,
+          sourcePageUrl:
+            article.imageSourcePageUrl?.trim() || article.sourceUrl || '',
+          credit: article.imageCredit,
+          isPlaceholder: article.imageIsPlaceholder,
+        },
+        relatedArticles: relatedRaw.map(mapListItem),
+        previousArticle: previousRaw ? mapListItem(previousRaw) : null,
+        nextArticle: nextRaw ? mapListItem(nextRaw) : null,
       },
     };
 

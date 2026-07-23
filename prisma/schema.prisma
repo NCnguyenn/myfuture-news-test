@@ -20,24 +20,37 @@ model Category {
 }
 
 model Article {
-  id            String   @id @default(uuid())
-  title         String
-  slug          String   @unique
-  excerpt       String
-  contentHtml   String
-  thumbnailUrl  String
-  coverImageUrl String?
-  publishedAt   DateTime @default(now())
-  isPublished   Boolean  @default(true)
-  isFeatured    Boolean  @default(false)
-  viewCount     Int      @default(0)
-  readingTime   Int?
-  sourceName    String?
-  sourceUrl     String?
-  categoryId    String
-  category      Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id                     String    @id @default(uuid())
+  title                  String
+  slug                   String    @unique
+  excerpt                String
+  contentHtml            String
+  thumbnailUrl           String
+  coverImageUrl          String?
+  publishedAt            DateTime  @default(now())
+  isPublished            Boolean   @default(true)
+  isFeatured             Boolean   @default(false)
+  viewCount              Int       @default(0)
+  readingTime            Int?
+  sourceName             String?
+  sourceUrl              String?
+  imageAlt               String?
+  imageCredit            String?
+  originalImageUrl       String?
+  imageSourcePageUrl     String?
+  imageIsPlaceholder     Boolean   @default(false)
+  authorName             String?
+  authorSlug             String?
+  authorType             String?
+  authorVerificationNote String?
+  dateModified           DateTime?
+  tags                   Json?
+  evidence               Json?
+  verification           Json?
+  categoryId             String
+  category               Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
 
   @@index([categoryId])
   @@index([publishedAt])

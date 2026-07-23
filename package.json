@@ -12,12 +12,16 @@
     "build:api": "npm --workspace apps/api run build",
     "build": "npm run build:web && npm run build:api",
     "typecheck": "npm run typecheck:web && npm run typecheck:api",
+    "test:web": "tsx --test apps/web/test/**/*.spec.ts",
     "test:api": "tsx --test apps/api/test/**/*.spec.ts",
     "typecheck:web": "npm --workspace apps/web run typecheck",
     "typecheck:api": "npm --workspace apps/api run typecheck",
     "db:migrate": "prisma migrate dev",
     "db:seed": "prisma db seed",
-    "db:generate": "prisma generate"
+    "db:generate": "prisma generate",
+    "sync:news-images": "tsx scripts/sync-researched-news-images.ts",
+    "import:official-news": "tsx scripts/import-official-news.ts",
+    "import:official-news:dry-run": "tsx scripts/import-official-news.ts --dry-run"
   },
   "prisma": {
     "seed": "npx tsx prisma/seed.ts"

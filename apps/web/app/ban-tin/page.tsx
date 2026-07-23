@@ -19,19 +19,24 @@ export const metadata: Metadata = {
 export default async function NewsOverviewPage() {
   const [categoriesResponse, featuredResponse, latestResponse] = await Promise.all([
     getCategories(),
-    getArticles({ featured: true, limit: 5 }),
-    getArticles({ page: 1, limit: 10 }),
+    getArticles({ page: 1, limit: 5, featured: true, sort: 'newest' }),
+    getArticles({ page: 1, limit: 10, sort: 'newest' }),
   ]);
+
+  const featuredArticles =
+    featuredResponse.data.length > 0
+      ? featuredResponse.data
+      : latestResponse.data.slice(0, 5);
 
   return (
     <div className="page-shell">
       <section className="page-intro">
         <p className="eyebrow">MYFUTURE NEWS</p>
         <h1>Bản tin thị trường</h1>
-        <p>Thông tin chọn lọc về pháp lý, quy hoạch, tài chính và cơ hội bất động sản.</p>
+        <p>Ba mươi bài viết mới được biên tập đầy đủ và kiểm chứng trực tiếp từ nguồn gốc.</p>
       </section>
       <NewsTabs categories={categoriesResponse.data} activeSlug={null} />
-      <FeaturedNews articles={featuredResponse.data} />
+      <FeaturedNews articles={featuredArticles} />
       <NewsList articles={latestResponse.data} title="Tin mới nhất" />
     </div>
   );
