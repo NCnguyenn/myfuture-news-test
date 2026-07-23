@@ -54,7 +54,7 @@ Do not swap frameworks or add extra frameworks without a clear technical reason.
 - Do not commit passwords, tokens, real connection strings, or `.env` files containing secrets.
 - Do not embed full article bodies in the frontend as hardcoded data.
 - Do not build an admin UI only to enter demo data; use Prisma seed.
-- Do not use remote image URLs for required seed data; use local SVG placeholders committed under `apps/web/public/images/news/`.
+- Do not use remote image URLs for required seed data; use local SVG placeholders committed under `apps/frontend/public/images/news/`.
 
 ## 5.1. Rendering, styling, images, and HTML policy
 

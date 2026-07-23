@@ -1,10 +1,12 @@
 import json
-import os
+from pathlib import Path
 
-MANIFEST_PATH = "d:/Personal_Project/myfuture-news-test/md/content-research/manifest-2026-07-23.json"
-REPORT_PATH = "d:/Personal_Project/myfuture-news-test/md/content-research/research-report-2026-07-23.md"
+REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
+OUTPUT_DIRECTORY = REPOSITORY_ROOT / "docs" / "research"
+MANIFEST_PATH = OUTPUT_DIRECTORY / "manifest-2026-07-23.json"
+REPORT_PATH = OUTPUT_DIRECTORY / "research-report-2026-07-23.md"
 
-os.makedirs("d:/Personal_Project/myfuture-news-test/md/content-research", exist_ok=True)
+OUTPUT_DIRECTORY.mkdir(parents=True, exist_ok=True)
 
 def article(title, slug, category_slug, excerpt, body_markdown, author_name, author_type, author_slug, date_published, source_name, source_url, source_type, image_url=None, image_alt="", image_caption="", image_credit="", image_license="", license_url=None, tags=[], notes=None):
     missing_fields = []

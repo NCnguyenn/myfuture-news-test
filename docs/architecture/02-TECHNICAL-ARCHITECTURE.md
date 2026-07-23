@@ -70,7 +70,7 @@ Do not create `packages/shared` if shared types only add config overhead without
 ## 4. Expected frontend structure
 
 ```text
-apps/web/
+apps/frontend/
 ├─ app/
 │  ├─ layout.tsx
 │  ├─ globals.css
@@ -122,14 +122,14 @@ File names may follow Next.js conventions, but each component should have one re
 
 ### 4.2. CSS strategy
 
-- Use `apps/web/app/globals.css` for reset, font variables, colors, base typography, and layout tokens.
+- Use `apps/frontend/app/globals.css` for reset, font variables, colors, base typography, and layout tokens.
 - Use colocated `*.module.css` files for Header, tabs, cards, lists, pagination, article content, and responsive rules.
 - Use CSS media queries for mobile/tablet/desktop breakpoints.
 - Do not add Tailwind, styled-components, Material UI, Chakra UI, or another CSS/UI framework.
 
 ### 4.3. Seed image strategy
 
-- Commit a small set of local SVG placeholders under `apps/web/public/images/news/`.
+- Commit a small set of local SVG placeholders under `apps/frontend/public/images/news/`.
 - Store relative paths such as `/images/news/placeholder-01.svg` in seeded `thumbnailUrl`/`coverImageUrl` fields.
 - Include at least three visual variants plus `placeholder-default.svg` for missing/broken-image fallback.
 - This keeps seed data deterministic and makes the app usable without external image hosting or network access.
@@ -137,7 +137,7 @@ File names may follow Next.js conventions, but each component should have one re
 ## 5. Expected backend structure
 
 ```text
-apps/api/
+apps/backend/
 ├─ src/
 │  ├─ main.ts
 │  ├─ app.module.ts

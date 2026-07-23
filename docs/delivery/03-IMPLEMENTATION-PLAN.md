@@ -31,12 +31,12 @@
 
 | Path | Responsibility |
 |---|---|
-| `apps/web/` | Next.js frontend, routes, and UI components |
-| `apps/web/public/images/news/` | Local SVG placeholders used by seed data and broken-image fallback |
-| `apps/web/**/*.module.css` | Component-scoped CSS Modules |
-| `apps/api/` | NestJS/Fastify API |
-| `prisma/schema.prisma` | Category, Article, and optional Tag models |
-| `prisma/seed.ts` | Six Categories and sample articles |
+| `apps/frontend/` | Next.js frontend, routes, and UI components |
+| `apps/frontend/public/images/news/` | Local SVG placeholders used by seed data and broken-image fallback |
+| `apps/frontend/**/*.module.css` | Component-scoped CSS Modules |
+| `apps/backend/` | NestJS/Fastify API |
+| `apps/backend/prisma/schema.prisma` | Category, Article, and optional Tag models |
+| `apps/backend/prisma/seed.ts` | Six Categories and sample articles |
 | `docker-compose.yml` | Local PostgreSQL and Redis |
 | `.env.example` | Environment variable names, no real secrets |
 | `README.md` | Run, migrate, seed, test, and build instructions |
@@ -85,8 +85,8 @@
 
 **Work:**
 
-- Create `apps/web` with Next.js + React + TypeScript.
-- Create `apps/api` with NestJS + TypeScript.
+- Create `apps/frontend` with Next.js + React + TypeScript.
+- Create `apps/backend` with NestJS + TypeScript.
 - Configure backend to use `FastifyAdapter` instead of the default Express adapter.
 - Add workspace scripts for dev/build/lint/test when the package manager supports them.
 - Create `.env.example` with variables defined in the architecture doc.
@@ -97,8 +97,8 @@
 **Files:**
 
 - Create: `package.json`, workspace config, and matching lockfile
-- Create: `apps/web/**`
-- Create: `apps/api/**`
+- Create: `apps/frontend/**`
+- Create: `apps/backend/**`
 - Create: `.env.example`, `.gitignore`
 - Modify: `md/05-PROGRESS.md`
 
@@ -132,18 +132,18 @@
 **Files:**
 
 - Create: `docker-compose.yml`
-- Create: `prisma/schema.prisma`
-- Create: `apps/api/src/prisma/prisma.module.ts`
-- Create: `apps/api/src/prisma/prisma.service.ts`
-- Modify: `apps/api/src/main.ts`, `apps/api/src/app.module.ts`
+- Create: `apps/backend/prisma/schema.prisma`
+- Create: `apps/backend/src/prisma/prisma.module.ts`
+- Create: `apps/backend/src/prisma/prisma.service.ts`
+- Modify: `apps/backend/src/main.ts`, `apps/backend/src/app.module.ts`
 - Modify: `.env.example`, `README.md`
 - Modify: `md/05-PROGRESS.md`
 
 **Entry criteria:** Phase 1 produced a backend skeleton.
 
-**Done when:** `docker compose up -d` starts both services; API can open a Prisma connection; health check distinguishes unavailable database/Redis.
+**Done when:** `docker compose -f infrastructure/docker-compose.yml up -d` starts both services; API can open a Prisma connection; health check distinguishes unavailable database/Redis.
 
-**How to verify:** Run `docker compose ps`; run Prisma validate; call health with both services up and with each service stopped.
+**How to verify:** Run `docker compose -f infrastructure/docker-compose.yml ps`; run Prisma validate; call health with both services up and with each service stopped.
 
 **Common failures:** Using `localhost` from inside a container; old volume with different credentials; wrong Redis URL scheme; Prisma client not generated.
 
@@ -166,16 +166,16 @@
 - Seed at least 3 articles per Category and more than 10 articles in one Category for pagination tests.
 - Seed multiple featured articles but limit display count via query.
 - Seed articles with images, without images, long content, and related articles from other Categories. Keep a separate test fixture or temporary database state for an empty-category test; do not contradict the requirement to seed every Category.
-- Create `apps/web/public/images/news/placeholder-01.svg`, `placeholder-02.svg`, `placeholder-03.svg`, and `placeholder-default.svg`.
+- Create `apps/frontend/public/images/news/placeholder-01.svg`, `placeholder-02.svg`, `placeholder-03.svg`, and `placeholder-default.svg`.
 - Store relative local paths such as `/images/news/placeholder-01.svg` in seeded image fields; use the default file when an article has no dedicated image.
 - Run migrations and generate the Prisma client.
 
 **Files:**
 
-- Modify: `prisma/schema.prisma`
+- Modify: `apps/backend/prisma/schema.prisma`
 - Create: `prisma/migrations/**`
-- Create: `prisma/seed.ts`
-- Create: `apps/web/public/images/news/*.svg`
+- Create: `apps/backend/prisma/seed.ts`
+- Create: `apps/frontend/public/images/news/*.svg`
 - Modify: `package.json` scripts
 - Modify: `README.md`, `md/05-PROGRESS.md`
 
@@ -216,12 +216,12 @@
 
 **Files:**
 
-- Create: `apps/api/src/categories/**`
-- Create: `apps/api/src/articles/**`
-- Create: `apps/api/src/content/content-sanitizer.service.ts`
-- Create: `apps/api/src/common/**` if filters/exception mappers are needed
-- Modify: `apps/api/src/app.module.ts`, `apps/api/src/main.ts`
-- Create: `apps/api/test/**`
+- Create: `apps/backend/src/categories/**`
+- Create: `apps/backend/src/articles/**`
+- Create: `apps/backend/src/content/content-sanitizer.service.ts`
+- Create: `apps/backend/src/common/**` if filters/exception mappers are needed
+- Modify: `apps/backend/src/app.module.ts`, `apps/backend/src/main.ts`
+- Create: `apps/backend/test/**`
 - Modify: `README.md`, `md/05-PROGRESS.md`
 
 **Entry criteria:** Phase 3 has schema and seed.
@@ -256,12 +256,12 @@
 
 **Files:**
 
-- Create: `apps/api/src/cache/cache.module.ts`
-- Create: `apps/api/src/cache/cache.service.ts`
-- Create: `apps/api/src/cache/cache.keys.ts`
-- Modify: `apps/api/src/categories/categories.service.ts`
-- Modify: `apps/api/src/articles/articles.service.ts`
-- Create/modify: `apps/api/test/cache/**`
+- Create: `apps/backend/src/cache/cache.module.ts`
+- Create: `apps/backend/src/cache/cache.service.ts`
+- Create: `apps/backend/src/cache/cache.keys.ts`
+- Modify: `apps/backend/src/categories/categories.service.ts`
+- Modify: `apps/backend/src/articles/articles.service.ts`
+- Create/modify: `apps/backend/test/cache/**`
 - Modify: `README.md`, `md/04-TEST-CHECKLIST.md`, `md/05-PROGRESS.md`
 
 **Entry criteria:** Read APIs work without depending on Redis.
@@ -302,12 +302,12 @@
 
 **Files:**
 
-- Create/modify: `apps/web/app/**`
-- Create: `apps/web/components/layout/**`
-- Create: `apps/web/components/news/**`
-- Create: `apps/web/lib/api-client.ts`, `apps/web/lib/format-date.ts`
-- Create: `apps/web/types/news.ts`
-- Create/modify: `apps/web/app/globals.css`, `apps/web/**/*.module.css`
+- Create/modify: `apps/frontend/app/**`
+- Create: `apps/frontend/components/layout/**`
+- Create: `apps/frontend/components/news/**`
+- Create: `apps/frontend/lib/api-client.ts`, `apps/frontend/lib/format-date.ts`
+- Create: `apps/frontend/types/news.ts`
+- Create/modify: `apps/frontend/app/globals.css`, `apps/frontend/**/*.module.css`
 - Modify: `README.md`, `md/05-PROGRESS.md`
 
 **Entry criteria:** API contract and seed data are stable.
@@ -342,10 +342,10 @@
 
 **Files:**
 
-- Modify: `apps/web/components/news/**`
-- Modify: `apps/web/components/layout/**`
-- Modify: `apps/web/app/loading.tsx`, `apps/web/app/error.tsx`, `apps/web/app/not-found.tsx`
-- Modify: `apps/web/styles/**`, `md/04-TEST-CHECKLIST.md`, `md/05-PROGRESS.md`
+- Modify: `apps/frontend/components/news/**`
+- Modify: `apps/frontend/components/layout/**`
+- Modify: `apps/frontend/app/loading.tsx`, `apps/frontend/app/error.tsx`, `apps/frontend/app/not-found.tsx`
+- Modify: `apps/frontend/styles/**`, `md/04-TEST-CHECKLIST.md`, `md/05-PROGRESS.md`
 
 **Entry criteria:** Main routes already render with normal data.
 
@@ -383,8 +383,8 @@
 
 **Files:**
 
-- Modify: `apps/api/test/**`
-- Create: `apps/web/**` tests if a test framework is already chosen
+- Modify: `apps/backend/test/**`
+- Create: `apps/frontend/**` tests if a test framework is already chosen
 - Modify: `md/04-TEST-CHECKLIST.md`, `md/05-PROGRESS.md`, `README.md`
 
 **Entry criteria:** All routes and APIs are implemented.

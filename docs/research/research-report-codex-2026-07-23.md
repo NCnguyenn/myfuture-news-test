@@ -76,18 +76,18 @@
 - Untracked files:
 ```text
 ?? md/06-ANTIGRAVITY-CONTENT-RESEARCH.md
-?? md/content-research/build_clean_manifest.py
-?? md/content-research/build_data.py
-?? md/content-research/build_full_manifest.py
-?? md/content-research/manifest-2026-07-23.json
-?? md/content-research/manifest-codex-2026-07-23.json
-?? md/content-research/research-report-2026-07-23.md
-?? md/content-research/research-report-codex-2026-07-23.md
-?? md/content-research/source-validation-codex-2026-07-23.json
+?? docs/research/build_clean_manifest.py
+?? docs/research/build_data.py
+?? docs/research/build_full_manifest.py
+?? docs/research/manifest-2026-07-23.json
+?? docs/research/manifest-codex-2026-07-23.json
+?? docs/research/research-report-2026-07-23.md
+?? docs/research/research-report-codex-2026-07-23.md
+?? docs/research/source-validation-codex-2026-07-23.json
 ```
 - Không sửa Prisma schema, migration, seed, frontend, backend, package manifests, test, PostgreSQL hoặc Redis.
 - Không tải hoặc tạo ảnh.
-- Chỉ tạo ba artifact Codex trong `md/content-research/`.
+- Chỉ tạo ba artifact Codex trong `docs/research/`.
 
 ## 8. Cổng duyệt Phase C
 

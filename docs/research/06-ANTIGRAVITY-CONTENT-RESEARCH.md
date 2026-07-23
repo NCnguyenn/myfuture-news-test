@@ -18,13 +18,13 @@ database, or frontend until a human explicitly approves the manifest.
 
 The project currently contains:
 
-- Next.js frontend under `apps/web`.
-- NestJS API under `apps/api`.
+- Next.js frontend under `apps/frontend`.
+- NestJS API under `apps/backend`.
 - PostgreSQL and Prisma under `prisma`.
 - Redis cache for read APIs.
 - Six persisted categories and one UI-only Overview tab.
-- Demo article data in `prisma/seed.ts`.
-- Placeholder SVG images under `apps/web/public/images/news/`.
+- Demo article data in `apps/backend/prisma/seed.ts`.
+- Placeholder SVG images under `apps/frontend/public/images/news/`.
 
 The current `Article` model has title, slug, excerpt, HTML content, thumbnail,
 optional cover image, published date, source name/URL, category, view count and
@@ -266,9 +266,9 @@ backup and destructive reset.
 
 Write the research result to a new review artifact, for example:
 
-`md/content-research/manifest-YYYY-MM-DD.json`
+`docs/research/manifest-YYYY-MM-DD.json`
 
-Do not place the manifest directly into `prisma/seed.ts` during Phase B.
+Do not place the manifest directly into `apps/backend/prisma/seed.ts` during Phase B.
 
 Top-level shape:
 

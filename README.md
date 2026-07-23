@@ -24,8 +24,8 @@ cd myfuture-news-test
 ### 2. Start PostgreSQL and Redis
 
 ```bash
-docker compose up -d
-docker compose ps
+docker compose -f infrastructure/docker-compose.yml up -d
+docker compose -f infrastructure/docker-compose.yml ps
 ```
 
 Wait until both services are healthy. PostgreSQL maps container port `5432` to host port **`5434`**; Redis uses host port `6379`.
@@ -61,8 +61,8 @@ NODE_ENV=development
 
 ```bash
 npm install
-npx prisma validate
-npx prisma generate
+npm run db:validate
+npm run db:generate
 ```
 
 ### 5. Apply migrations and seed demo data
@@ -70,11 +70,11 @@ npx prisma generate
 Use the committed migration so setup is deterministic:
 
 ```bash
-npx prisma migrate deploy
-npx prisma db seed
+npm run db:migrate:deploy
+npm run db:seed
 ```
 
-The idempotent seed creates exactly six Categories and 30 Articles. Overview / Toàn cảnh is a UI-only aggregate and is not inserted into the Category table. Seeded images are committed local SVG files under `apps/web/public/images/news/`.
+The idempotent seed creates exactly six Categories and 30 Articles. Overview / Toàn cảnh is a UI-only aggregate and is not inserted into the Category table. Article images and fallback SVG files are committed under `apps/frontend/public/images/news/`.
 
 ### 6. Start the API and web app
 
@@ -113,14 +113,14 @@ An additional pagination sample is available at `http://localhost:3000/ban-tin/c
 If PowerShell blocks `npm.ps1` or `npx.ps1` with `PSSecurityException`, use the `.cmd` shims. The complete setup sequence is:
 
 ```powershell
-docker compose up -d
-docker compose ps
+docker compose -f infrastructure/docker-compose.yml up -d
+docker compose -f infrastructure/docker-compose.yml ps
 Copy-Item .env.example .env
 npm.cmd install
-npx.cmd prisma validate
-npx.cmd prisma generate
-npx.cmd prisma migrate deploy
-npx.cmd prisma db seed
+npm.cmd run db:validate
+npm.cmd run db:generate
+npm.cmd run db:migrate:deploy
+npm.cmd run db:seed
 npm.cmd run dev:api
 ```
 
@@ -153,13 +153,13 @@ npm.cmd run build:api
 The API production entry point can be checked after `build:api`:
 
 ```bash
-npm --workspace apps/api run start
+npm --workspace apps/backend run start
 ```
 
 To run both production builds locally, start the API with the command above and run this in a second terminal:
 
 ```bash
-npm --workspace apps/web run start
+npm --workspace apps/frontend run start
 ```
 
 There is intentionally no lint script in this small take-home repository. The handoff gates are the existing focused API tests, TypeScript checks, and production builds; Phase 9 does not add an ESLint stack solely for checklist symmetry.
@@ -186,18 +186,20 @@ Redis caches successful read responses only:
 If Redis is unavailable, reads fall back to PostgreSQL and the API remains usable. After reseeding, clear only News cache keys:
 
 ```bash
-docker compose exec redis sh -c 'redis-cli --scan --pattern "news:*" | xargs -r redis-cli DEL'
+docker compose -f infrastructure/docker-compose.yml exec redis sh -c 'redis-cli --scan --pattern "news:*" | xargs -r redis-cli DEL'
 ```
 
 ## Known local behavior
 
 - Dynamic App Router routes stream their response. For an unknown category or article, Next.js can send an HTTP 200 header before `notFound()` resolves; the rendered result is the custom 404 UI and carries `noindex` metadata. The backend API still returns HTTP 404 for unknown slugs.
 - Some Windows PowerShell policies require `npm.cmd` / `npx.cmd`, as documented above.
-- Docker Compose may print an environment-specific user-config access warning while still completing successfully; confirm actual service state with `docker compose ps`.
+- Docker Compose may print an environment-specific user-config access warning while still completing successfully; confirm actual service state with `docker compose -f infrastructure/docker-compose.yml ps`.
 
 ## Project documentation
 
-- `md/` contains the project specification, architecture, implementation plan, test checklist, and progress evidence.
-- `role/` contains the project-specific AI team-lead operating notes.
+- `apps/frontend/` contains the independently deployable Next.js application. Use `apps/frontend` as the Vercel Root Directory.
+- `apps/backend/` contains the NestJS/Fastify API and its Prisma schema, migrations, and seed.
+- `docs/` contains architecture, delivery, decisions, research, and internal project records.
+- `infrastructure/` contains local Docker Compose configuration.
 
 No deployment is required for local review.

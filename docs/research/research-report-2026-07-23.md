@@ -11,16 +11,16 @@
 
 Qua đối chiếu giữa yêu cầu của tài liệu `md/06-ANTIGRAVITY-CONTENT-RESEARCH.md` và mã nguồn hiện tại của dự án:
 
-1. **Prisma Schema (`prisma/schema.prisma`):**
+1. **Prisma Schema (`apps/backend/prisma/schema.prisma`):**
    - Hiện tại model `Article` chỉ chứa các trường cơ bản: `title`, `slug`, `excerpt`, `contentHtml`, `thumbnailUrl`, `coverImageUrl`, `publishedAt`, `isPublished`, `isFeatured`, `viewCount`, `readingTime`, `sourceName`, `sourceUrl`, `categoryId`.
    - **Chênh lệch (Mismatch):** Model hiện tại chưa có quan hệ `Author` (hoặc các trường `authorName`, `authorSlug`, `authorType`), chưa có cấu trúc bảng ảnh chi tiết với tác quyền (`alt`, `caption`, `credit`, `license`, `licenseUrl`), và các meta-field của nguồn tin (`sourceCanonicalUrl`, `sourcePublishedAt`, `sourceAccessedAt`, `sourceType`, `sourceReliabilityNote`).
    - **Xử lý:** Đúng theo quy định Phase A/B, không thực hiện thay đổi Prisma Schema hay Migration ở bước này. Các nâng cấp schema sẽ được đề xuất trong Phase D sau khi Manifest được phê duyệt.
 
-2. **Dữ liệu Mẫu Seed (`prisma/seed.ts`):**
+2. **Dữ liệu Mẫu Seed (`apps/backend/prisma/seed.ts`):**
    - File seed hiện tại đang sử dụng các bài viết demo placeholder với hình ảnh SVG tĩnh (`placeholder-01.svg` ...).
    - Phân bố danh mục trong seed hiện tại: `phap-ly-du-an` (13 bài), `quy-hoach-ha-tang` (4 bài), `lai-suat-tai-chinh` (3 bài), `thi-truong-gia-ca` (4 bài), `dau-tu-dong-tien` (3 bài), `cho-thue` (3 bài).
    - 5/6 danh mục chưa đủ tối thiểu 5 bài viết thực tế.
-   - **Xử lý:** Giữ nguyên `prisma/seed.ts`, không can thiệp hay ghi đè vào database.
+   - **Xử lý:** Giữ nguyên `apps/backend/prisma/seed.ts`, không can thiệp hay ghi đè vào database.
 
 3. **Giao diện & API (Frontend & Backend):**
    - Đã xác nhận 6 danh mục chuẩn được lưu vết trong CSDL và 1 tab "Overview" chỉ là Aggregate UI Tab trên Frontend.
@@ -97,9 +97,9 @@ Theo chính sách an toàn tác quyền ảnh của brief (Section 7): *Không s
 ## 7. Đường Dẫn File Đầu Ra (Generated Output Files)
 
 1. **JSON Content Manifest:**
-   `file:///d:/Personal_Project/myfuture-news-test/md/content-research/manifest-2026-07-23.json`
+   `file:///d:/Personal_Project/myfuture-news-test/docs/research/manifest-2026-07-23.json`
 2. **Research Report (File này):**
-   `file:///d:/Personal_Project/myfuture-news-test/md/content-research/research-report-2026-07-23.md`
+   `file:///d:/Personal_Project/myfuture-news-test/docs/research/research-report-2026-07-23.md`
 
 ---
 

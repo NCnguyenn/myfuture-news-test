@@ -34,8 +34,8 @@ type OutputRecord = {
 const workspaceRoot = path.resolve(import.meta.dirname, '..');
 const sourceManifestPath = path.join(
   workspaceRoot,
-  'md',
-  'content-research',
+  'docs',
+  'research',
   'manifest-codex-2026-07-23.json',
 );
 const outputDirectory = path.join(

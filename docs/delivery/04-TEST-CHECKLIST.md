@@ -17,16 +17,16 @@
 | Docker | Run `docker --version` | Docker CLI works | [x] | Phase 8 2026-07-22: Docker 29.4.0; Docker config access warning is the documented ENV-003 residual. |
 | Docker Compose | Run `docker compose version` | Compose plugin works | [x] | Phase 8 2026-07-22: Docker Compose v5.1.2. |
 | Environment | Compare `.env` with `.env.example` | Required vars present; no secrets committed | [x] | Phase 8 2026-07-22: both files contain the same six variable names; `.env` is ignored by `.gitignore` and `git ls-files .env` returned no path. |
-| Server-only API URL | Inspect `.env.example` and frontend API client | Uses `API_BASE_URL`; no unnecessary `NEXT_PUBLIC_API_BASE_URL` exposure | [x] | Phase 8 2026-07-22: `apps/web/lib/api-client.ts` reads `process.env.API_BASE_URL`; source scan found no `NEXT_PUBLIC_API_BASE_URL`; requests use `cache: 'no-store'`. |
+| Server-only API URL | Inspect `.env.example` and frontend API client | Uses `API_BASE_URL`; no unnecessary `NEXT_PUBLIC_API_BASE_URL` exposure | [x] | Phase 8 2026-07-22: `apps/frontend/lib/api-client.ts` reads `process.env.API_BASE_URL`; source scan found no `NEXT_PUBLIC_API_BASE_URL`; requests use `cache: 'no-store'`. |
 
 ## 2. Docker, PostgreSQL, and Redis
 
 | Check | How to verify | Expected result | Status | Notes |
 |---|---|---|---|---|
-| PostgreSQL starts | `docker compose up -d postgres` | Container running/healthy | [x] | Phase 8 2026-07-22: `docker compose up -d` left `myfuture-news-test-postgres-1` Up (healthy), mapped host port 5434. |
-| Redis starts | `docker compose up -d redis` | Container running/healthy | [x] | Phase 8 2026-07-22: `docker compose up -d` left Redis Up (healthy), mapped host port 6379. |
-| Full compose | `docker compose up -d` | Both services run | [x] | Phase 8 2026-07-22: `docker compose up -d` succeeded; `docker compose ps` showed both services healthy. |
-| PostgreSQL health | Check `docker compose ps` or health API | PostgreSQL reported healthy | [x] | Phase 8 2026-07-22: Compose health `healthy`; `/api/health` reported `postgres=up`. |
+| PostgreSQL starts | `docker compose -f infrastructure/docker-compose.yml up -d postgres` | Container running/healthy | [x] | Phase 8 2026-07-22: `docker compose -f infrastructure/docker-compose.yml up -d` left `myfuture-news-test-postgres-1` Up (healthy), mapped host port 5434. |
+| Redis starts | `docker compose -f infrastructure/docker-compose.yml up -d redis` | Container running/healthy | [x] | Phase 8 2026-07-22: `docker compose -f infrastructure/docker-compose.yml up -d` left Redis Up (healthy), mapped host port 6379. |
+| Full compose | `docker compose -f infrastructure/docker-compose.yml up -d` | Both services run | [x] | Phase 8 2026-07-22: `docker compose -f infrastructure/docker-compose.yml up -d` succeeded; `docker compose -f infrastructure/docker-compose.yml ps` showed both services healthy. |
+| PostgreSQL health | Check `docker compose -f infrastructure/docker-compose.yml ps` or health API | PostgreSQL reported healthy | [x] | Phase 8 2026-07-22: Compose health `healthy`; `/api/health` reported `postgres=up`. |
 | Redis health | `redis-cli ping` in container or health API | Returns `PONG`/healthy | [x] | Phase 8 2026-07-22: Compose health `healthy`; `/api/health` reported `redis=up`. |
 | Persistent volume | Restart Compose then inspect database | Data persists unless deliberately reset | [ ] | Not independently re-tested in Phase 8; no volume reset was authorized. Migrate deploy and idempotent seed preserved the existing dataset. |
 | Wrong credentials | Intentionally use bad credentials | Clear connection error; no secret leakage | [ ] | Not exercised because it would require changing connection configuration; no credential mutation was authorized. |
@@ -44,7 +44,7 @@
 | Unique slug | Re-seed or insert a duplicate slug | Database/service rejects correctly | [x] | Phase 8 2026-07-22: transaction-scoped duplicate Category slug insert failed with `Category_slug_key`; rollback completed and follow-up count was 0. Second idempotent seed also kept 30 articles/6 categories. |
 | Relations | Query Articles with Category | Each Article has a valid Category | [x] | Phase 8 read-only SQL returned `orphan_articles=0`; API list items included category slugs. |
 | Pagination data | Count Articles for a sample Category | At least one Category has more than 10 articles | [x] | Phase 8 SQL: published counts by category were 12/4/3/4/3/3; maximum published category count 12. |
-| Local seed images | Inspect seeded image paths and open each asset | Paths use `/images/news/*.svg`; files exist under Next.js `public` and need no external network | [x] | Phase 8 SQL returned four `/images/news/*.svg` paths and `non_local_image_paths=0`; all four SVG files exist under `apps/web/public/images/news/`. |
+| Local seed images | Inspect seeded image paths and open each asset | Paths use `/images/news/*.svg`; files exist under Next.js `public` and need no external network | [x] | Phase 8 SQL returned four `/images/news/*.svg` paths and `non_local_image_paths=0`; all four SVG files exist under `apps/frontend/public/images/news/`. |
 | Default image | Use an article without a dedicated image | `/images/news/placeholder-default.svg` is used | [x] | Phase 8 SQL found 7 articles using `/images/news/placeholder-default.svg`; asset exists. |
 
 ## 4. Category API
@@ -85,7 +85,7 @@
 | Source | Use an article that has source fields | `sourceName`/`sourceUrl` present as expected | [x] | Phase 8: `phap-ly-du-an-bai-03` returned `sourceName` and `sourceUrl`. |
 | Related articles | Inspect related payload | Related items exist and do not self-link | [x] | Phase 8: valid details returned 5 related articles; self-link count was 0. |
 | Unsafe content | Seed script/event-handler markup in test only | Script does not execute when content is rendered | [x] | Phase 8: live detail content contained no `<script`, `onerror`, or `onclick`; focused sanitizer spec also passed. |
-| Sanitizer package | Inspect backend dependencies and sanitizer service | Backend uses `sanitize-html`, not an unspecified/custom regex sanitizer | [x] | Phase 8: `sanitize-html` is in `apps/api/package.json` and `ContentSanitizerService` imports it. |
+| Sanitizer package | Inspect backend dependencies and sanitizer service | Backend uses `sanitize-html`, not an unspecified/custom regex sanitizer | [x] | Phase 8: `sanitize-html` is in `apps/backend/package.json` and `ContentSanitizerService` imports it. |
 | Sanitization before cache | Clear cache, request unsafe test article, inspect response/cache | Unsafe markup is removed before the value is written to Redis | [x] | Phase 8: after scoped `news:*` delete, detail MISS→HIT logs and Redis TTL (~899s) were observed; returned/cached content had no unsafe markup. |
 | Detail cache | Call same slug twice | First miss, second hit | [x] | Phase 8: detail returned HTTP 200 twice; logs showed `MISS news:article:phap-ly-du-an-bai-01` then `HIT`; TTL 899s. |
 | Bad slug | Use unknown slug | HTTP 404 | [x] | Phase 8: `/api/articles/no-such` returned HTTP 404 with `ARTICLE_NOT_FOUND`. |
@@ -118,7 +118,7 @@ Phase 8 route spot-check (2026-07-22) re-confirmed the overflow empty state; Pha
 
 | Check | How to verify | Expected result | Status | Notes |
 |---|---|---|---|---|
-| Loading | Throttle network or delay API | Skeleton/loading shown; no blank screen | [x] | Production stream from `http://localhost:3002/ban-tin` contains the route skeleton with `aria-busy="true"`; `apps/web/app/ban-tin/loading.tsx` covers all News navigations |
+| Loading | Throttle network or delay API | Skeleton/loading shown; no blank screen | [x] | Production stream from `http://localhost:3002/ban-tin` contains the route skeleton with `aria-busy="true"`; `apps/frontend/app/ban-tin/loading.tsx` covers all News navigations |
 | Empty | Use a temporary empty-category fixture or isolated test database state | Empty state with way back | [x] | `GET /ban-tin/chuyen-muc/phap-ly-du-an?page=999` returned HTTP 200 with the reusable empty-state link and no misleading overflow pagination; no database mutation |
 | API error | Stop backend or force 500 | Error state; layout does not break | [x] | Stopped API port 4000 and hard-navigated with headless Chrome: DOM showed `Không thể tải bản tin`, retry button, overview link, Header, and Footer; API health returned 200 after restart |
 | Broken image | Use invalid image URL | Fallback image; no large layout shift | [x] | Headless Chrome changed the primary image to an invalid URL; DOM recovered to `/images/news/placeholder-default.svg`, retained the article-title alt text, and kept its measured `739.828x300` wrapper dimensions |
@@ -128,7 +128,7 @@ Phase 8 route spot-check (2026-07-22) re-confirmed the overflow empty state; Pha
 | Tablet | Viewport ~768px | Reasonable grid/sidebar | [x] | Headless Chrome/CDP: document `clientWidth=753`, `scrollWidth=753`; featured columns measured `440.953px 248.047px`; screenshot shows readable cards/list |
 | Desktop | Viewport ~1440px | Main layout and sidebar balanced | [x] | Headless Chrome/CDP: document `clientWidth=1425`, `scrollWidth=1425`; 1180px shell bounds `122.5..1302.5`; featured columns measured `739.828px 416.156px` |
 | Footer | Scroll to bottom | Footer stable; links do not throw JS errors | [x] | Live overview/category/detail responses include the shared Footer and `/ban-tin` link; Footer has a mobile column layout |
-| CSS strategy | Inspect dependencies and styles | Uses `globals.css` plus CSS Modules; no Tailwind/UI framework added | [x] | `apps/web/package.json` has only Next/React dependencies; styles remain `globals.css` plus colocated `*.module.css` |
+| CSS strategy | Inspect dependencies and styles | Uses `globals.css` plus CSS Modules; no Tailwind/UI framework added | [x] | `apps/frontend/package.json` has only Next/React dependencies; styles remain `globals.css` plus colocated `*.module.css` |
 
 ## 9. Basic SEO and accessibility
 
@@ -151,7 +151,7 @@ Phase 8 preserved the Phase 7 SEO/accessibility evidence; route HTML spot-checks
 | Backend typecheck | Run api typecheck/build script | No TypeScript errors | [x] | Phase 8 2026-07-22: `npm.cmd run typecheck:api` exited 0; `build:api` also completed. |
 | Lint | Run workspace lint | No blocking lint errors | [ ] | N/A by Phase 9 decision: no lint script exists, and this small take-home does not add an ESLint stack solely for checklist symmetry. README documents the decision; typecheck, tests, and production builds remain the automated quality gates. |
 | Unit/integration tests | Run test script | Written tests pass | [x] | Phase 8 2026-07-22: after the red missing-script check, `npm.cmd run test:api` ran all existing recursive node:test specs: 8 pass, 0 fail. |
-| Production build | Build frontend/backend | Builds complete | [x] | Phase 9 2026-07-22: `npm.cmd run build:web` and `npm.cmd run build:api` exited 0. After the API build, `npm.cmd --workspace apps/api run start` launched `dist/src/main.js`; `/api/health` returned HTTP 200 on isolated port 4100. ENV-006 is closed. |
+| Production build | Build frontend/backend | Builds complete | [x] | Phase 9 2026-07-22: `npm.cmd run build:web` and `npm.cmd run build:api` exited 0. After the API build, `npm.cmd --workspace apps/backend run start` launched `dist/src/main.js`; `/api/health` returned HTTP 200 on isolated port 4100. ENV-006 is closed. |
 | README | Follow README in a clean environment | Another person can run from zero | [x] | Phase 9 2026-07-22: an artifact-free temporary copy followed clone-path steps with `npm.cmd ci`, Compose, `.env`, Prisma validate/generate, migrate deploy, seed, tests, typechecks, and builds; the three demo routes returned usable HTML. |
 | `.env.example` | Compare with code | No missing vars; no secrets | [x] | Phase 9: six env names match code and `.env`; `.env` is ignored/untracked; candidate-file private-key/token scan found 0 hits. |
 | Console | Open DevTools on main flows | No serious console errors | [x] | Phase 9 2026-07-22: installed Chrome headless spot-check of overview, category, and detail routes exited 0 with zero `CONSOLE`/`SEVERE` log lines. |
