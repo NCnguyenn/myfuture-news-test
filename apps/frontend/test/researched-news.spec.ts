@@ -121,7 +121,7 @@ test('records image provenance for all thirty researched articles', () => {
       path.join(
         workspaceRoot,
         'apps',
-        'web',
+        'frontend',
         'public',
         'images',
         'news',
@@ -146,7 +146,7 @@ test('records image provenance for all thirty researched articles', () => {
       const localFile = path.join(
         workspaceRoot,
         'apps',
-        'web',
+        'frontend',
         'public',
         image.localPath.replace(/^\//, ''),
       );

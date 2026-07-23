@@ -4,9 +4,9 @@ import path from 'node:path';
 import test from 'node:test';
 
 const routeFiles = [
-  'apps/web/app/ban-tin/page.tsx',
-  'apps/web/app/ban-tin/chuyen-muc/[slug]/page.tsx',
-  'apps/web/app/ban-tin/[articleSlug]/page.tsx',
+  'apps/frontend/app/ban-tin/page.tsx',
+  'apps/frontend/app/ban-tin/chuyen-muc/[slug]/page.tsx',
+  'apps/frontend/app/ban-tin/[articleSlug]/page.tsx',
 ];
 const workspaceRoot = path.resolve(import.meta.dirname, '..', '..', '..');
 
@@ -25,7 +25,7 @@ test('article metadata only catches ApiClientError 404 and rethrows other errors
   const articlePage = readFileSync(
     path.join(
       workspaceRoot,
-      'apps/web/app/ban-tin/[articleSlug]/page.tsx',
+    'apps/frontend/app/ban-tin/[articleSlug]/page.tsx',
     ),
     'utf8',
   );

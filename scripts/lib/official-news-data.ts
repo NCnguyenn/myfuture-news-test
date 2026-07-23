@@ -183,7 +183,11 @@ function webPathToPublicFile(workspaceRoot: string, webPath: string): string {
   if (!webPath.startsWith('/')) {
     throw new Error(`Image localPath must be a relative web path starting with /: ${webPath}`);
   }
-  return path.join(workspaceRoot, 'apps/web/public', webPath.replace(/^\//, ''));
+  return path.join(
+    workspaceRoot,
+    'apps/frontend/public',
+    webPath.replace(/^\//, ''),
+  );
 }
 
 function loadImageManifest(
@@ -191,7 +195,7 @@ function loadImageManifest(
 ): Record<string, ImageRecord> {
   const manifestPath = path.join(
     workspaceRoot,
-    'apps/web/public/images/news/researched/manifest.json',
+    'apps/frontend/public/images/news/researched/manifest.json',
   );
   if (!existsSync(manifestPath)) {
     throw new Error(`Image manifest not found: ${manifestPath}`);

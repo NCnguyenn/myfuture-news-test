@@ -10,8 +10,8 @@ function read(relativePath: string): string {
 }
 
 test('news cards show authors and only render real view counts', () => {
-  const card = read('apps/web/components/news/NewsCard.tsx');
-  const featured = read('apps/web/components/news/FeaturedNews.tsx');
+  const card = read('apps/frontend/components/news/NewsCard.tsx');
+  const featured = read('apps/frontend/components/news/FeaturedNews.tsx');
 
   assert.match(card, /article\.author\.name/);
   assert.match(card, /article\.viewCount !== undefined/);
@@ -19,7 +19,7 @@ test('news cards show authors and only render real view counts', () => {
 });
 
 test('article details show author, image provenance, and verification evidence', () => {
-  const page = read('apps/web/app/ban-tin/[articleSlug]/page.tsx');
+  const page = read('apps/frontend/app/ban-tin/[articleSlug]/page.tsx');
 
   assert.match(page, /Tác giả:/);
   assert.match(page, /article\.imageProvenance\.isPlaceholder/);

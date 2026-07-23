@@ -7,7 +7,7 @@ import path from 'node:path';
 import {
   extensionForContentType,
   extractOgImage,
-} from '../apps/web/lib/source-image';
+} from '../apps/frontend/lib/source-image';
 
 type RawArticle = {
   slug: string;
@@ -41,7 +41,7 @@ const sourceManifestPath = path.join(
 const outputDirectory = path.join(
   workspaceRoot,
   'apps',
-  'web',
+  'frontend',
   'public',
   'images',
   'news',
