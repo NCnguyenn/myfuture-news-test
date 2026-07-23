@@ -1,7 +1,7 @@
 # Thiết kế website preview chỉ hiển thị bài viết mới
 
-**Ngày:** 2026-07-23  
-**Trạng thái:** Chờ người dùng duyệt spec trước khi triển khai  
+**Ngày:** 2026-07-23
+**Trạng thái:** Chờ người dùng duyệt spec trước khi triển khai
 **Phạm vi:** Frontend preview, không thay đổi database/API
 
 ## 1. Mục tiêu
