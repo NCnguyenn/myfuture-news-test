@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450" role="img" aria-label="News placeholder 01">
+  <rect width="800" height="450" fill="#1e3a5f"/>
+  <rect x="40" y="40" width="720" height="370" fill="#2d5a87" rx="8"/>
+  <text x="400" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" fill="#ffffff" font-weight="bold">News Placeholder 01</text>
+  <text x="400" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#a8c5e2">/images/news/placeholder-01.svg</text>
+</svg>

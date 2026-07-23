@@ -9,6 +9,8 @@ dotenv.config({ path: path.resolve(process.cwd(), '../../.env') });
 import { NestFactory } from '@nestjs/core';
 import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 import { AppModule } from './app.module';
+import { ApiExceptionFilter } from './common/api-exception.filter';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -17,6 +19,12 @@ async function bootstrap() {
   );
 
   app.setGlobalPrefix('api');
+  app.useGlobalPipes(new ValidationPipe({
+    transform: true,
+    whitelist: true,
+    forbidNonWhitelisted: true,
+  }));
+  app.useGlobalFilters(new ApiExceptionFilter());
   app.enableCors({ origin: process.env.WEB_ORIGIN ?? 'http://localhost:3000' });
 
   const port = Number(process.env.API_PORT ?? 4000);

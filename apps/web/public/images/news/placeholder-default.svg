@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450" role="img" aria-label="News default placeholder">
+  <rect width="800" height="450" fill="#374151"/>
+  <rect x="40" y="40" width="720" height="370" fill="#4b5563" rx="8"/>
+  <text x="400" y="210" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" fill="#e5e7eb" font-weight="bold">Default Image</text>
+  <text x="400" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#9ca3af">/images/news/placeholder-default.svg</text>
+</svg>

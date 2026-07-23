@@ -1,11 +1,5 @@
-import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 export default function HomePage() {
-  return (
-    <main>
-      <h1>MyFuture News</h1>
-      <p>News module scaffold.</p>
-      <Link href="/ban-tin">Open Bản tin</Link>
-    </main>
-  );
+  redirect('/ban-tin');
 }
