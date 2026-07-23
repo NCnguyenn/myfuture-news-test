@@ -181,7 +181,9 @@ test('detail returns author, image provenance, evidence and sanitizes contentHtm
   // previous/next use findFirst after the detail lookup
   let findFirstCalls = 0;
   const originalFindFirst = prisma.article.findFirst;
-  prisma.article.findFirst = async (args: never) => {
+  prisma.article.findFirst = async (
+    args: Parameters<typeof originalFindFirst>[0],
+  ) => {
     findFirstCalls += 1;
     if (findFirstCalls === 1) {
       return originalFindFirst(args);
