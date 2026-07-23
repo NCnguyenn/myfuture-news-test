@@ -6,7 +6,8 @@ coverage/
 .env
 .env.*
 !.env.example
-prisma/*.db
-prisma/*.db-journal
+apps/backend/prisma/*.db
+apps/backend/prisma/*.db-journal
 backups/
+*.tsbuildinfo
 

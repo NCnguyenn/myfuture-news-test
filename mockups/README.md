@@ -2,7 +2,7 @@
 
 - **Viewport Width:** 1440px
 - **Capture Timestamp:** 2026-07-22T22:55:06+07:00
-- **Target Directory:** `D:\Personal_Project\myfuture-news-test\mockup`
+- **Target Directory:** `mockups/`
 
 ## Captured Pages
 
