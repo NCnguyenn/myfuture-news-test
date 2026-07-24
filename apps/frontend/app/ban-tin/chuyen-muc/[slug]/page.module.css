@@ -1,0 +1,39 @@
+.intro {
+  max-width: 760px;
+  margin: 34px 0 28px;
+}
+
+.intro h1 {
+  margin: 8px 0 12px;
+  font-size: clamp(2.45rem, 5.5vw, 4.8rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+  text-wrap: balance;
+}
+
+.intro > p:last-child {
+  max-width: 660px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.04rem;
+  line-height: 1.7;
+}
+
+.categoryLead {
+  max-width: 920px;
+  margin: 42px 0 8px;
+}
+
+@media (max-width: 640px) {
+  .intro {
+    margin: 26px 0 22px;
+  }
+
+  .intro h1 {
+    font-size: clamp(2.35rem, 13vw, 3.5rem);
+  }
+
+  .categoryLead {
+    margin-top: 30px;
+  }
+}

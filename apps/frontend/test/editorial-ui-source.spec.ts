@@ -40,3 +40,16 @@ test('overview requests featured, newest, and popular article groups', () => {
   assert.match(source, /sort:\s*'popular'/);
   assert.match(source, /Promise\.all/);
 });
+
+test('category page separates the first-page lead from the feed', () => {
+  const source = read(
+    'apps/frontend/app/ban-tin/chuyen-muc/[slug]/page.tsx',
+  );
+  assert.match(source, /page === 1/);
+  assert.match(source, /categoryLead/);
+});
+
+test('pagination exposes current page semantics', () => {
+  const source = read('apps/frontend/components/news/Pagination.tsx');
+  assert.match(source, /aria-current/);
+});
