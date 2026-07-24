@@ -7,6 +7,13 @@
 - Vercel backend project: `myfuture-news-api`, root `apps/backend`
 - Function/database/cache region: Singapore
 
+## Runtime
+
+In each Vercel project (`myfuture-news-web` and `myfuture-news-api`), set
+**Build and Deployment** to use Node.js **22.x** before deploying. CI runs the
+same quality gates on Node 20 for compatibility and Node 22 for production
+parity.
+
 ## Required environment names
 
 Backend: `DATABASE_URL`, `DIRECT_URL`, `REDIS_URL`, `WEB_ORIGIN`.

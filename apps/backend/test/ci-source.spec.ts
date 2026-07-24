@@ -14,6 +14,7 @@ test('CI runs every recruiter quality gate', () => {
     'npm ci',
     'npm run lint',
     'npm run db:validate',
+    'npm run db:generate',
     'npm run test:web',
     'npm run test:api',
     'npm run typecheck',
@@ -24,4 +25,10 @@ test('CI runs every recruiter quality gate', () => {
       new RegExp(command.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')),
     );
   }
+
+  assert.match(
+    source,
+    /matrix:\s*[\s\S]*?node-version:\s*\[20,\s*22\]/,
+  );
+  assert.match(source, /node-version:\s*\$\{\{\s*matrix\.node-version\s*\}\}/);
 });
