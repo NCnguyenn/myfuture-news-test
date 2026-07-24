@@ -12,7 +12,7 @@
     "build:api": "npm --workspace apps/backend run build",
     "build": "npm run build:web && npm run build:api",
     "typecheck": "npm run typecheck:web && npm run typecheck:api",
-    "test:web": "tsx --test apps/frontend/test/**/*.spec.ts",
+    "test:web": "node scripts/run-node-tests.mjs --test-dir apps/frontend/test --import tsx",
     "test:api": "npm --workspace apps/backend run test",
     "typecheck:web": "npm --workspace apps/frontend run typecheck",
     "typecheck:api": "npm --workspace apps/backend run typecheck",
