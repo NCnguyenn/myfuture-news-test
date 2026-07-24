@@ -10,4 +10,7 @@ apps/backend/prisma/*.db
 apps/backend/prisma/*.db-journal
 backups/
 *.tsbuildinfo
+.vercel/
+NUL
+*.local
 
