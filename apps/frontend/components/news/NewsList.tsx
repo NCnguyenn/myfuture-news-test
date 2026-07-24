@@ -9,7 +9,15 @@ export function NewsList({ articles, title = 'Bài viết', description }: NewsL
   return (
     <section aria-labelledby="news-list-heading">
       <div className="section-heading"><div><h2 id="news-list-heading">{title}</h2>{description && <p>{description}</p>}</div></div>
-      {articles.length > 0 ? <div className={styles.list}>{articles.map((article) => <NewsCard article={article} key={article.id} />)}</div> : <EmptyState />}
+      {articles.length > 0 ? (
+        <div className={styles.list}>
+          {articles.map((article) => (
+            <NewsCard article={article} variant="list" key={article.id} />
+          ))}
+        </div>
+      ) : (
+        <EmptyState />
+      )}
     </section>
   );
 }

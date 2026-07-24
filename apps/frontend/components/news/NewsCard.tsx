@@ -4,24 +4,49 @@ import type { ArticleListItem } from '../../types/news';
 import { NewsImage } from './NewsImage';
 import styles from './NewsCard.module.css';
 
-type NewsCardProps = { article: ArticleListItem; compact?: boolean };
+export type StoryCardVariant = 'featured' | 'compact' | 'list' | 'related';
 
-export function NewsCard({ article, compact = false }: NewsCardProps) {
+type NewsCardProps = {
+  article: ArticleListItem;
+  variant?: StoryCardVariant;
+  showExcerpt?: boolean;
+};
+
+export function NewsCard({
+  article,
+  variant = 'list',
+  showExcerpt = variant === 'list',
+}: NewsCardProps) {
   return (
-    <article className={`${styles.card} ${compact ? styles.compact : ''}`}>
-      <Link href={`/ban-tin/${article.slug}`} className={styles.imageLink}>
-        <NewsImage src={article.thumbnailUrl} alt={article.imageAlt} />
+    <article className={`${styles.card} ${styles[variant]}`}>
+      <Link
+        href={`/ban-tin/${article.slug}`}
+        className={styles.imageLink}
+        aria-label={`Đọc bài: ${article.title}`}
+      >
+        <NewsImage
+          src={article.thumbnailUrl}
+          alt={article.imageAlt}
+          priority={variant === 'featured'}
+        />
       </Link>
       <div className={styles.body}>
-        <Link href={`/ban-tin/chuyen-muc/${article.category.slug}`} className={styles.category}>{article.category.name}</Link>
-        <h3><Link href={`/ban-tin/${article.slug}`}>{article.title}</Link></h3>
-        {!compact && <p>{article.excerpt}</p>}
+        <Link
+          href={`/ban-tin/chuyen-muc/${article.category.slug}`}
+          className={styles.category}
+        >
+          {article.category.name}
+        </Link>
+        <h3>
+          <Link href={`/ban-tin/${article.slug}`}>{article.title}</Link>
+        </h3>
+        {showExcerpt ? <p className={styles.excerpt}>{article.excerpt}</p> : null}
         <div className={styles.meta}>
           <time dateTime={article.publishedAt}>{formatDate(article.publishedAt)}</time>
           <span>{article.author.name}</span>
-          {article.viewCount !== undefined && (
+          {article.viewCount !== undefined && article.viewCount > 0 ? (
             <span>{article.viewCount.toLocaleString('vi-VN')} lượt xem</span>
-          )}
+          ) : null}
         </div>
       </div>
     </article>

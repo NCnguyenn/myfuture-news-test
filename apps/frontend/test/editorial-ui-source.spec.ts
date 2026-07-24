@@ -24,3 +24,11 @@ test('does not add unsupported header controls', () => {
   const source = read('apps/frontend/components/layout/Header.tsx');
   assert.doesNotMatch(source, /Đăng nhập|Tìm kiếm|MyFuture Pro/);
 });
+
+test('provides the four approved story-card variants', () => {
+  const source = read('apps/frontend/components/news/NewsCard.tsx');
+  for (const variant of ['featured', 'compact', 'list', 'related']) {
+    assert.match(source, new RegExp(`'${variant}'`));
+  }
+  assert.match(source, /variant\s*=\s*'list'/);
+});
