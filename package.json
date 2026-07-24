@@ -20,14 +20,20 @@
     "db:migrate": "prisma migrate dev --schema apps/backend/prisma/schema.prisma",
     "db:migrate:deploy": "prisma migrate deploy --schema apps/backend/prisma/schema.prisma",
     "db:seed": "prisma db seed --schema apps/backend/prisma/schema.prisma",
-    "db:generate": "prisma generate --schema apps/backend/prisma/schema.prisma"
+    "db:generate": "prisma generate --schema apps/backend/prisma/schema.prisma",
+    "lint": "eslint . --max-warnings=0",
+    "check": "npm run lint && npm run db:validate && npm run test:web && npm run test:api && npm run typecheck && npm run build"
   },
   "prisma": {
     "seed": "npx tsx apps/backend/prisma/seed.ts"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "eslint": "^9.39.5",
+    "globals": "^16.5.0",
     "prisma": "^6.4.0",
-    "tsx": "^4.19.3"
+    "tsx": "^4.19.3",
+    "typescript-eslint": "^8.65.0"
   },
   "dependencies": {
     "@prisma/client": "^6.4.0"
