@@ -5,12 +5,17 @@ export function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
-        <Link href="/ban-tin" className={styles.brand} aria-label="MyFuture News - Bản tin">
-          <span className={styles.mark}>M</span>
-          <span><strong>MyFuture</strong><small>NEWS</small></span>
+        <Link href="/ban-tin" className={styles.brand} aria-label="MyFuture - Bản tin">
+          <span className={styles.wordmark}>
+            <span>my</span>FUTURE
+          </span>
+          <span className={styles.divider} aria-hidden="true" />
+          <span className={styles.channel}>Bản tin</span>
         </Link>
         <nav className={styles.nav} aria-label="Điều hướng chính">
-          <Link href="/ban-tin" className={styles.active}>Bản tin</Link>
+          <Link href="/ban-tin" className={styles.active}>
+            Bản tin
+          </Link>
           <span className={styles.muted}>Góc nhìn thị trường</span>
         </nav>
       </div>
