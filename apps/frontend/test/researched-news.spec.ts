@@ -64,6 +64,33 @@ test('uses unique new slugs and source URLs only', () => {
   assert.equal(new Set(sourceUrls).size, 30);
 });
 
+test('does not reuse any source URL from the Antigravity manifest', () => {
+  const excludedSourceUrls = JSON.parse(
+    readFileSync(
+      path.join(
+        import.meta.dirname,
+        'fixtures',
+        'antigravity-source-urls.json',
+      ),
+      'utf8',
+    ),
+  ) as string[];
+  assert.equal(excludedSourceUrls.length, 29);
+  assert.equal(new Set(excludedSourceUrls).size, 29);
+
+  const excluded = new Set(excludedSourceUrls);
+  const articles = getResearchedArticles({ limit: 100 }).data;
+  for (const article of articles) {
+    const detail = getResearchedArticleBySlug(article.slug);
+    assert.ok(detail);
+    assert.equal(
+      excluded.has(detail.data.sourceUrl ?? ''),
+      false,
+      `Reused excluded source URL: ${detail.data.sourceUrl}`,
+    );
+  }
+});
+
 test('records image provenance for all thirty researched articles', () => {
   type ImageRecord = {
     localPath: string;
