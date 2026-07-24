@@ -23,11 +23,42 @@ function validatedUrl(
   protocols: string[],
 ): string {
   const value = required(env, name, fallback);
-  const url = new URL(value);
+  const url = parseUrl(value, name);
   if (!protocols.includes(url.protocol)) {
     throw new Error(`${name} has an unsupported protocol`);
   }
   return value;
+}
+
+function parseUrl(value: string, name: string): URL {
+  try {
+    return new URL(value);
+  } catch {
+    throw new Error(`${name} must be a valid URL`);
+  }
+}
+
+function validatedOrigin(
+  env: NodeJS.ProcessEnv,
+  name: string,
+  fallback: string | undefined,
+): string {
+  const value = required(env, name, fallback);
+  const url = parseUrl(value, name);
+  if (!['http:', 'https:'].includes(url.protocol)) {
+    throw new Error(`${name} has an unsupported protocol`);
+  }
+  if (
+    url.username ||
+    url.password ||
+    url.pathname !== '/' ||
+    url.search ||
+    url.hash ||
+    url.href !== `${url.origin}/`
+  ) {
+    throw new Error(`${name} must be an origin`);
+  }
+  return url.origin;
 }
 
 export function getRuntimeEnv(
@@ -41,11 +72,10 @@ export function getRuntimeEnv(
 
   return {
     port,
-    webOrigin: validatedUrl(
+    webOrigin: validatedOrigin(
       env,
       'WEB_ORIGIN',
       production ? undefined : 'http://localhost:3000',
-      ['http:', 'https:'],
     ),
     databaseUrl: validatedUrl(
       env,
