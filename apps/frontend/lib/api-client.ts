@@ -34,39 +34,61 @@ export class ApiClientError extends Error {
 }
 
 type ErrorBody = { message?: string; code?: string };
+type NewsRead = (path: string) => Promise<unknown>;
+type CacheFactory = (
+  reader: NewsRead,
+  keyParts?: string[],
+  options?: { revalidate?: number | false; tags?: string[] },
+) => NewsRead;
+type NewsApiReaderDependencies = {
+  fetchImpl?: typeof fetch;
+  cache?: CacheFactory;
+  resolveBaseUrl?: () => string;
+  timeoutSignal?: (delay: number) => AbortSignal;
+};
 
-async function requestUncached(path: string): Promise<unknown> {
-  const response = await fetch(`${resolveApiBaseUrl()}${path}`, {
-    cache: 'no-store',
-    signal: AbortSignal.timeout(NEWS_REQUEST_TIMEOUT_MS),
-  });
+export function createNewsApiReader({
+  fetchImpl = fetch,
+  cache = unstable_cache,
+  resolveBaseUrl = resolveApiBaseUrl,
+  timeoutSignal = AbortSignal.timeout,
+}: NewsApiReaderDependencies = {}) {
+  async function requestUncached(path: string): Promise<unknown> {
+    const response = await fetchImpl(`${resolveBaseUrl()}${path}`, {
+      cache: 'no-store',
+      signal: timeoutSignal(NEWS_REQUEST_TIMEOUT_MS),
+    });
 
-  if (!response.ok) {
-    let errorBody: ErrorBody = {};
-    try {
-      errorBody = (await response.json()) as ErrorBody;
-    } catch {
-      errorBody = {};
+    if (!response.ok) {
+      let errorBody: ErrorBody = {};
+      try {
+        errorBody = (await response.json()) as ErrorBody;
+      } catch {
+        errorBody = {};
+      }
+      throw new ApiClientError(
+        response.status,
+        errorBody.message ??
+          `News API request failed with status ${response.status}`,
+        errorBody.code,
+      );
     }
-    throw new ApiClientError(
-      response.status,
-      errorBody.message ?? `News API request failed with status ${response.status}`,
-      errorBody.code,
-    );
+
+    return response.json();
   }
 
-  return response.json();
+  const requestCached = cache(
+    requestUncached,
+    ['news-api-read'],
+    { revalidate: NEWS_CACHE_SECONDS },
+  );
+
+  return async function request<T>(path: string): Promise<T> {
+    return (await requestCached(path)) as T;
+  };
 }
 
-const requestCached = unstable_cache(
-  requestUncached,
-  ['news-api-read'],
-  { revalidate: NEWS_CACHE_SECONDS },
-);
-
-async function request<T>(path: string): Promise<T> {
-  return (await requestCached(path)) as T;
-}
+const request = createNewsApiReader();
 
 export function getCategories(): Promise<{ data: NewsCategory[] }> {
   return request<{ data: NewsCategory[] }>('/categories');

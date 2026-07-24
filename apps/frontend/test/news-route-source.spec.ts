@@ -44,6 +44,6 @@ test('category pagination uses the demonstrable page size', () => {
     ),
     'utf8',
   );
-  assert.match(source, /CATEGORY_PAGE_SIZE/);
+  assert.match(source, /limit:\s*CATEGORY_PAGE_SIZE/);
   assert.doesNotMatch(source, /limit:\s*10/);
 });
