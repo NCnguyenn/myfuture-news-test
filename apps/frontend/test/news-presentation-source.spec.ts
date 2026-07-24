@@ -20,9 +20,11 @@ test('news cards show authors and only render real view counts', () => {
 
 test('article details show author, image provenance, and verification evidence', () => {
   const page = read('apps/frontend/app/ban-tin/[articleSlug]/page.tsx');
+  const header = read('apps/frontend/components/news/ArticleHeader.tsx');
+  const evidence = read('apps/frontend/components/news/SourceEvidence.tsx');
 
-  assert.match(page, /Tác giả:/);
+  assert.match(header, /Tác giả:/);
   assert.match(page, /article\.imageProvenance\.isPlaceholder/);
-  assert.match(page, /Nguồn kiểm chứng/);
-  assert.match(page, /article\.evidence\.map/);
+  assert.match(evidence, /Nguồn kiểm chứng/);
+  assert.match(evidence, /evidence\.map/);
 });

@@ -2,14 +2,18 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArticleContent } from '../../../components/news/ArticleContent';
+import { ArticleHeader } from '../../../components/news/ArticleHeader';
 import { NewsImage } from '../../../components/news/NewsImage';
+import { NewsTabs } from '../../../components/news/NewsTabs';
 import { RelatedNews } from '../../../components/news/RelatedNews';
+import { SourceEvidence } from '../../../components/news/SourceEvidence';
 import {
   ApiClientError,
   getArticleBySlug,
+  getCategories,
   isNotFoundError,
 } from '../../../lib/api-client';
-import { formatDate } from '../../../lib/format-date';
+import styles from './page.module.css';
 
 export const dynamic = 'force-dynamic';
 
@@ -25,7 +29,9 @@ async function loadArticle(slug: string) {
   }
 }
 
-export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: ArticlePageProps): Promise<Metadata> {
   const { articleSlug } = await params;
   try {
     const response = await getArticleBySlug(articleSlug);
@@ -40,7 +46,10 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
       },
     };
   } catch (error) {
-    if (isNotFoundError(error) || (error instanceof ApiClientError && error.status === 404)) {
+    if (
+      isNotFoundError(error) ||
+      (error instanceof ApiClientError && error.status === 404)
+    ) {
       notFound();
     }
     throw error;
@@ -49,91 +58,71 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { articleSlug } = await params;
-  const article = await loadArticle(articleSlug);
+  const [article, categoriesResponse] = await Promise.all([
+    loadArticle(articleSlug),
+    getCategories(),
+  ]);
 
   return (
     <div className="page-shell">
-      <div className="breadcrumb">
+      <NewsTabs
+        categories={categoriesResponse.data}
+        activeSlug={article.category.slug}
+      />
+      <div className={`${styles.breadcrumb} breadcrumb`}>
         <Link href="/ban-tin">Bản tin</Link>
         <span>/</span>
-        <Link href={`/ban-tin/chuyen-muc/${article.category.slug}`}>{article.category.name}</Link>
+        <Link href={`/ban-tin/chuyen-muc/${article.category.slug}`}>
+          {article.category.name}
+        </Link>
         <span>/</span>
         <span>{article.title}</span>
       </div>
       <article>
-        <header className="article-header">
-          <div className="article-category">
-            {article.isFeatured ? 'NỔI BẬT · ' : ''}
-            {article.category.name}
+        <ArticleHeader article={article} />
+        <figure className={styles.cover}>
+          <div className={styles.coverImage}>
+            <NewsImage
+              src={article.coverImageUrl ?? article.thumbnailUrl}
+              alt={article.imageAlt}
+              priority
+            />
           </div>
-          <h1>{article.title}</h1>
-          <p className="article-excerpt">{article.excerpt}</p>
-          <div className="article-meta">
-            <time dateTime={String(article.publishedAt)}>
-              {formatDate(article.publishedAt)}
-            </time>
-            <span>Tác giả: {article.author.name}</span>
-            {article.viewCount !== undefined && (
-              <span>{article.viewCount.toLocaleString('vi-VN')} lượt xem</span>
-            )}
-            {article.readingTime && <span>{article.readingTime} phút đọc</span>}
-            {article.sourceName && article.sourceUrl && (
-              <a href={article.sourceUrl} target="_blank" rel="noreferrer">
-                Nguồn: {article.sourceName}
-              </a>
-            )}
-          </div>
-        </header>
-        <div className="article-cover">
-          <NewsImage
-            src={article.coverImageUrl ?? article.thumbnailUrl}
-            alt={article.imageAlt}
-            priority
-          />
-        </div>
-        {!article.imageProvenance.isPlaceholder && (
-          <p className="article-image-credit">
-            Ảnh từ nguồn bài viết: {article.imageProvenance.credit ?? article.sourceName}
-          </p>
-        )}
-        <div className="article-body">
+          {!article.imageProvenance.isPlaceholder ? (
+            <figcaption className={styles.credit}>
+              Ảnh từ nguồn bài viết:{' '}
+              {article.imageProvenance.credit ?? article.sourceName}
+            </figcaption>
+          ) : null}
+        </figure>
+        <div className={styles.readingColumn}>
           <ArticleContent contentHtml={article.contentHtml} />
+          <SourceEvidence evidence={article.evidence} />
         </div>
-        <aside className="article-evidence" aria-labelledby="evidence-heading">
-          <p className="eyebrow">MINH BẠCH NGUỒN</p>
-          <h2 id="evidence-heading">Nguồn kiểm chứng</h2>
-          <ul>
-            {article.evidence.map((item) => (
-              <li key={`${item.sourceUrl}-${item.claim}`}>
-                <strong>{item.claim}</strong>
-                <p>{item.evidenceNote}</p>
-                <a href={item.sourceUrl} target="_blank" rel="noreferrer">
-                  Mở nguồn gốc
-                </a>
-              </li>
-            ))}
-          </ul>
-        </aside>
       </article>
-      <RelatedNews articles={article.relatedArticles} />
-      {(article.previousArticle || article.nextArticle) && (
-        <nav className="article-nav" aria-label="Điều hướng bài viết">
+      <div className={styles.related}>
+        <RelatedNews articles={article.relatedArticles} />
+      </div>
+      {article.previousArticle || article.nextArticle ? (
+        <nav className={styles.articleNav} aria-label="Điều hướng bài viết">
           {article.previousArticle ? (
             <Link href={`/ban-tin/${article.previousArticle.slug}`}>
-              ← {article.previousArticle.title}
+              <small>Đọc bài trước</small>
+              <span>← {article.previousArticle.title}</span>
             </Link>
           ) : (
             <span />
           )}
           {article.nextArticle ? (
             <Link href={`/ban-tin/${article.nextArticle.slug}`}>
-              {article.nextArticle.title} →
+              <small>Đọc bài tiếp</small>
+              <span>{article.nextArticle.title} →</span>
             </Link>
           ) : (
             <span />
           )}
         </nav>
-      )}
+      ) : null}
     </div>
   );
 }

@@ -53,3 +53,12 @@ test('pagination exposes current page semantics', () => {
   const source = read('apps/frontend/components/news/Pagination.tsx');
   assert.match(source, /aria-current/);
 });
+
+test('article page delegates header and evidence presentation', () => {
+  const source = read(
+    'apps/frontend/app/ban-tin/[articleSlug]/page.tsx',
+  );
+  assert.match(source, /<ArticleHeader/);
+  assert.match(source, /<SourceEvidence/);
+  assert.match(source, /<NewsTabs/);
+});
