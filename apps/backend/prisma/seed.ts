@@ -82,6 +82,18 @@ function articleUpdateData(
 }
 
 async function main() {
+  const articles = loadOfficialArticles();
+  const articleSlugs = articles.map((article) => article.slug);
+
+  // This is a dedicated read-only recruiter demo database. Pruning stale rows
+  // before upserts is intentional so every seed run produces the exact snapshot.
+  await prisma.article.deleteMany({
+    where: { slug: { notIn: articleSlugs } },
+  });
+  await prisma.category.deleteMany({
+    where: { slug: { notIn: [...OFFICIAL_CATEGORY_ORDER] } },
+  });
+
   console.log('Seeding official categories (upsert by slug)...');
 
   const categoryIdBySlug = new Map<string, string>();
@@ -107,7 +119,6 @@ async function main() {
     categoryIdBySlug.set(slug, row.id);
   }
 
-  const articles = loadOfficialArticles();
   console.log(`Seeding ${articles.length} official articles (upsert by slug)...`);
 
   for (const article of articles) {
