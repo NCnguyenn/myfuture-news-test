@@ -1,11 +1,25 @@
+import { unstable_cache } from 'next/cache';
 import type {
   ArticleDetailResponse,
   ArticleListResponse,
   ArticleQuery,
   NewsCategory,
 } from '../types/news';
+import {
+  NEWS_CACHE_SECONDS,
+  NEWS_REQUEST_TIMEOUT_MS,
+} from './news-config';
 
-const API_BASE_URL = process.env.API_BASE_URL ?? 'http://localhost:4000/api';
+export function resolveApiBaseUrl(
+  env: NodeJS.ProcessEnv = process.env,
+): string {
+  const configured = env.API_BASE_URL?.trim().replace(/\/+$/, '');
+  if (configured) return configured;
+  if (env.NODE_ENV === 'production') {
+    throw new Error('API_BASE_URL is required in production');
+  }
+  return 'http://localhost:4000/api';
+}
 
 export class ApiClientError extends Error {
   readonly status: number;
@@ -21,8 +35,11 @@ export class ApiClientError extends Error {
 
 type ErrorBody = { message?: string; code?: string };
 
-async function request<T>(path: string): Promise<T> {
-  const response = await fetch(`${API_BASE_URL}${path}`, { cache: 'no-store' });
+async function requestUncached(path: string): Promise<unknown> {
+  const response = await fetch(`${resolveApiBaseUrl()}${path}`, {
+    cache: 'no-store',
+    signal: AbortSignal.timeout(NEWS_REQUEST_TIMEOUT_MS),
+  });
 
   if (!response.ok) {
     let errorBody: ErrorBody = {};
@@ -38,7 +55,17 @@ async function request<T>(path: string): Promise<T> {
     );
   }
 
-  return (await response.json()) as T;
+  return response.json();
+}
+
+const requestCached = unstable_cache(
+  requestUncached,
+  ['news-api-read'],
+  { revalidate: NEWS_CACHE_SECONDS },
+);
+
+async function request<T>(path: string): Promise<T> {
+  return (await requestCached(path)) as T;
 }
 
 export function getCategories(): Promise<{ data: NewsCategory[] }> {

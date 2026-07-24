@@ -11,6 +11,7 @@ import {
   getCategories,
   isNotFoundError,
 } from '../../../../lib/api-client';
+import { CATEGORY_PAGE_SIZE } from '../../../../lib/news-config';
 import styles from './page.module.css';
 
 export const dynamic = 'force-dynamic';
@@ -76,7 +77,7 @@ export default async function CategoryPage({
     articlesResponse = await getArticles({
       category: slug,
       page,
-      limit: 10,
+      limit: CATEGORY_PAGE_SIZE,
     });
   } catch (error) {
     if (isNotFoundError(error)) notFound();

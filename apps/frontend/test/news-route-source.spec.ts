@@ -35,3 +35,15 @@ test('article metadata only catches ApiClientError 404 and rethrows other errors
   assert.match(articlePage, /isNotFoundError|ApiClientError/);
   assert.match(articlePage, /notFound\(\)/);
 });
+
+test('category pagination uses the demonstrable page size', () => {
+  const source = readFileSync(
+    path.join(
+      workspaceRoot,
+      'apps/frontend/app/ban-tin/chuyen-muc/[slug]/page.tsx',
+    ),
+    'utf8',
+  );
+  assert.match(source, /CATEGORY_PAGE_SIZE/);
+  assert.doesNotMatch(source, /limit:\s*10/);
+});
