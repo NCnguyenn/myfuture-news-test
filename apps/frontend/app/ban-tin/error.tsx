@@ -17,7 +17,9 @@ export default function NewsError({ error, reset }: NewsErrorProps) {
   return (
     <div className="page-shell">
       <ErrorPanel>
-        <button type="button" onClick={reset}>Thử tải lại</button>
+        <button type="button" onClick={() => reset()}>
+          Thử tải lại
+        </button>
         <Link href="/ban-tin">Về trang tổng quan</Link>
       </ErrorPanel>
     </div>

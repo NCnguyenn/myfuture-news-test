@@ -11,11 +11,14 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <div className={styles.wrapper}>
-      <p className="eyebrow">404</p>
+    <main className={styles.wrapper}>
+      <p className="eyebrow">LỖI 404</p>
       <h1>Không tìm thấy nội dung</h1>
-      <p>Liên kết này không tồn tại hoặc bài viết chưa được xuất bản.</p>
+      <p>
+        Liên kết này không tồn tại hoặc bài viết chưa được xuất bản. Bạn có thể
+        quay lại Bản tin để tiếp tục đọc.
+      </p>
       <Link href="/ban-tin">Quay lại Bản tin</Link>
-    </div>
+    </main>
   );
 }

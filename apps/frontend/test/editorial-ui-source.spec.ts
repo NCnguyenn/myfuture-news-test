@@ -62,3 +62,12 @@ test('article page delegates header and evidence presentation', () => {
   assert.match(source, /<SourceEvidence/);
   assert.match(source, /<NewsTabs/);
 });
+
+test('news states retain retry, overview, and reduced-motion support', () => {
+  const error = read('apps/frontend/app/ban-tin/error.tsx');
+  const states = read('apps/frontend/components/news/NewsStates.module.css');
+  const notFound = read('apps/frontend/app/not-found.tsx');
+  assert.match(error, /reset\(\)/);
+  assert.match(states, /prefers-reduced-motion/);
+  assert.match(notFound, /ban-tin/);
+});

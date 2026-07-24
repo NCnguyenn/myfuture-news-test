@@ -8,10 +8,11 @@ type EmptyStateProps = {
 
 export function EmptyState({
   title = 'Chưa có bài viết phù hợp',
-  description = 'Thử xem các danh mục khác hoặc quay lại toàn cảnh bản tin.',
+  description = 'Thử xem chuyên mục khác hoặc quay lại toàn cảnh bản tin.',
 }: EmptyStateProps) {
   return (
     <div className={`${styles.state} ${styles.empty}`} role="status">
+      <span className={styles.marker} aria-hidden="true">M</span>
       <p className={styles.stateTitle}>{title}</p>
       <p className={styles.stateDescription}>{description}</p>
       <Link className={styles.stateLink} href="/ban-tin">
@@ -34,34 +35,49 @@ export function ErrorPanel({
 }: ErrorPanelProps) {
   return (
     <div className={`${styles.state} ${styles.error}`} role="alert">
+      <span className={styles.marker} aria-hidden="true">!</span>
       <p className={styles.stateTitle}>{title}</p>
       <p className={styles.stateDescription}>{description}</p>
-      {children && <div className={styles.actions}>{children}</div>}
+      {children ? <div className={styles.actions}>{children}</div> : null}
     </div>
   );
 }
 
 function SkeletonBlock({ className = '' }: { className?: string }) {
-  return <span className={`${styles.skeleton} ${className}`} aria-hidden="true" />;
+  return (
+    <span className={`${styles.skeleton} ${className}`} aria-hidden="true" />
+  );
 }
 
 export function LoadingSkeleton() {
   return (
     <div className="page-shell" aria-busy="true" aria-label="Đang tải bản tin">
-      <section className="page-intro">
+      <section className={styles.skeletonIntro}>
         <SkeletonBlock className={styles.skeletonEyebrow} />
         <SkeletonBlock className={styles.skeletonTitle} />
         <SkeletonBlock className={styles.skeletonText} />
       </section>
       <div className={styles.skeletonTabs}>
-        {Array.from({ length: 7 }, (_, index) => <SkeletonBlock key={index} className={styles.skeletonTab} />)}
+        {Array.from({ length: 7 }, (_, index) => (
+          <SkeletonBlock key={index} className={styles.skeletonTab} />
+        ))}
       </div>
       <section className={styles.skeletonFeatured} aria-hidden="true">
-        <SkeletonBlock className={styles.skeletonFeatureImage} />
-        <div className={styles.skeletonFeatureBody}>
-          <SkeletonBlock className={styles.skeletonLine} />
-          <SkeletonBlock className={styles.skeletonLineWide} />
-          <SkeletonBlock className={styles.skeletonLine} />
+        <div className={styles.skeletonLead}>
+          <SkeletonBlock className={styles.skeletonFeatureImage} />
+          <div className={styles.skeletonFeatureBody}>
+            <SkeletonBlock className={styles.skeletonLine} />
+            <SkeletonBlock className={styles.skeletonLineWide} />
+            <SkeletonBlock className={styles.skeletonLineShort} />
+          </div>
+        </div>
+        <div className={styles.skeletonSide}>
+          {Array.from({ length: 4 }, (_, index) => (
+            <div className={styles.skeletonSideRow} key={index}>
+              <SkeletonBlock className={styles.skeletonSideImage} />
+              <SkeletonBlock className={styles.skeletonLineWide} />
+            </div>
+          ))}
         </div>
       </section>
       <section className={styles.skeletonList} aria-hidden="true">
