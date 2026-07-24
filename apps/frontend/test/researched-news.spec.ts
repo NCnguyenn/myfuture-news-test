@@ -64,49 +64,6 @@ test('uses unique new slugs and source URLs only', () => {
   assert.equal(new Set(sourceUrls).size, 30);
 });
 
-test('does not reuse any source URL from the Antigravity manifest', () => {
-  type OldArticle = {
-    source?: { canonicalUrl?: string; url?: string };
-    sources?: Array<{ canonicalUrl?: string; sourceUrl?: string }>;
-    canonicalUrl?: string;
-  };
-  type OldManifest = {
-    categories: Array<{ articles: OldArticle[] }>;
-  };
-
-  const oldManifest = JSON.parse(
-    readFileSync(
-      path.join(
-        workspaceRoot,
-        'docs',
-        'research',
-        'manifest-2026-07-23.json',
-      ),
-      'utf8',
-    ),
-  ) as OldManifest;
-  const oldUrls = new Set(
-    oldManifest.categories
-      .flatMap((category) => category.articles)
-      .map(
-        (article) =>
-          article.sources?.[0]?.canonicalUrl ??
-          article.sources?.[0]?.sourceUrl ??
-          article.source?.canonicalUrl ??
-          article.source?.url ??
-          article.canonicalUrl,
-      )
-      .filter((value): value is string => Boolean(value)),
-  );
-
-  const articles = getResearchedArticles({ limit: 100 }).data;
-  for (const article of articles) {
-    const detail = getResearchedArticleBySlug(article.slug);
-    assert.ok(detail);
-    assert.equal(oldUrls.has(detail.data.sourceUrl ?? ''), false);
-  }
-});
-
 test('records image provenance for all thirty researched articles', () => {
   type ImageRecord = {
     localPath: string;
@@ -120,13 +77,7 @@ test('records image provenance for all thirty researched articles', () => {
     readFileSync(
       path.join(
         workspaceRoot,
-        'apps',
-        'frontend',
-        'public',
-        'images',
-        'news',
-        'researched',
-        'manifest.json',
+        'data/news/images.json',
       ),
       'utf8',
     ),

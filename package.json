@@ -20,10 +20,7 @@
     "db:migrate": "prisma migrate dev --schema apps/backend/prisma/schema.prisma",
     "db:migrate:deploy": "prisma migrate deploy --schema apps/backend/prisma/schema.prisma",
     "db:seed": "prisma db seed --schema apps/backend/prisma/schema.prisma",
-    "db:generate": "prisma generate --schema apps/backend/prisma/schema.prisma",
-    "sync:news-images": "tsx scripts/sync-researched-news-images.ts",
-    "import:official-news": "tsx scripts/import-official-news.ts",
-    "import:official-news:dry-run": "tsx scripts/import-official-news.ts --dry-run"
+    "db:generate": "prisma generate --schema apps/backend/prisma/schema.prisma"
   },
   "prisma": {
     "seed": "npx tsx apps/backend/prisma/seed.ts"

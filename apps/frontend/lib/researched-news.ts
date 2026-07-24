@@ -74,9 +74,7 @@ function findWorkspaceFile(relativePath: string): string {
 function readManifest(): RawManifest {
   return JSON.parse(
     readFileSync(
-      findWorkspaceFile(
-        'docs/research/manifest-codex-2026-07-23.json',
-      ),
+      findWorkspaceFile('data/news/articles.json'),
       'utf8',
     ),
   ) as RawManifest;

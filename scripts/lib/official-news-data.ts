@@ -136,13 +136,11 @@ function findWorkspaceRoot(): string {
     path.resolve(process.cwd(), '../..'),
   ];
   for (const candidate of candidates) {
-    if (
-      existsSync(path.join(candidate, 'docs/research/manifest-codex-2026-07-23.json'))
-    ) {
+    if (existsSync(path.join(candidate, 'data/news/articles.json'))) {
       return candidate;
     }
   }
-  throw new Error('Could not locate workspace root (manifest-codex-2026-07-23.json missing)');
+  throw new Error('Could not locate workspace root (data/news/articles.json missing)');
 }
 
 function isComplete(article: RawArticle): boolean {
@@ -191,16 +189,14 @@ function webPathToPublicFile(workspaceRoot: string, webPath: string): string {
 }
 
 function loadImageManifest(
-  workspaceRoot: string,
+  imageManifestPath: string,
 ): Record<string, ImageRecord> {
-  const manifestPath = path.join(
-    workspaceRoot,
-    'apps/frontend/public/images/news/researched/manifest.json',
-  );
-  if (!existsSync(manifestPath)) {
-    throw new Error(`Image manifest not found: ${manifestPath}`);
+  if (!existsSync(imageManifestPath)) {
+    throw new Error(`Image manifest not found: ${imageManifestPath}`);
   }
-  return JSON.parse(readFileSync(manifestPath, 'utf8')) as Record<string, ImageRecord>;
+  return JSON.parse(
+    readFileSync(imageManifestPath, 'utf8'),
+  ) as Record<string, ImageRecord>;
 }
 
 function auditImages(
@@ -252,12 +248,18 @@ function auditImages(
  */
 export function loadOfficialArticles(): OfficialArticleSeed[] {
   const workspaceRoot = findWorkspaceRoot();
-  const manifestPath = path.join(
+  const articleManifestPath = path.join(
     workspaceRoot,
-    'docs/research/manifest-codex-2026-07-23.json',
+    'data/news/articles.json',
   );
-  const rawManifest = JSON.parse(readFileSync(manifestPath, 'utf8')) as RawManifest;
-  const imageManifest = loadImageManifest(workspaceRoot);
+  const imageManifestPath = path.join(
+    workspaceRoot,
+    'data/news/images.json',
+  );
+  const rawManifest = JSON.parse(
+    readFileSync(articleManifestPath, 'utf8'),
+  ) as RawManifest;
+  const imageManifest = loadImageManifest(imageManifestPath);
 
   if (rawManifest.categories.length !== 6) {
     throw new Error(
