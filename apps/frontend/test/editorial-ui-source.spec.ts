@@ -32,3 +32,11 @@ test('provides the four approved story-card variants', () => {
   }
   assert.match(source, /variant\s*=\s*'list'/);
 });
+
+test('overview requests featured, newest, and popular article groups', () => {
+  const source = read('apps/frontend/app/ban-tin/page.tsx');
+  assert.match(source, /featured:\s*true/);
+  assert.match(source, /sort:\s*'newest'/);
+  assert.match(source, /sort:\s*'popular'/);
+  assert.match(source, /Promise\.all/);
+});
