@@ -67,12 +67,12 @@ export class HealthService implements OnModuleDestroy {
     }
 
     // 3. Overall status
-    let status: 'ok' | 'degraded' | 'error' = 'ok';
-    if (postgresStatus === 'down' && redisStatus === 'down') {
-      status = 'error';
-    } else if (postgresStatus === 'down' || redisStatus === 'down') {
-      status = 'degraded';
-    }
+    const status =
+      postgresStatus === 'down'
+        ? 'error'
+        : redisStatus === 'down'
+          ? 'degraded'
+          : 'ok';
 
     return {
       data: {
