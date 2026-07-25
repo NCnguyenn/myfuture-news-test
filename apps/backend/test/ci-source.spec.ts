@@ -32,3 +32,16 @@ test('CI runs every recruiter quality gate', () => {
   );
   assert.match(source, /node-version:\s*\$\{\{\s*matrix\.node-version\s*\}\}/);
 });
+
+test('Nest entrypoint imports NestJS directly for Vercel detection', () => {
+  const source = readFileSync(
+    path.join(root, 'apps/backend/src/main.ts'),
+    'utf8',
+  );
+
+  assert.match(source, /import\s+\{\s*NestFactory\s*\}\s+from\s+'@nestjs\/core';/);
+  assert.match(source, /import\s+\{\s*FastifyAdapter\s*,\s*NestFastifyApplication\s*\}\s+from\s+'@nestjs\/platform-fastify';/);
+  assert.match(source, /import\s+\{\s*getRuntimeEnv\s*\}\s+from\s+'\.\/config\/runtime-env';/);
+  assert.match(source, /import\s+\{\s*configureApp\s*\}\s+from\s+'\.\/app\.factory';/);
+  assert.doesNotMatch(source, /createApp/);
+});
