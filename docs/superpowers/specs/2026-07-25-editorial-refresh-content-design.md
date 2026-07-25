@@ -3,7 +3,7 @@
 **Date:** 2026-07-25
 **Branch:** `codex/editorial-refresh-content`
 **Base:** `origin/main` at `c62803e32a68614a616a58cdae7099ec7e88ee09`
-**Status:** Approved visual direction; written specification awaiting user review
+**Status:** Approved by user on 2026-07-25
 
 ## Goal
 
