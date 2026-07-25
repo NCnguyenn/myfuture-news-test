@@ -4,7 +4,7 @@ import { spawnSync } from 'node:child_process';
 import { parseArgs } from 'node:util';
 
 const usage =
-  'Usage: node scripts/run-node-tests.mjs --test-dir <directory> [--import <module>] [--require <module>]';
+  'Usage: node scripts/run-node-tests.mjs --test-dir <directory> [--import <module>] [--require <module>] [--test-name-pattern <pattern>]';
 
 function exitWithUsage(message) {
   console.error(`${message}\n${usage}`);
@@ -19,6 +19,7 @@ try {
       'test-dir': { type: 'string' },
       import: { type: 'string', multiple: true },
       require: { type: 'string', multiple: true },
+      'test-name-pattern': { type: 'string' },
     },
     strict: true,
   }));
@@ -34,6 +35,10 @@ for (const option of ['import', 'require']) {
   if (values[option]?.some((moduleName) => !moduleName.trim())) {
     exitWithUsage(`--${option} requires a non-empty module name.`);
   }
+}
+
+if (values['test-name-pattern'] !== undefined && !values['test-name-pattern'].trim()) {
+  exitWithUsage('--test-name-pattern requires a non-empty test name pattern.');
 }
 
 const testDirectory = resolve(values['test-dir']);
@@ -76,6 +81,10 @@ for (const moduleName of values.import ?? []) {
 
 for (const moduleName of values.require ?? []) {
   loaderArguments.push('--require', moduleName);
+}
+
+if (values['test-name-pattern']) {
+  loaderArguments.push('--test-name-pattern', values['test-name-pattern']);
 }
 
 const result = spawnSync(
