@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { SearchLauncher } from '../search/SearchLauncher';
 import styles from './Header.module.css';
 
 export function Header() {
@@ -12,12 +13,15 @@ export function Header() {
           <span className={styles.divider} aria-hidden="true" />
           <span className={styles.channel}>Bản tin</span>
         </Link>
-        <nav className={styles.nav} aria-label="Điều hướng chính">
-          <Link href="/ban-tin" className={styles.active}>
-            Bản tin
-          </Link>
-          <span className={styles.muted}>Góc nhìn thị trường</span>
-        </nav>
+        <div className={styles.actions}>
+          <nav className={styles.nav} aria-label="Điều hướng chính">
+            <Link href="/ban-tin" className={styles.active}>
+              Bản tin
+            </Link>
+            <span className={styles.muted}>Góc nhìn thị trường</span>
+          </nav>
+          <SearchLauncher />
+        </div>
       </div>
     </header>
   );

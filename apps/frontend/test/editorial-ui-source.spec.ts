@@ -20,9 +20,16 @@ test('renders exactly one overview link plus API category links', () => {
   assert.match(source, /aria-current/);
 });
 
-test('does not add unsupported header controls', () => {
+test('renders the approved prominent search launcher', () => {
   const source = read('apps/frontend/components/layout/Header.tsx');
-  assert.doesNotMatch(source, /Đăng nhập|Tìm kiếm|MyFuture Pro/);
+  assert.match(source, /SearchLauncher/);
+  const launcher = read(
+    'apps/frontend/components/search/SearchLauncher.tsx',
+  );
+  assert.match(launcher, /Tìm kiếm/);
+  assert.match(launcher, /SearchOverlay/);
+  assert.match(launcher, /event\.metaKey \|\| event\.ctrlKey/);
+  assert.match(launcher, /event\.key\.toLowerCase\(\) === 'k'/);
 });
 
 test('provides the four approved story-card variants', () => {

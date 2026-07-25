@@ -47,6 +47,12 @@
   letter-spacing: 0.02em;
 }
 
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
 .nav {
   display: flex;
   align-items: center;
@@ -72,6 +78,10 @@
 
   .nav {
     display: none;
+  }
+
+  .actions {
+    gap: 0;
   }
 
   .wordmark {
