@@ -28,3 +28,15 @@ test('article details show author, image provenance, and verification evidence',
   assert.match(evidence, /Nguồn kiểm chứng/);
   assert.match(evidence, /evidence\.map/);
 });
+
+test('news images render through Next Image optimization', () => {
+  const image = read('apps/frontend/components/news/NewsImage.tsx');
+
+  assert.match(image, /import Image from 'next\/image';/);
+  assert.match(image, /<Image\b/);
+  assert.doesNotMatch(image, /<img\b/);
+  assert.match(image, /width=\{1200\}/);
+  assert.match(image, /height=\{675\}/);
+  assert.match(image, /priority=\{priority\}/);
+  assert.doesNotMatch(image, /unoptimized/);
+});

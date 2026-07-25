@@ -49,7 +49,7 @@ async function expectExpectedMissingApi(url: string): Promise<void> {
   );
 }
 
-async function expectPublicHtml(web: string, path: string): Promise<void> {
+async function expectPublicHtml(web: string, path: string): Promise<string> {
   const response = await expectOk(`${web}${path}`);
   const contentType = response.headers.get('content-type') ?? '';
   assert.match(contentType, /text\/html/i, `${path} must return HTML`);
@@ -61,9 +61,10 @@ async function expectPublicHtml(web: string, path: string): Promise<void> {
     /(?:^|\/)(?:login|dang-nhap)(?:\/|$)/i,
     `${path} must be publicly accessible without login`,
   );
+  return response.text();
 }
 
-async function expectStaticImageAndOptimizer(
+async function expectStaticImage(
   web: string,
   thumbnailUrl: string,
 ): Promise<void> {
@@ -83,10 +84,15 @@ async function expectStaticImageAndOptimizer(
     'static article image must return an image',
   );
 
-  const optimizerUrl = new URL('/_next/image', web);
-  optimizerUrl.searchParams.set('url', imageUrl.pathname);
-  optimizerUrl.searchParams.set('w', '640');
-  optimizerUrl.searchParams.set('q', '75');
+}
+
+async function expectOptimizerFromNewsHtml(web: string, html: string): Promise<void> {
+  const match = html.match(/\bsrc=["']([^"']*\/_next\/image\?[^"']+)["']/i);
+  assert.ok(match, '/ban-tin HTML must render a Next Image optimizer URL');
+
+  const optimizerUrl = new URL(match[1].replace(/&amp;/g, '&'), web);
+  assert.equal(optimizerUrl.origin, new URL(web).origin, 'Next Image URL must use the public origin');
+  assert.equal(optimizerUrl.pathname, '/_next/image', 'news HTML must use the Next Image optimizer');
   const optimizedImage = await expectOk(optimizerUrl.toString());
   assert.match(
     optimizedImage.headers.get('content-type') ?? '',
@@ -139,7 +145,7 @@ async function main() {
   await expectExpectedMissingApi(`${api}/articles/missing-article`);
 
   await expectPublicHtml(web, '/');
-  await expectPublicHtml(web, '/ban-tin');
+  const newsHtml = await expectPublicHtml(web, '/ban-tin');
   await expectPublicHtml(web, '/ban-tin?page=2');
   await expectPublicHtml(web, '/ban-tin.html');
 
@@ -170,7 +176,8 @@ async function main() {
   }
 
   await expectPublicHtml(web, `/ban-tin/${article.slug}`);
-  await expectStaticImageAndOptimizer(web, detail.data.thumbnailUrl);
+  await expectStaticImage(web, detail.data.thumbnailUrl);
+  await expectOptimizerFromNewsHtml(web, newsHtml);
 
   console.log(
     JSON.stringify({

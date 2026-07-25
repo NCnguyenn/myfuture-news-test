@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 import styles from './NewsImage.module.css';
 
@@ -15,11 +16,13 @@ type NewsImageProps = {
 export function NewsImage({ src, alt, className, priority = false }: NewsImageProps) {
   const [imageSource, setImageSource] = useState(src || FALLBACK_IMAGE);
   return (
-    <img
+    <Image
       src={imageSource}
       alt={alt}
+      width={1200}
+      height={675}
       className={`${styles.image} ${className ?? ''}`}
-      loading={priority ? 'eager' : 'lazy'}
+      priority={priority}
       decoding="async"
       onError={(event) => {
         event.currentTarget.onerror = null;
