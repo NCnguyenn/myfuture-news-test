@@ -171,7 +171,7 @@ export default async function CategoryPage({
             articles={popularSelection.articles}
             title={popularSelection.title}
           />
-          <CategoryDirectory categories={categories} />
+          <CategoryDirectory categories={categories} compact />
         </aside>
       </div>
     </div>
