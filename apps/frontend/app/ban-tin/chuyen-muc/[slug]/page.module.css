@@ -6,8 +6,8 @@
 .intro h1 {
   margin: 8px 0 12px;
   font-size: clamp(2.45rem, 5.5vw, 4.8rem);
-  line-height: 1;
-  letter-spacing: -0.06em;
+  line-height: 1.05;
+  letter-spacing: normal;
   text-wrap: balance;
 }
 

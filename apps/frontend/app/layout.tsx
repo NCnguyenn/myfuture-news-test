@@ -1,7 +1,15 @@
 import type { Metadata } from 'next';
+import { Be_Vietnam_Pro } from 'next/font/google';
 import { Footer } from '../components/layout/Footer';
 import { Header } from '../components/layout/Header';
 import './globals.css';
+
+const vietnameseFont = Be_Vietnam_Pro({
+  weight: ['400', '500', '600', '700', '800'],
+  subsets: ['vietnamese', 'latin'],
+  display: 'swap',
+  variable: '--font-vietnamese',
+});
 
 export const metadata: Metadata = {
   title: 'Bản tin | MyFuture News',
@@ -15,8 +23,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="vi">
-      <body>
+    <html lang="vi" className={vietnameseFont.variable}>
+      <body className={vietnameseFont.className}>
         <Header />
         <main className="site-main">{children}</main>
         <Footer />
@@ -24,3 +32,4 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     </html>
   );
 }
+
