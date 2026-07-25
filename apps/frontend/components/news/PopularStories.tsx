@@ -3,26 +3,21 @@ import { NewsCard } from './NewsCard';
 import styles from './PopularStories.module.css';
 
 type PopularStoriesProps = {
-  popularArticles: ArticleListItem[];
-  featuredFallback: ArticleListItem[];
+  articles: ArticleListItem[];
+  title: 'Đọc nhiều' | 'Đáng chú ý';
 };
 
 export function PopularStories({
-  popularArticles,
-  featuredFallback,
+  articles,
+  title,
 }: PopularStoriesProps) {
-  const hasMeaningfulViews = popularArticles.some(
-    (article) => (article.viewCount ?? 0) > 0,
-  );
-  const articles = hasMeaningfulViews ? popularArticles : featuredFallback;
-
   if (articles.length === 0) return null;
 
   return (
     <section className={styles.panel} aria-labelledby="popular-heading">
       <div className={styles.heading}>
         <p className="eyebrow">ĐỀ XUẤT</p>
-        <h2 id="popular-heading">Đọc nhiều</h2>
+        <h2 id="popular-heading">{title}</h2>
       </div>
       <ol className={styles.list}>
         {articles.slice(0, 5).map((article, index) => (

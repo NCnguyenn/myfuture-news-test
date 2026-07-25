@@ -116,12 +116,25 @@ test('editorial UI: overview callout targets the working category directory', ()
   );
 
   assert.match(pageSource, /href="#category-directory"/);
+  assert.match(
+    pageSource,
+    /categoriesResponse\.data\.length\s*>\s*0[\s\S]*href="#category-directory"/,
+  );
   assert.match(directorySource, /id="category-directory"/);
   assert.match(directorySource, /category\.articleCount/);
   assert.match(
     directorySource,
     /href=\{`\/ban-tin\/chuyen-muc\/\$\{category\.slug\}`\}/,
   );
+});
+
+test('editorial UI: popular panel renders the honest selected title', () => {
+  const source = read(
+    'apps/frontend/components/news/PopularStories.tsx',
+  );
+
+  assert.match(source, /title:\s*'Đọc nhiều'\s*\|\s*'Đáng chú ý'/);
+  assert.match(source, /<h2[^>]*>\{title\}<\/h2>/);
 });
 
 test('editorial UI: category page separates the first-page lead from the feed', () => {

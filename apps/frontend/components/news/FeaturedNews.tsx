@@ -14,6 +14,7 @@ export function FeaturedNews({ articles }: FeaturedNewsProps) {
       className={styles.section}
       aria-label={`Tin nổi bật, dẫn đầu bởi bài của ${primary.author.name}`}
     >
+      <h2 className={styles.heading}>Tin nổi bật</h2>
       <div className={styles.featured}>
         <NewsCard article={primary} variant="lead" showExcerpt />
         {supporting.length > 0 ? (

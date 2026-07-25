@@ -55,13 +55,20 @@ test('overview pagination parses the selected page and keeps a fixed page size',
   );
 
   assert.match(source, /const LATEST_PAGE_SIZE = 10/);
-  assert.match(
-    source,
-    /function parsePage\(value: string \| string\[\] \| undefined\): number/,
-  );
-  assert.match(source, /Number\.isInteger\(parsed\) && parsed > 0/);
-  assert.match(source, /const page = parsePage\(query\.page\)/);
+  assert.match(source, /parseOverviewPage/);
+  assert.match(source, /const page = parseOverviewPage\(query\.page\)/);
   assert.match(source, /page,\s*limit:\s*LATEST_PAGE_SIZE/);
   assert.match(source, /<Pagination[\s\S]*meta=\{latestResponse\.meta\}/);
   assert.match(source, /basePath="\/ban-tin"/);
+});
+
+test('overview redirects out-of-range pages after reading response metadata', () => {
+  const source = readFileSync(
+    path.join(workspaceRoot, 'apps/frontend/app/ban-tin/page.tsx'),
+    'utf8',
+  );
+
+  assert.match(source, /import\s+\{\s*redirect\s*\}\s+from\s+'next\/navigation'/);
+  assert.match(source, /resolveOverviewPageRedirect\(page,\s*latestResponse\.meta\)/);
+  assert.match(source, /if\s*\(redirectTo\)\s*redirect\(redirectTo\)/);
 });

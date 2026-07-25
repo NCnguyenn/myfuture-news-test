@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import { CategoryDirectory } from '../../components/news/CategoryDirectory';
 import { FeaturedNews } from '../../components/news/FeaturedNews';
 import { NewsList } from '../../components/news/NewsList';
@@ -7,6 +8,11 @@ import { NewsTabs } from '../../components/news/NewsTabs';
 import { Pagination } from '../../components/news/Pagination';
 import { PopularStories } from '../../components/news/PopularStories';
 import { getArticles, getCategories } from '../../lib/api-client';
+import {
+  parseOverviewPage,
+  resolveOverviewPageRedirect,
+  selectPopularStories,
+} from '../../lib/news-overview';
 import styles from './page.module.css';
 
 export const dynamic = 'force-dynamic';
@@ -17,11 +23,6 @@ type SearchParams = { [key: string]: string | string[] | undefined };
 type NewsOverviewPageProps = {
   searchParams: Promise<SearchParams>;
 };
-
-function parsePage(value: string | string[] | undefined): number {
-  const parsed = Number(Array.isArray(value) ? value[0] : value);
-  return Number.isInteger(parsed) && parsed > 0 ? parsed : 1;
-}
 
 export const metadata: Metadata = {
   title: 'Bản tin | MyFuture News',
@@ -39,7 +40,7 @@ export default async function NewsOverviewPage({
   searchParams,
 }: NewsOverviewPageProps) {
   const query = await searchParams;
-  const page = parsePage(query.page);
+  const page = parseOverviewPage(query.page);
   const [
     categoriesResponse,
     featuredResponse,
@@ -56,10 +57,18 @@ export default async function NewsOverviewPage({
     getArticles({ page: 1, limit: 5, sort: 'popular' }),
   ]);
 
+  const redirectTo = resolveOverviewPageRedirect(page, latestResponse.meta);
+  if (redirectTo) redirect(redirectTo);
+
   const featuredArticles =
     featuredResponse.data.length > 0
       ? featuredResponse.data
       : latestResponse.data.slice(0, 5);
+  const popularSelection = selectPopularStories(
+    popularResponse.data,
+    latestResponse.data,
+    featuredArticles,
+  );
 
   return (
     <div className={`page-shell ${styles.page}`}>
@@ -70,10 +79,12 @@ export default async function NewsOverviewPage({
           Góc nhìn chọn lọc về thị trường, quy hoạch, tài chính và pháp lý — được
           biên tập đầy đủ từ nguồn tin có thể kiểm chứng.
         </p>
-        <Link href="#category-directory" className={styles.directoryLink}>
-          Khám phá chuyên mục
-          <span aria-hidden="true">↓</span>
-        </Link>
+        {categoriesResponse.data.length > 0 ? (
+          <Link href="#category-directory" className={styles.directoryLink}>
+            Khám phá chuyên mục
+            <span aria-hidden="true">↓</span>
+          </Link>
+        ) : null}
       </section>
       <NewsTabs categories={categoriesResponse.data} activeSlug={null} />
       <FeaturedNews articles={featuredArticles} />
@@ -82,10 +93,10 @@ export default async function NewsOverviewPage({
           <NewsList articles={latestResponse.data} title="Tin mới nhất" />
           <Pagination meta={latestResponse.meta} basePath="/ban-tin" />
         </div>
-        <aside className={styles.sidebar} aria-label="Bài viết đọc nhiều">
+        <aside className={styles.sidebar} aria-label={popularSelection.title}>
           <PopularStories
-            popularArticles={popularResponse.data}
-            featuredFallback={featuredArticles}
+            articles={popularSelection.articles}
+            title={popularSelection.title}
           />
         </aside>
       </div>
