@@ -106,7 +106,7 @@ export default async function CategoryPage({
       <NewsTabs categories={categories} activeSlug={category.slug} />
       {categoryLead ? (
         <section className={styles.categoryLead} aria-label="Bài viết nổi bật">
-          <NewsCard article={categoryLead} variant="featured" showExcerpt />
+          <NewsCard article={categoryLead} variant="lead" showExcerpt />
         </section>
       ) : null}
       <NewsList

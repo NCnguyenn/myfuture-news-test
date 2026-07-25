@@ -1,48 +1,55 @@
 .tabs {
   min-width: 0;
-  overflow-x: auto;
+  overflow: hidden;
   border-bottom: 1px solid var(--line);
-  background: var(--surface);
-  scrollbar-width: none;
-  overscroll-behavior-inline: contain;
-}
-
-.tabs::-webkit-scrollbar {
-  display: none;
+  background: transparent;
 }
 
 .track {
   display: flex;
-  min-width: max-content;
-  gap: 28px;
+  justify-content: space-between;
+  gap: clamp(16px, 2.5vw, 36px);
 }
 
 .tab {
   flex: 0 0 auto;
-  min-height: 48px;
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
-  color: var(--muted);
+  color: var(--color-muted);
   font-size: 0.88rem;
-  font-weight: 750;
+  font-weight: 700;
   white-space: nowrap;
 }
 
 .tab:hover {
-  color: var(--ink);
+  color: var(--color-ink);
 }
 
 .active {
-  color: var(--brand-dark);
-  box-shadow: inset 0 -3px var(--brand);
+  color: var(--color-brand);
+  box-shadow: inset 0 -3px var(--color-brand);
 }
 
 .active:hover {
-  color: var(--brand-dark);
+  color: var(--color-brand);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .tabs {
+    overflow-x: auto;
+    scrollbar-width: none;
+    overscroll-behavior-inline: contain;
+  }
+
+  .tabs::-webkit-scrollbar {
+    display: none;
+  }
+
   .track {
+    width: max-content;
+    min-width: 100%;
+    justify-content: flex-start;
     gap: 22px;
   }
 }

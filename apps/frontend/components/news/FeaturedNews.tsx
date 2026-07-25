@@ -20,11 +20,11 @@ export function FeaturedNews({ articles }: FeaturedNewsProps) {
         </div>
       </div>
       <div className={styles.featured}>
-        <NewsCard article={primary} variant="featured" showExcerpt />
+        <NewsCard article={primary} variant="lead" showExcerpt />
         {secondary.length > 0 ? (
           <div className={styles.secondary}>
             {secondary.slice(0, 4).map((article) => (
-              <NewsCard article={article} variant="compact" key={article.id} />
+              <NewsCard article={article} variant="supporting" key={article.id} />
             ))}
           </div>
         ) : null}

@@ -1,32 +1,47 @@
 :root {
   color-scheme: light;
-  --brand: #d71920;
-  --brand-dark: #a80f16;
-  --brand-soft: #fff1f1;
-  --ink: #17191d;
-  --muted: #66707c;
-  --soft: #f6f7f8;
-  --surface: #ffffff;
+  --color-brand: #9f1d2d;
+  --color-red: #c62832;
+  --color-ink: #172033;
+  --color-page: #f7f6f3;
+  --color-surface: #ffffff;
+  --color-muted: #667085;
+  --color-rose: #fbeaec;
+  --color-gold: #b88a44;
+  --font-editorial: Georgia, Cambria, "Times New Roman", serif;
+  --font-interface: "Segoe UI", Helvetica, Arial, sans-serif;
+  --content-width: 1200px;
+  --reading-width: 760px;
+
+  /* Compatibility aliases keep the existing route modules stable during the refresh. */
+  --brand: var(--color-red);
+  --brand-dark: var(--color-brand);
+  --brand-soft: var(--color-rose);
+  --ink: var(--color-ink);
+  --muted: var(--color-muted);
+  --soft: var(--color-page);
+  --surface: var(--color-surface);
   --line: #e6e8eb;
-  --accent: #b88936;
-  --content-max: 1200px;
-  --reading-max: 760px;
+  --accent: var(--color-gold);
+  --content-max: var(--content-width);
+  --reading-max: var(--reading-width);
   --radius-sm: 10px;
   --radius-md: 14px;
-  --shadow-soft: 0 12px 32px rgba(24, 27, 32, 0.08);
+  --shadow-soft: 0 12px 32px rgba(23, 32, 51, 0.08);
   --shadow: var(--shadow-soft);
-  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  background: var(--soft);
-  color: var(--ink);
+  font-family: var(--font-interface);
+  background: var(--color-page);
+  color: var(--color-ink);
 }
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-body { margin: 0; overflow-x: hidden; background: var(--soft); }
+body { margin: 0; overflow-x: hidden; background: var(--color-page); color: var(--color-ink); font-family: var(--font-interface); }
 a { color: inherit; text-decoration: none; }
 button, a { -webkit-tap-highlight-color: transparent; }
 button { font: inherit; }
-button:focus-visible, a:focus-visible { outline: 3px solid #fff; outline-offset: 2px; box-shadow: 0 0 0 5px var(--brand-dark); border-radius: 4px; }
+:focus-visible { outline: 3px solid var(--color-brand); outline-offset: 3px; }
+h1, h2, h3 { font-family: var(--font-editorial); }
 .site-main { min-height: calc(100vh - 180px); }
 .page-shell { width: min(var(--content-max), calc(100% - 48px)); min-width: 0; margin: 0 auto; padding: 48px 0 72px; }
 .page-intro { max-width: 720px; margin-bottom: 28px; }
@@ -66,4 +81,12 @@ button:focus-visible, a:focus-visible { outline: 3px solid #fff; outline-offset:
   .article-header h1 { font-size: clamp(2.2rem, 12vw, 3.5rem); }
   .article-evidence { padding: 20px; }
   .article-nav { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }

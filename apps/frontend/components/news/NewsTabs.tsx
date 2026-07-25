@@ -12,8 +12,10 @@ export function NewsTabs({ categories, activeSlug }: NewsTabsProps) {
           href="/ban-tin"
           className={`${styles.tab} ${activeSlug === null ? styles.active : ''}`}
           aria-current={activeSlug === null ? 'page' : undefined}
-        >Toàn cảnh</Link>
-        {categories.map((category) => (
+        >
+          Toàn cảnh
+        </Link>
+        {categories.slice(0, 6).map((category) => (
           <Link
             href={`/ban-tin/chuyen-muc/${category.slug}`}
             className={`${styles.tab} ${activeSlug === category.slug ? styles.active : ''}`}

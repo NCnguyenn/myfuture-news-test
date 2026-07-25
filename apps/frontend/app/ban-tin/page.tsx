@@ -52,9 +52,9 @@ export default async function NewsOverviewPage() {
       <NewsTabs categories={categoriesResponse.data} activeSlug={null} />
       <FeaturedNews articles={featuredArticles} />
       <div className={styles.contentGrid}>
-        <main className={styles.feed}>
+        <div className={styles.feed}>
           <NewsList articles={latestResponse.data} title="Tin mới nhất" />
-        </main>
+        </div>
         <aside className={styles.sidebar} aria-label="Nội dung gợi ý">
           <PopularStories
             popularArticles={popularResponse.data}

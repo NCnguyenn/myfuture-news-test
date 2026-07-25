@@ -12,7 +12,7 @@ export function NewsList({ articles, title = 'Bài viết', description }: NewsL
       {articles.length > 0 ? (
         <div className={styles.list}>
           {articles.map((article) => (
-            <NewsCard article={article} variant="list" key={article.id} />
+            <NewsCard article={article} variant="feed" key={article.id} />
           ))}
         </div>
       ) : (
