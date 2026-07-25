@@ -221,6 +221,87 @@ test('editorial UI: article page delegates header and evidence presentation', ()
   assert.match(source, /<NewsTabs/);
 });
 
+test('editorial UI: article page composes focused reading and honest discovery panels', () => {
+  const source = read(
+    'apps/frontend/app/ban-tin/[articleSlug]/page.tsx',
+  );
+  const css = read(
+    'apps/frontend/app/ban-tin/[articleSlug]/page.module.css',
+  );
+  const directorySource = read(
+    'apps/frontend/components/news/CategoryDirectory.tsx',
+  );
+
+  assert.match(source, /<aside\b/);
+  assert.match(source, /<PopularStories/);
+  assert.match(source, /<CategoryDirectory\s+compact/);
+  assert.match(source, /<RelatedNews/);
+  assert.match(source, /sizes="\(max-width:\s*1199px\)\s*100vw,\s*820px"/);
+  assert.match(source, /<nav[\s\S]*aria-label="Đường dẫn"/);
+  assert.match(source, /aria-current="page"/);
+  assert.match(
+    source,
+    /selectPopularStories\(\s*popularResponse\.data,\s*article\.relatedArticles,\s*\[article\],?\s*\)/,
+  );
+  assert.match(
+    css,
+    /grid-template-columns:\s*minmax\(0,\s*1fr\)\s+minmax\(/,
+  );
+  assert.match(css, /width:\s*min\(100%,\s*var\(--reading-width\)\)/);
+  assert.match(
+    css,
+    /@media\s*\(max-width:\s*1199px\)[\s\S]*grid-template-columns:\s*1fr/,
+  );
+  assert.doesNotMatch(css, /position:\s*sticky/);
+  assert.doesNotMatch(source, /<main\b/);
+  assert.match(directorySource, /compact\?:\s*boolean/);
+  assert.match(directorySource, /compact\s*\?\s*'Chuyên mục'/);
+});
+
+test('editorial UI: article header exposes real metadata and provenance caption', () => {
+  const pageSource = read(
+    'apps/frontend/app/ban-tin/[articleSlug]/page.tsx',
+  );
+  const headerSource = read(
+    'apps/frontend/components/news/ArticleHeader.tsx',
+  );
+
+  assert.match(headerSource, /<h1[^>]*>\{article\.title\}<\/h1>/);
+  assert.match(headerSource, /\{article\.excerpt\}/);
+  assert.match(headerSource, /\{article\.author\.name\}/);
+  assert.match(headerSource, /<time[^>]*dateTime=/);
+  assert.match(headerSource, /article\.readingTime\s*&&\s*article\.readingTime\s*>\s*0/);
+  assert.match(headerSource, /article\.viewCount\s*!==\s*undefined\s*&&\s*article\.viewCount\s*>\s*0/);
+  assert.match(pageSource, /alt=\{article\.imageAlt\}/);
+  assert.match(pageSource, /<figcaption/);
+  assert.match(pageSource, /Nguồn ảnh:/);
+  assert.match(pageSource, /article\.imageProvenance\.sourcePageUrl/);
+});
+
+test('editorial UI: article evidence and navigation stay explicit and canonical', () => {
+  const pageSource = read(
+    'apps/frontend/app/ban-tin/[articleSlug]/page.tsx',
+  );
+  const evidenceSource = read(
+    'apps/frontend/components/news/SourceEvidence.tsx',
+  );
+  const contentSource = read(
+    'apps/frontend/components/news/ArticleContent.tsx',
+  );
+
+  assert.match(evidenceSource, />Nguồn tham khảo<\/h2>/);
+  assert.match(evidenceSource, /href=\{item\.sourceUrl\}/);
+  assert.match(evidenceSource, /noopener noreferrer/);
+  assert.match(pageSource, /article\.previousArticle/);
+  assert.match(pageSource, /article\.nextArticle/);
+  assert.match(pageSource, /<RelatedNews/);
+  assert.doesNotMatch(pageSource, /dangerouslySetInnerHTML/);
+  assert.equal(
+    (contentSource.match(/dangerouslySetInnerHTML/g) ?? []).length,
+    1,
+  );
+});
+
 test('editorial UI: news states retain retry, overview, and reduced-motion support', () => {
   const error = read('apps/frontend/app/ban-tin/error.tsx');
   const states = read('apps/frontend/components/news/NewsStates.module.css');

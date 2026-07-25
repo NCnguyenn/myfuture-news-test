@@ -178,6 +178,25 @@ test('editorial UI: overview uses unique non-hero latest stories for zero-view f
   );
 });
 
+test('editorial UI: article recommendations fall back when popular is absent and exclude the current article', () => {
+  const selected = selectPopularStories(
+    [],
+    [
+      article('current'),
+      article('related-a'),
+      article('related-a'),
+      article('related-b'),
+    ],
+    [article('current')],
+  );
+
+  assert.equal(selected.title, 'Đáng chú ý');
+  assert.deepEqual(
+    selected.articles.map(({ slug }) => slug),
+    ['related-a', 'related-b'],
+  );
+});
+
 test('editorial UI: featured news renders coherent sparse hero markup', async () => {
   const runtimeRequire = createRequire(import.meta.url);
   runtimeRequire.extensions['.css'] = (module) => {

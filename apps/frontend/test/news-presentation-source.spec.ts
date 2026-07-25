@@ -32,7 +32,7 @@ test('news presentation: article details show author, image provenance, and veri
 
   assert.match(header, /Tác giả:/);
   assert.match(page, /article\.imageProvenance\.isPlaceholder/);
-  assert.match(evidence, /Nguồn kiểm chứng/);
+  assert.match(evidence, /Nguồn tham khảo/);
   assert.match(evidence, /evidence\.map/);
 });
 

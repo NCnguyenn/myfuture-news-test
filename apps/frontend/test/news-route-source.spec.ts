@@ -36,6 +36,25 @@ test('article metadata only catches ApiClientError 404 and rethrows other errors
   assert.match(articlePage, /notFound\(\)/);
 });
 
+test('news route: article requests popular stories and excludes the current article', () => {
+  const articlePage = readFileSync(
+    path.join(
+      workspaceRoot,
+      'apps/frontend/app/ban-tin/[articleSlug]/page.tsx',
+    ),
+    'utf8',
+  );
+
+  assert.match(
+    articlePage,
+    /getArticles\(\{[\s\S]*page:\s*1[\s\S]*limit:\s*6[\s\S]*sort:\s*'popular'/,
+  );
+  assert.match(
+    articlePage,
+    /selectPopularStories\(\s*popularResponse\.data,\s*article\.relatedArticles,\s*\[article\],?\s*\)/,
+  );
+});
+
 test('category pagination uses the demonstrable page size', () => {
   const source = readFileSync(
     path.join(

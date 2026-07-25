@@ -10,8 +10,12 @@ export function SourceEvidence({ evidence }: SourceEvidenceProps) {
 
   return (
     <aside className={styles.evidence} aria-labelledby="evidence-heading">
-      <p className="eyebrow">MINH BẠCH NGUỒN</p>
-      <h2 id="evidence-heading">Nguồn kiểm chứng</h2>
+      <p className="eyebrow">ĐỐI CHIẾU THÔNG TIN</p>
+      <h2 id="evidence-heading">Nguồn tham khảo</h2>
+      <p className={styles.intro}>
+        Các liên kết dưới đây dẫn tới nguồn gốc dùng để kiểm chứng nội dung
+        bài viết.
+      </p>
       <ul>
         {evidence.map((item) => (
           <li key={`${item.sourceUrl}-${item.claim}`}>
@@ -22,7 +26,7 @@ export function SourceEvidence({ evidence }: SourceEvidenceProps) {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Mở nguồn gốc ↗
+              Xem nguồn gốc <span aria-hidden="true">↗</span>
             </a>
           </li>
         ))}

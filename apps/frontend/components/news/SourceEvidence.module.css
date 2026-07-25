@@ -1,16 +1,23 @@
 .evidence {
-  margin-top: 48px;
+  margin-top: 52px;
   padding: clamp(22px, 4vw, 32px);
-  border: 1px solid var(--line);
+  border: 1px solid #efd7da;
   border-left: 4px solid var(--brand);
   border-radius: var(--radius-md);
-  background: var(--surface);
+  background:
+    linear-gradient(120deg, var(--surface) 0%, var(--color-rose) 150%);
 }
 
 .evidence h2 {
-  margin: 7px 0 22px;
-  font-size: 1.45rem;
+  margin: 7px 0 9px;
+  font-size: clamp(1.45rem, 3vw, 1.7rem);
   letter-spacing: -0.03em;
+}
+
+.intro {
+  margin: 0 0 24px;
+  color: var(--muted);
+  line-height: 1.65;
 }
 
 .evidence ul {
@@ -46,7 +53,20 @@
   min-height: 44px;
   display: inline-flex;
   align-items: center;
+  gap: 5px;
   color: var(--brand-dark);
   font-size: 0.84rem;
   font-weight: 800;
+}
+
+.evidence a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .evidence {
+    margin-top: 42px;
+    padding: 22px 20px;
+  }
 }
