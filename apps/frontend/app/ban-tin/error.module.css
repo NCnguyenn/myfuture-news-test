@@ -1,0 +1,5 @@
+.routeState {
+  min-width: 0;
+  padding-top: clamp(40px, 8vw, 96px);
+  padding-bottom: clamp(56px, 10vw, 120px);
+}

@@ -56,14 +56,32 @@ test('editorial UI: shared frame stays semantic and contains no fake controls', 
   );
 });
 
-test('editorial UI: provides all five approved story-card variants', () => {
+test('editorial UI: exposes exactly the five approved story-card variants', () => {
   const source = read('apps/frontend/components/news/NewsCard.tsx');
-  assert.match(
-    source,
-    /'lead'[\s\S]*'supporting'[\s\S]*'feed'[\s\S]*'compact'[\s\S]*'related'/,
+  const publicVariant = source.match(
+    /export type NewsCardVariant\s*=\s*([\s\S]*?);/,
   );
+  assert.ok(publicVariant);
+  assert.deepEqual(
+    Array.from(publicVariant[1].matchAll(/'([^']+)'/g), (match) => match[1]),
+    ['lead', 'supporting', 'feed', 'compact', 'related'],
+  );
+  assert.doesNotMatch(publicVariant[1], /'featured'|'list'/);
   assert.match(source, /variant\s*=\s*'feed'/);
   assert.match(source, /IMAGE_SIZES/);
+  assert.match(source, /href=\{`\/ban-tin\/\$\{article\.slug\}`\}/);
+  assert.match(
+    source,
+    /href=\{`\/ban-tin\/chuyen-muc\/\$\{article\.category\.slug\}`\}/,
+  );
+  assert.doesNotMatch(
+    source,
+    /href=\{`\/ban-tin\/\$\{article\.category\.slug\}`\}/,
+  );
+  assert.doesNotMatch(
+    source,
+    /href=\{`\/ban-tin\/chuyen-muc\/\$\{article\.slug\}`\}/,
+  );
 });
 
 test('editorial UI: exposes focus and reduced-motion accessibility primitives', () => {

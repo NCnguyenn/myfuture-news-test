@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect } from 'react';
 import { ErrorPanel } from '../../components/news/NewsStates';
+import styles from './error.module.css';
 
 type NewsErrorProps = {
   error: Error & { digest?: string };
@@ -15,7 +16,7 @@ export default function NewsError({ error, reset }: NewsErrorProps) {
   }, [error]);
 
   return (
-    <div className="page-shell">
+    <div className={`page-shell ${styles.routeState}`}>
       <ErrorPanel>
         <button type="button" onClick={() => reset()}>
           Thử tải lại

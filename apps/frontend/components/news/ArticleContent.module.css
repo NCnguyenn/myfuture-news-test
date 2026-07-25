@@ -62,18 +62,18 @@
 
 .content pre {
   max-width: 100%;
-  overflow-x: auto;
   padding: 16px;
   border-radius: var(--radius-sm);
   color: #f4f7f8;
   background: #182230;
-  white-space: pre;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
 }
 
 .content table {
-  display: block;
+  width: 100%;
   max-width: 100%;
-  overflow-x: auto;
+  table-layout: fixed;
   border-collapse: collapse;
 }
 
@@ -82,6 +82,7 @@
   padding: 8px 10px;
   border: 1px solid var(--line);
   text-align: left;
+  overflow-wrap: anywhere;
 }
 
 .content video,

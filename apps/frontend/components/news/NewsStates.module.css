@@ -98,7 +98,12 @@
   animation: shimmer 1.4s ease infinite;
 }
 
+.loadingRoot {
+  min-width: 0;
+}
+
 .skeletonIntro {
+  min-width: 0;
   max-width: 780px;
   margin-bottom: 30px;
 }
@@ -124,6 +129,7 @@
 }
 
 .skeletonTabs {
+  min-width: 0;
   display: flex;
   gap: 28px;
   overflow: hidden;
@@ -137,6 +143,7 @@
 }
 
 .skeletonFeatured {
+  min-width: 0;
   display: grid;
   grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.85fr);
   gap: 32px;
@@ -144,6 +151,7 @@
 }
 
 .skeletonLead {
+  min-width: 0;
   overflow: hidden;
   border-radius: var(--radius-md);
   background: var(--surface);
@@ -160,20 +168,27 @@
 }
 
 .skeletonSide {
+  min-width: 0;
   display: grid;
-  gap: 18px;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 20px;
 }
 
-.skeletonSideRow {
-  display: grid;
-  grid-template-columns: 128px minmax(0, 1fr);
-  gap: 16px;
-  align-items: center;
+.skeletonSupport {
+  min-width: 0;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--surface);
 }
 
-.skeletonSideImage {
-  aspect-ratio: 4 / 3;
-  border-radius: var(--radius-sm);
+.skeletonSupportImage {
+  aspect-ratio: 16 / 10;
+}
+
+.skeletonSupportBody {
+  display: grid;
+  gap: 12px;
+  padding: 18px;
 }
 
 .skeletonLine,
@@ -196,7 +211,7 @@
 }
 
 .skeletonList {
-  max-width: 830px;
+  min-width: 0;
   margin-top: 52px;
 }
 
@@ -208,6 +223,7 @@
 }
 
 .skeletonRow {
+  min-width: 0;
   display: grid;
   grid-template-columns: 230px minmax(0, 1fr);
   gap: 22px;
@@ -221,9 +237,85 @@
 }
 
 .skeletonRowBody {
+  min-width: 0;
   display: grid;
   align-content: center;
   gap: 12px;
+}
+
+.skeletonContentGrid,
+.skeletonCategoryGrid,
+.skeletonArticleGrid {
+  min-width: 0;
+  display: grid;
+  align-items: start;
+  gap: clamp(30px, 4vw, 52px);
+}
+
+.skeletonContentGrid,
+.skeletonCategoryGrid {
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+}
+
+.skeletonArticleGrid {
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 320px);
+  margin-top: 42px;
+}
+
+.skeletonContentGrid .skeletonList,
+.skeletonCategoryGrid .skeletonList {
+  margin-top: 52px;
+}
+
+.skeletonSidebar {
+  min-width: 0;
+  display: grid;
+  gap: 18px;
+  margin-top: 52px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+
+.skeletonSidebarLine {
+  width: 100%;
+  height: 44px;
+  border-radius: 7px;
+}
+
+.skeletonArticleHeader {
+  min-width: 0;
+  max-width: 860px;
+  margin-top: 36px;
+}
+
+.skeletonArticleTitle {
+  width: min(780px, 100%);
+  height: 130px;
+  margin-top: 14px;
+  border-radius: var(--radius-sm);
+}
+
+.skeletonMeta {
+  width: min(420px, 75%);
+  height: 16px;
+  margin-top: 18px;
+  border-radius: 6px;
+}
+
+.skeletonCover {
+  width: min(100%, 820px);
+  aspect-ratio: 16 / 9;
+  margin-top: 38px;
+  border-radius: var(--radius-md);
+}
+
+.skeletonReading {
+  min-width: 0;
+  display: grid;
+  gap: 18px;
+  max-width: var(--reading-width);
 }
 
 @keyframes shimmer {
@@ -231,13 +323,52 @@
   100% { background-position: -100% 0; }
 }
 
-@media (max-width: 900px) {
-  .skeletonFeatured {
+@media (max-width: 1199px) {
+  .skeletonArticleGrid {
     grid-template-columns: 1fr;
   }
 
+  .skeletonArticleGrid .skeletonSidebar {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 1023px) {
+  .skeletonCategoryGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .skeletonCategoryGrid .skeletonSidebar {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .skeletonFeatured,
+  .skeletonContentGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .skeletonFeatured {
+    gap: 14px;
+  }
+
   .skeletonSide {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+    gap: 14px;
+  }
+
+  .skeletonSupport {
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+  }
+
+  .skeletonSupportImage {
+    aspect-ratio: 1 / 1;
+  }
+
+  .skeletonContentGrid .skeletonSidebar {
+    margin-top: 0;
   }
 }
 
@@ -250,8 +381,8 @@
     height: 52px;
   }
 
-  .skeletonSide {
-    grid-template-columns: 1fr;
+  .skeletonArticleTitle {
+    height: 96px;
   }
 
   .skeletonRow {
@@ -262,6 +393,10 @@
 
   .skeletonThumb {
     aspect-ratio: 1 / 1;
+  }
+
+  .skeletonSidebar {
+    padding: 20px;
   }
 }
 

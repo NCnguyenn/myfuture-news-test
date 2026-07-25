@@ -20,7 +20,9 @@
 }
 
 .brand {
-  display: inline-block;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   color: var(--color-ink);
   font-size: 1.1rem;
   font-weight: 900;
@@ -67,6 +69,9 @@
 }
 
 .legal a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   color: var(--color-brand);
   font-weight: 700;
 }

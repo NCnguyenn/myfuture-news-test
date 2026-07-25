@@ -1,5 +1,10 @@
-import { LoadingSkeleton } from '../../components/news/NewsStates';
+import { OverviewLoadingSkeleton } from '../../components/news/NewsStates';
+import styles from './loading.module.css';
 
 export default function Loading() {
-  return <LoadingSkeleton />;
+  return (
+    <div className={styles.routeState}>
+      <OverviewLoadingSkeleton />
+    </div>
+  );
 }
