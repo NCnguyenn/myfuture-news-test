@@ -105,6 +105,33 @@ async function expectOptimizerFromNewsHtml(web: string, html: string): Promise<v
   );
 }
 
+function decodeHtmlAttributes(html: string): string {
+  return html
+    .replaceAll('&quot;', '"')
+    .replaceAll('&#x27;', "'")
+    .replaceAll('&#39;', "'")
+    .replaceAll('&amp;', '&');
+}
+
+function expectNewsTabs(html: string, categories: Category[]): void {
+  const decodedHtml = decodeHtmlAttributes(html);
+  const tabsLabel = 'aria-label="Danh mục bản tin"';
+  const labelIndex = decodedHtml.indexOf(tabsLabel);
+  assert.ok(labelIndex >= 0, '/ban-tin HTML must contain the visible news tabs');
+
+  const tabsStart = decodedHtml.lastIndexOf('<nav', labelIndex);
+  const tabsEnd = decodedHtml.indexOf('</nav>', labelIndex);
+  assert.ok(tabsStart >= 0 && tabsEnd >= 0, 'news tabs must be a complete nav element');
+  const tabsHtml = decodedHtml.slice(tabsStart, tabsEnd + '</nav>'.length);
+
+  for (const href of [
+    '/ban-tin',
+    ...categories.map((category) => `/ban-tin/chuyen-muc/${category.slug}`),
+  ]) {
+    assert.ok(tabsHtml.includes(`href="${href}"`), `news tabs must link to ${href}`);
+  }
+}
+
 async function main() {
   const web = requiredOrigin('WEB_BASE_URL');
   const api = requiredOrigin('API_BASE_URL');
@@ -146,6 +173,7 @@ async function main() {
 
   await expectPublicHtml(web, '/');
   const newsHtml = await expectPublicHtml(web, '/ban-tin');
+  expectNewsTabs(newsHtml, categories.data);
   await expectPublicHtml(web, '/ban-tin?page=2');
   await expectPublicHtml(web, '/ban-tin.html');
 
