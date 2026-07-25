@@ -87,6 +87,43 @@ test('editorial UI: overview requests featured, newest, and popular article grou
   assert.doesNotMatch(source, /<main\b/);
 });
 
+test('editorial UI: overview composes a one plus two hero and ranked sidebar', () => {
+  const pageSource = read('apps/frontend/app/ban-tin/page.tsx');
+  const featuredSource = read(
+    'apps/frontend/components/news/FeaturedNews.tsx',
+  );
+  const popularSource = read(
+    'apps/frontend/components/news/PopularStories.tsx',
+  );
+
+  assert.match(pageSource, /searchParams/);
+  assert.match(pageSource, /Pagination/);
+  assert.match(pageSource, /<aside\b/);
+  assert.match(pageSource, /Tin mới nhất/);
+  assert.doesNotMatch(pageSource, /<main\b/);
+  assert.match(featuredSource, /articles\.slice\(1,\s*3\)/);
+  assert.match(featuredSource, /variant="lead"/);
+  assert.match(featuredSource, /variant="supporting"/);
+  assert.match(popularSource, /<ol\b/);
+  assert.match(popularSource, /index \+ 1/);
+  assert.match(popularSource, /Đọc nhiều/);
+});
+
+test('editorial UI: overview callout targets the working category directory', () => {
+  const pageSource = read('apps/frontend/app/ban-tin/page.tsx');
+  const directorySource = read(
+    'apps/frontend/components/news/CategoryDirectory.tsx',
+  );
+
+  assert.match(pageSource, /href="#category-directory"/);
+  assert.match(directorySource, /id="category-directory"/);
+  assert.match(directorySource, /category\.articleCount/);
+  assert.match(
+    directorySource,
+    /href=\{`\/ban-tin\/chuyen-muc\/\$\{category\.slug\}`\}/,
+  );
+});
+
 test('editorial UI: category page separates the first-page lead from the feed', () => {
   const source = read(
     'apps/frontend/app/ban-tin/chuyen-muc/[slug]/page.tsx',
