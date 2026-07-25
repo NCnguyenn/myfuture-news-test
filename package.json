@@ -42,6 +42,9 @@
   "overrides": {
     "find-my-way": "9.7.0",
     "postcss": "8.5.12",
-    "sharp": "0.35.3"
+    "sharp": "0.35.3",
+    "sanitize-html": {
+      "htmlparser2": "10.1.0"
+    }
   }
 }

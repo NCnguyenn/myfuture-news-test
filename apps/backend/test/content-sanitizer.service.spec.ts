@@ -11,3 +11,20 @@ test('removes unsafe markup while preserving the article allowlist', () => {
 
   assert.equal(sanitized, '<p>Safe</p><a>bad</a><strong>Bold</strong>Unknown');
 });
+
+test('keeps article markup while excluding foreign-content and raw-text tags', () => {
+  const service = new ContentSanitizerService();
+  const allowedArticleMarkup =
+    '<p>Intro <strong>bold</strong> and <em>emphasis</em>.</p><h2>Heading</h2><ul><li>Item</li></ul><blockquote>Quote</blockquote><figure><img src="https://cdn.example/article.jpg" alt="Article image" loading="lazy" /><figcaption>Caption</figcaption></figure>';
+
+  assert.equal(service.sanitize(allowedArticleMarkup), allowedArticleMarkup);
+
+  for (const disallowedTag of ['svg', 'math', 'textarea', 'xmp']) {
+    const sanitized = service.sanitize(
+      `<${disallowedTag} onload="alert(1)"><img src="https://cdn.example/article.jpg" onerror="alert(1)" /><a href="javascript:alert(1)" onclick="alert(1)">link</a></${disallowedTag}>`,
+    );
+
+    assert.doesNotMatch(sanitized, new RegExp(`<${disallowedTag}`, 'i'));
+    assert.doesNotMatch(sanitized, /onload|onerror|onclick|javascript:/i);
+  }
+});
