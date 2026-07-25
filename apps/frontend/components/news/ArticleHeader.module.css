@@ -18,7 +18,9 @@
   line-height: 1.06;
   letter-spacing: normal;
   text-wrap: balance;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: none;
 }
 
 .excerpt {
