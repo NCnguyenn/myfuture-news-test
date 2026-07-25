@@ -105,6 +105,7 @@ Then open:
 - `http://localhost:3000/ban-tin` — Overview, featured stories, and latest articles.
 - `http://localhost:3000/ban-tin/chuyen-muc/phap-ly-du-an` — Category listing.
 - `http://localhost:3000/ban-tin/phap-ly-du-an-bai-01` — Article detail and related articles.
+- `http://localhost:3000/ban-tin/tim-kiem?q=bat%20dong%20san` — Vietnamese-aware article search results.
 
 An additional pagination sample is available at `http://localhost:3000/ban-tin/chuyen-muc/phap-ly-du-an?page=2`.
 
@@ -169,11 +170,14 @@ There is intentionally no lint script in this small take-home repository. The ha
 ```bash
 curl http://localhost:4000/api/categories
 curl "http://localhost:4000/api/articles?page=1&limit=10"
+curl "http://localhost:4000/api/articles?q=bat%20dong%20san&page=1&limit=6"
 curl "http://localhost:4000/api/articles?category=phap-ly-du-an&featured=true"
 curl http://localhost:4000/api/articles/phap-ly-du-an-bai-01
 ```
 
 Article lists return `data` plus pagination `meta`. Invalid query parameters return HTTP 400, unknown API category/article slugs return HTTP 404, and page overflow returns HTTP 200 with an empty `data` array. Article `contentHtml` is sanitized by the backend before it is cached or returned.
+
+Search covers article titles, excerpts, categories, and body content. Queries can be entered with or without Vietnamese diacritics; search responses expose a plain-text snippet but never return article `contentHtml`.
 
 ## Redis behavior
 
