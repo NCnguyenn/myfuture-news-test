@@ -18,8 +18,9 @@ setup required to inspect the deployed demo. It provides:
 
 - Seven visible news tabs: one aggregate overview and six persisted database
   categories.
-- A deterministic editorial dataset of 30 published articles, including 5
-  featured articles.
+- A deterministic editorial dataset of 42 published articles across six
+  intentionally uneven categories, including exactly 5 featured stories,
+  complete provenance, and idempotent verification.
 - Responsive overview, category, pagination, article-detail, related-story,
   loading, empty, and error states.
 - Public API-backed navigation and detail pages, including these production

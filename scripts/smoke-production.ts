@@ -1,4 +1,8 @@
 import assert from 'node:assert/strict';
+import {
+  EXPECTED_ARTICLE_COUNTS,
+  EXPECTED_PUBLISHED_ARTICLES,
+} from './lib/news-dataset-contract';
 
 type Category = { id: string; name: string; slug: string };
 type Article = {
@@ -147,18 +151,22 @@ async function main() {
   assert.equal(health.data.checks.redis, 'up');
 
   const categories = await json<{ data: Category[] }>(`${api}/categories`);
-  assert.equal(categories.data.length, 6);
+  assert.equal(categories.data.length, Object.keys(EXPECTED_ARTICLE_COUNTS).length);
+  assert.deepEqual(
+    categories.data.map((category) => category.slug).sort(),
+    Object.keys(EXPECTED_ARTICLE_COUNTS).sort(),
+  );
 
   const articles = await json<ListResponse>(
-    `${api}/articles?page=1&limit=50`,
+    `${api}/articles?page=1&limit=4`,
   );
-  assert.equal(articles.meta.totalItems, 30);
-  assert.equal(articles.data.length, 30);
+  assert.equal(articles.meta.totalItems, EXPECTED_PUBLISHED_ARTICLES);
+  assert.equal(articles.data.length, 4);
 
   const aggregatePageTwo = await json<ListResponse>(
     `${api}/articles?page=2&limit=4`,
   );
-  assert.equal(aggregatePageTwo.meta.totalItems, 30);
+  assert.equal(aggregatePageTwo.meta.totalItems, EXPECTED_PUBLISHED_ARTICLES);
   assert.equal(aggregatePageTwo.data.length, 4);
 
   const article = articles.data[0];
@@ -178,10 +186,15 @@ async function main() {
   await expectPublicHtml(web, '/ban-tin.html');
 
   for (const category of categories.data) {
+    const expectedCount = EXPECTED_ARTICLE_COUNTS[
+      category.slug as keyof typeof EXPECTED_ARTICLE_COUNTS
+    ];
+    assert.notEqual(expectedCount, undefined, `unexpected category: ${category.slug}`);
     const categoryArticles = await json<ListResponse>(
       `${api}/articles?category=${encodeURIComponent(category.slug)}&page=1&limit=4`,
     );
-    assert.equal(categoryArticles.meta.totalItems, 5);
+    assert.equal(categoryArticles.meta.totalItems, expectedCount);
+    assert.equal(categoryArticles.data.length, Math.min(4, expectedCount));
     assert.equal(
       categoryArticles.data.every(
         (categoryArticle) => categoryArticle.category.slug === category.slug,
@@ -191,8 +204,8 @@ async function main() {
     const categoryPageTwo = await json<ListResponse>(
       `${api}/articles?category=${encodeURIComponent(category.slug)}&page=2&limit=4`,
     );
-    assert.equal(categoryPageTwo.meta.totalItems, 5);
-    assert.equal(categoryPageTwo.data.length, 1);
+    assert.equal(categoryPageTwo.meta.totalItems, expectedCount);
+    assert.equal(categoryPageTwo.data.length, expectedCount - 4);
     assert.equal(
       categoryPageTwo.data.every(
         (categoryArticle) => categoryArticle.category.slug === category.slug,

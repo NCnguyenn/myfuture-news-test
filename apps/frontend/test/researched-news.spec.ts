@@ -3,6 +3,10 @@ import { existsSync, readFileSync, statSync } from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 import {
+  EXPECTED_ARTICLE_COUNTS,
+  EXPECTED_PUBLISHED_ARTICLES,
+} from '../../../scripts/lib/news-dataset-contract';
+import {
   getResearchedArticleBySlug,
   getResearchedArticles,
   getResearchedCategories,
@@ -10,16 +14,30 @@ import {
 
 const workspaceRoot = path.resolve(import.meta.dirname, '..', '..', '..');
 
-test('loads exactly six categories and thirty complete new articles', () => {
+test('researched news loads the complete dataset with approved category counts', () => {
   const categories = getResearchedCategories().data;
   const articles = getResearchedArticles({ limit: 100 }).data;
 
   assert.equal(categories.length, 6);
-  assert.equal(articles.length, 30);
+  assert.equal(articles.length, EXPECTED_PUBLISHED_ARTICLES);
   assert.deepEqual(
-    categories.map((item) => item.articleCount),
-    [5, 5, 5, 5, 5, 5],
+    Object.fromEntries(categories.map((item) => [item.slug, item.articleCount])),
+    EXPECTED_ARTICLE_COUNTS,
   );
+  assert.equal(new Set(articles.map(({ slug }) => slug)).size, 42);
+});
+
+test('production smoke uses the shared dataset contract instead of legacy totals', () => {
+  const smokeSource = readFileSync(
+    path.join(workspaceRoot, 'scripts', 'smoke-production.ts'),
+    'utf8',
+  );
+
+  assert.match(smokeSource, /from ['"]\.\/lib\/news-dataset-contract['"]/);
+  assert.match(smokeSource, /EXPECTED_ARTICLE_COUNTS/);
+  assert.match(smokeSource, /EXPECTED_PUBLISHED_ARTICLES/);
+  assert.doesNotMatch(smokeSource, /totalItems, 30/);
+  assert.doesNotMatch(smokeSource, /meta\.totalItems, 5/);
 });
 
 test('returns only articles from the requested category', () => {
@@ -28,7 +46,10 @@ test('returns only articles from the requested category', () => {
     limit: 100,
   });
 
-  assert.equal(response.data.length, 5);
+  assert.equal(
+    response.data.length,
+    EXPECTED_ARTICLE_COUNTS['phap-ly-du-an'],
+  );
   assert.ok(
     response.data.every(
       (item) => item.category.slug === 'phap-ly-du-an',
@@ -54,14 +75,14 @@ test('maps full detail with author, source, evidence, and safe HTML', () => {
 
 test('uses unique new slugs and source URLs only', () => {
   const articles = getResearchedArticles({ limit: 100 }).data;
-  assert.equal(new Set(articles.map((item) => item.slug)).size, 30);
+  assert.equal(new Set(articles.map((item) => item.slug)).size, 42);
 
   const sourceUrls = articles.map((item) => {
     const detail = getResearchedArticleBySlug(item.slug);
     assert.ok(detail);
     return detail.data.sourceUrl;
   });
-  assert.equal(new Set(sourceUrls).size, 30);
+  assert.equal(new Set(sourceUrls).size, EXPECTED_PUBLISHED_ARTICLES);
 });
 
 test('does not reuse any source URL from the Antigravity manifest', () => {
@@ -91,7 +112,7 @@ test('does not reuse any source URL from the Antigravity manifest', () => {
   }
 });
 
-test('records image provenance for all thirty researched articles', () => {
+test('records image provenance for every researched article', () => {
   type ImageRecord = {
     localPath: string;
     originalImageUrl: string | null;
@@ -109,7 +130,7 @@ test('records image provenance for all thirty researched articles', () => {
       'utf8',
     ),
   ) as Record<string, ImageRecord>;
-  assert.equal(Object.keys(imageManifest).length, 30);
+  assert.equal(Object.keys(imageManifest).length, EXPECTED_PUBLISHED_ARTICLES);
 
   const articles = getResearchedArticles({ limit: 100 }).data;
   for (const article of articles) {
