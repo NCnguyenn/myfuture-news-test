@@ -1,6 +1,6 @@
 {
-  "researchDate": "2026-07-23",
-  "sourceAccessedAt": "2026-07-23T16:00:00+07:00",
+  "researchDate": "2026-07-25",
+  "sourceAccessedAt": "2026-07-25T12:00:00+07:00",
   "timezone": "Asia/Bangkok",
   "project": "myfuture-news-test",
   "approvedCategorySlugs": [
@@ -15,8 +15,8 @@
     {
       "name": "Pháp lý dự án",
       "slug": "phap-ly-du-an",
-      "candidateCount": 5,
-      "latest90Count": 3,
+      "candidateCount": 7,
+      "latest90Count": 5,
       "articles": [
         {
           "title": "Hai luật về nhà ở và kinh doanh bất động sản bước vào đợt sửa đổi cấp bách",
@@ -473,14 +473,176 @@
             ],
             "notes": []
           }
+        },
+        {
+          "title": "Luật Phát triển đô thị làm rõ ranh giới khu kinh tế đặc biệt",
+          "slug": "luat-phat-trien-do-thi-khu-kinh-te-dac-biet-2026",
+          "excerpt": "Nghị quyết 198/NQ-CP cho biết Chính phủ cơ bản thống nhất với dự thảo Luật Phát triển đô thị, đồng thời yêu cầu phân định khu thương mại tự do với khu kinh tế đặc biệt. Đây vẫn là dự án luật đang được hoàn thiện, chưa phải quy định đã có hiệu lực.",
+          "bodyMarkdown": "## Dữ kiện từ nguồn chính thức\n\nBáo Điện tử Chính phủ ngày 24/7/2026 công bố nội dung Nghị quyết 198/NQ-CP về hai dự án luật. Với dự thảo Luật Phát triển đô thị, Chính phủ thống nhất cơ bản với nội dung đã trình, đồng thời giao Bộ trưởng Tư pháp tiếp thu, hoàn thiện và giải trình dự thảo theo quy định. Thông tin này xác nhận một bước trong quy trình chuẩn bị luật, không đồng nghĩa dự thảo đã được Quốc hội thông qua hoặc đã phát sinh hiệu lực áp dụng.\n\nMột điểm được nguồn nêu rõ là yêu cầu phân định giữa khu thương mại tự do và khu kinh tế đặc biệt. Hai mô hình có thể cùng gắn với mục tiêu thu hút đầu tư và tạo động lực phát triển, nhưng việc xác định phạm vi, cơ chế quản lý và thẩm quyền phải được thể hiện rõ trong văn bản pháp luật. Nghị quyết không cung cấp trong bài báo toàn bộ tiêu chí chi tiết, vì vậy bài viết này không suy diễn thêm điều kiện thành lập hay ưu đãi cụ thể.\n\n## Vì sao ranh giới pháp lý đáng chú ý\n\nKhi các khái niệm phát triển đô thị giao với cơ chế kinh tế đặc thù, một dự án có thể chịu nhiều lớp quy hoạch, đất đai, đầu tư, xây dựng và quản lý vận hành. Nếu phạm vi giữa các mô hình không rõ, cơ quan xử lý hồ sơ và nhà đầu tư có thể gặp khó trong việc xác định văn bản ưu tiên, đầu mối quyết định hoặc trình tự cần thực hiện. Đây là nhận định về rủi ro thực thi nói chung, không phải kết luận rằng một dự án cụ thể đang bị chồng chéo.\n\nViệc Chính phủ yêu cầu phân định ngay trong quá trình hoàn thiện dự thảo cho thấy chất lượng định nghĩa và sự thống nhất với hệ thống pháp luật hiện hành là phần việc trọng tâm. Tuy nhiên, nội dung cuối cùng còn phụ thuộc hồ sơ được hoàn thiện, thẩm tra và xem xét ở các bước tiếp theo. Doanh nghiệp không nên xây dựng phương án đầu tư chỉ từ một bản tin tóm tắt về nghị quyết.\n\n## Điều dự án đô thị cần theo dõi\n\nChủ đầu tư và đơn vị tư vấn có thể lập danh mục những vấn đề cần cập nhật khi dự thảo chính thức được công bố: tiêu chí của từng loại khu, quan hệ với quy hoạch đô thị và quy hoạch tỉnh, thẩm quyền chấp thuận, cơ chế chuyển tiếp, cùng trách nhiệm của cơ quan quản lý. Với dự án đang triển khai, hồ sơ vẫn phải tuân theo quy định có hiệu lực tại thời điểm xử lý.\n\nNhà đầu tư cũng cần tách ba trạng thái: định hướng chính sách, nội dung dự thảo và quy phạm đã ban hành. Nghị quyết 198/NQ-CP phản ánh ý kiến của Chính phủ đối với hồ sơ dự án luật; nó không tự tạo ra mọi quyền, ưu đãi hay thủ tục mà dự thảo có thể đề cập. Việc phân biệt trạng thái giúp tránh dùng thông tin chính sách sớm như một cam kết pháp lý.\n\n## Phạm vi bài viết\n\nToàn bộ dữ kiện pháp lý trong bài được giới hạn ở thông tin Báo Điện tử Chính phủ công bố ngày 24/7/2026: Chính phủ cơ bản thống nhất với dự thảo, yêu cầu làm rõ hai loại khu và giao Bộ trưởng Tư pháp hoàn thiện, giải trình. Phần phân tích chỉ nêu cách theo dõi hồ sơ và không dự báo nội dung Quốc hội sẽ quyết định.",
+          "categorySlug": "phap-ly-du-an",
+          "author": {
+            "name": "Báo Điện tử Chính phủ",
+            "slug": "bao-dien-tu-chinh-phu",
+            "authorType": "organization",
+            "profileUrl": null,
+            "verified": true,
+            "verificationNote": "Brief nguồn ngày 25/7/2026 xác nhận trang Báo Điện tử Chính phủ; trang không hiển thị byline cá nhân trong dữ liệu đã đóng băng."
+          },
+          "datePublished": "2026-07-24T16:07:00+07:00",
+          "dateModified": null,
+          "tags": [
+            "Luật Phát triển đô thị",
+            "Khu kinh tế đặc biệt",
+            "Khu thương mại tự do",
+            "Nghị quyết 198/NQ-CP"
+          ],
+          "sources": [
+            {
+              "sourceName": "Báo Điện tử Chính phủ",
+              "sourceUrl": "https://baochinhphu.vn/chinh-phu-thong-nhat-noi-dung-2-du-an-luat-102260724151848293.htm",
+              "finalUrl": "https://baochinhphu.vn/chinh-phu-thong-nhat-noi-dung-2-du-an-luat-102260724151848293.htm",
+              "canonicalUrl": "https://baochinhphu.vn/chinh-phu-thong-nhat-noi-dung-2-du-an-luat-102260724151848293.htm",
+              "httpStatus": 200,
+              "pageTitle": "Chính phủ thống nhất nội dung 2 dự án luật",
+              "sourceAuthor": "Báo Điện tử Chính phủ",
+              "sourcePublishedAt": "2026-07-24T16:07:00+07:00",
+              "sourceModifiedAt": null,
+              "sourceAccessedAt": "2026-07-25T12:00:00+07:00",
+              "sourceType": "official",
+              "sourceLanguage": "vi",
+              "verified": true,
+              "verificationNote": "H1, thời gian đăng và các nội dung về Nghị quyết 198/NQ-CP đã được đối chiếu trực tiếp trong brief nghiên cứu đóng băng."
+            }
+          ],
+          "evidence": [
+            {
+              "claim": "Nghị quyết 198/NQ-CP thể hiện Chính phủ cơ bản thống nhất với dự thảo Luật Phát triển đô thị.",
+              "sourceUrl": "https://baochinhphu.vn/chinh-phu-thong-nhat-noi-dung-2-du-an-luat-102260724151848293.htm",
+              "evidenceNote": "Nguồn chính thức nêu trạng thái đồng thuận của Chính phủ với hồ sơ dự thảo, không nêu luật đã có hiệu lực.",
+              "shortQuote": null
+            },
+            {
+              "claim": "Dự thảo cần phân định khu thương mại tự do và khu kinh tế đặc biệt; Bộ trưởng Tư pháp chịu trách nhiệm hoàn thiện, giải trình.",
+              "sourceUrl": "https://baochinhphu.vn/chinh-phu-thong-nhat-noi-dung-2-du-an-luat-102260724151848293.htm",
+              "evidenceNote": "Hai nội dung được brief kiểm chứng trên trang canonical và được giữ đúng phạm vi.",
+              "shortQuote": null
+            }
+          ],
+          "imagePlan": {
+            "cover": {
+              "mode": "source",
+              "sourceUrl": "https://bcp.cdnchinhphu.vn/thumb_w/777/334894974524682240/2026/7/24/vbpl-anh-1784880919709972427709.jpg",
+              "license": null,
+              "licenseUrl": null,
+              "credit": "Báo Điện tử Chính phủ",
+              "alt": "Búa gỗ và cân công lý minh họa quá trình hoàn thiện các dự án luật",
+              "caption": "Chính phủ cơ bản thống nhất với dự thảo và yêu cầu tiếp tục hoàn thiện nội dung.",
+              "generationPrompt": null
+            },
+            "inlineImages": []
+          },
+          "verification": {
+            "factsChecked": true,
+            "authorChecked": true,
+            "dateChecked": true,
+            "duplicateChecked": true,
+            "bodyWordCount": 628,
+            "missingFields": [
+              "dateModified"
+            ],
+            "notes": [
+              "Chỉ sử dụng hai nhóm dữ kiện đã được đóng băng trong brief MFN-37."
+            ]
+          }
+        },
+        {
+          "title": "Sửa luật bất động sản: yêu cầu tránh hai vòng thủ tục cho một dự án",
+          "slug": "sua-luat-kinh-doanh-bat-dong-san-tranh-chong-cheo-thu-tuc",
+          "excerpt": "Phiên họp Chính phủ chuyên đề pháp luật ngày 8/7 xem xét sửa Luật Kinh doanh bất động sản và Luật Nhà ở. Trọng tâm được công bố là xử lý thủ tục song song trong chuyển nhượng dự án, giao đất và làm rõ nội dung về nhà cho thuê, quỹ nhà ở địa phương.",
+          "bodyMarkdown": "## Dữ kiện được công bố tại phiên họp\n\nBáo Điện tử Chính phủ ngày 8/7/2026 đưa tin phiên họp chuyên đề xây dựng pháp luật xem xét dự án Luật Kinh doanh bất động sản và Luật Nhà ở sửa đổi. Theo nguồn, một yêu cầu quan trọng là tránh để thủ tục chuyển nhượng dự án và thủ tục giao đất cùng tồn tại theo cách gây trùng lặp. Bài nguồn cũng nêu phạm vi sửa Luật Nhà ở liên quan nhà cho thuê và quỹ nhà ở của địa phương.\n\nĐây là nội dung đang trong quá trình xây dựng pháp luật. Bản tin không phải văn bản luật hoàn chỉnh và không thay thế quy định hiện hành. Vì vậy, việc mô tả hướng sửa đổi cần giữ đúng trạng thái đề xuất, không trình bày như thủ tục mới đã được áp dụng cho hồ sơ đang xử lý.\n\n## Vấn đề của các thủ tục song song\n\nTrong một giao dịch chuyển nhượng dự án, nhiều quan hệ pháp lý có thể xuất hiện đồng thời: quyền và nghĩa vụ của nhà đầu tư, tình trạng sử dụng đất, quy hoạch, nghĩa vụ tài chính và điều kiện kinh doanh sản phẩm. Nếu hai thủ tục yêu cầu lặp lại cùng một nội dung hoặc chờ nhau không rõ thứ tự, thời gian xử lý có thể kéo dài và trách nhiệm giữa các cơ quan khó theo dõi. Đây là phân tích về nguyên tắc quản trị thủ tục; nguồn không cung cấp số ngày tiết kiệm hay danh mục hồ sơ cụ thể nên bài không tự bổ sung các con số đó.\n\nMục tiêu tránh chồng chéo không có nghĩa mọi bước kiểm tra đều được bỏ. Một thiết kế thủ tục tốt vẫn phải bảo đảm căn cứ giao đất, năng lực và nghĩa vụ của bên nhận chuyển nhượng, cũng như quyền lợi của khách hàng. Điều cần theo dõi là dự thảo cuối cùng phân định đầu mối và kết quả pháp lý của từng bước như thế nào.\n\n## Nhà cho thuê và quỹ nhà ở địa phương\n\nThông tin nguồn cho biết Luật Nhà ở sửa đổi được xem xét cùng phiên họp, trong đó có nội dung điều chỉnh nhà cho thuê và quỹ nhà ở địa phương. Hai chủ đề này có quan hệ với khả năng cung ứng chỗ ở dài hạn, nhưng bản tin đóng băng không nêu cơ chế tài chính, đối tượng hoặc chỉ tiêu cụ thể. Do đó, bài viết không gán thêm ưu đãi, tỷ lệ quỹ đất hay quyền tiếp cận chưa được xác nhận.\n\nĐối với địa phương, câu hỏi thực thi sẽ nằm ở cách hình thành, quản lý và sử dụng quỹ nhà; với doanh nghiệp, trọng tâm là điều kiện phát triển và vận hành sản phẩm cho thuê. Các câu hỏi này chỉ có thể trả lời khi dự thảo và văn bản sau cùng được công bố đầy đủ.\n\n## Cách chuẩn bị trong giai đoạn dự thảo\n\nDoanh nghiệp có thể rà lại bản đồ thủ tục của dự án để xác định bước nào đang dựa trên Luật Đất đai, Luật Đầu tư, Luật Nhà ở hay Luật Kinh doanh bất động sản. Việc này giúp nhận diện điểm giao nhau khi có dự thảo mới, nhưng hồ sơ hiện tại vẫn phải theo pháp luật đang hiệu lực và hướng dẫn của cơ quan có thẩm quyền.\n\nNgười mua và đối tác không nên coi thông tin sửa luật là bảo đảm rằng một dự án sẽ được chuyển nhượng hoặc mở bán nhanh hơn. Bài viết chỉ diễn giải nội dung đã được Báo Điện tử Chính phủ xác minh: phạm vi hai dự án luật, yêu cầu tránh thủ tục song song và các chủ đề nhà cho thuê, quỹ nhà ở địa phương.",
+          "categorySlug": "phap-ly-du-an",
+          "author": {
+            "name": "Báo Điện tử Chính phủ",
+            "slug": "bao-dien-tu-chinh-phu",
+            "authorType": "organization",
+            "profileUrl": null,
+            "verified": true,
+            "verificationNote": "Brief nguồn xác nhận nhà xuất bản và không ghi byline cá nhân cho MFN-38."
+          },
+          "datePublished": "2026-07-08T14:12:00+07:00",
+          "dateModified": null,
+          "tags": [
+            "Luật Kinh doanh bất động sản",
+            "Luật Nhà ở",
+            "Chuyển nhượng dự án",
+            "Nhà cho thuê"
+          ],
+          "sources": [
+            {
+              "sourceName": "Báo Điện tử Chính phủ",
+              "sourceUrl": "https://baochinhphu.vn/thu-tuong-the-che-phai-tao-dot-pha-phat-trien-va-thuc-thi-phai-hieu-qua-khong-tro-thanh-diem-nghen-cua-diem-nghen-102260708141042833.htm",
+              "finalUrl": "https://baochinhphu.vn/thu-tuong-the-che-phai-tao-dot-pha-phat-trien-va-thuc-thi-phai-hieu-qua-khong-tro-thanh-diem-nghen-cua-diem-nghen-102260708141042833.htm",
+              "canonicalUrl": "https://baochinhphu.vn/thu-tuong-the-che-phai-tao-dot-pha-phat-trien-va-thuc-thi-phai-hieu-qua-khong-tro-thanh-diem-nghen-cua-diem-nghen-102260708141042833.htm",
+              "httpStatus": 200,
+              "pageTitle": "Thủ tướng: Thể chế phải tạo đột phá phát triển và thực thi phải hiệu quả",
+              "sourceAuthor": "Báo Điện tử Chính phủ",
+              "sourcePublishedAt": "2026-07-08T14:12:00+07:00",
+              "sourceModifiedAt": null,
+              "sourceAccessedAt": "2026-07-25T12:00:00+07:00",
+              "sourceType": "official",
+              "sourceLanguage": "vi",
+              "verified": true,
+              "verificationNote": "Trang canonical và các nội dung về hai dự án luật đã được đối chiếu ngày 25/7/2026."
+            }
+          ],
+          "evidence": [
+            {
+              "claim": "Phiên họp xem xét dự án Luật Kinh doanh bất động sản và Luật Nhà ở sửa đổi.",
+              "sourceUrl": "https://baochinhphu.vn/thu-tuong-the-che-phai-tao-dot-pha-phat-trien-va-thuc-thi-phai-hieu-qua-khong-tro-thanh-diem-nghen-cua-diem-nghen-102260708141042833.htm",
+              "evidenceNote": "Nguồn chính thức nêu phạm vi phiên họp, bài giữ đúng trạng thái dự án luật.",
+              "shortQuote": null
+            },
+            {
+              "claim": "Yêu cầu sửa luật gồm tránh thủ tục song song về chuyển nhượng dự án và giao đất; Luật Nhà ở đề cập nhà cho thuê và quỹ nhà ở địa phương.",
+              "sourceUrl": "https://baochinhphu.vn/thu-tuong-the-che-phai-tao-dot-pha-phat-trien-va-thuc-thi-phai-hieu-qua-khong-tro-thanh-diem-nghen-cua-diem-nghen-102260708141042833.htm",
+              "evidenceNote": "Hai nhóm nội dung được brief MFN-38 xác nhận; không bổ sung cơ chế chưa có trong nguồn.",
+              "shortQuote": null
+            }
+          ],
+          "imagePlan": {
+            "cover": {
+              "mode": "source",
+              "sourceUrl": "https://bcp.cdnchinhphu.vn/thumb_w/777/334894974524682240/2026/7/9/base64-17835673244621391838867.png",
+              "license": null,
+              "licenseUrl": null,
+              "credit": "VGP/Nhật Bắc, qua Báo Điện tử Chính phủ",
+              "alt": "Thủ tướng phát biểu tại phiên họp Chính phủ chuyên đề xây dựng pháp luật",
+              "caption": "Phiên họp xem xét hướng sửa hai luật liên quan trực tiếp đến dự án và nhà ở.",
+              "generationPrompt": null
+            },
+            "inlineImages": []
+          },
+          "verification": {
+            "factsChecked": true,
+            "authorChecked": true,
+            "dateChecked": true,
+            "duplicateChecked": true,
+            "bodyWordCount": 654,
+            "missingFields": [
+              "dateModified"
+            ],
+            "notes": [
+              "Không diễn giải đề xuất đang soạn thảo thành quy định đã có hiệu lực."
+            ]
+          }
         }
       ]
     },
     {
       "name": "Quy hoạch - Hạ tầng",
       "slug": "quy-hoach-ha-tang",
-      "candidateCount": 5,
-      "latest90Count": 5,
+      "candidateCount": 8,
+      "latest90Count": 8,
       "articles": [
         {
           "title": "Năm tuyến quốc lộ tiêu chuẩn cao tốc được đề xuất bổ sung vào quy hoạch",
@@ -937,14 +1099,253 @@
             ],
             "notes": []
           }
+        },
+        {
+          "title": "Hưng Yên định hướng trục Bắc – Nam 89 km trong mục tiêu đô thị 2030",
+          "slug": "hung-yen-truc-bac-nam-89km-thanh-pho-truc-thuoc-trung-uong",
+          "excerpt": "Hưng Yên đặt mục tiêu trở thành thành phố trực thuộc Trung ương trước năm 2030 và xác định trục Bắc – Nam dài 89 km, rộng 180 m. Các chỉ số sáu tháng cho thấy GRDP, vốn đầu tư và giải ngân công cùng tăng, nhưng mục tiêu đô thị vẫn cần được đọc như một lộ trình.",
+          "bodyMarkdown": "## Dữ kiện về mục tiêu và trục phát triển\n\nBáo Điện tử Chính phủ ngày 24/7/2026 công bố định hướng đưa Hưng Yên trở thành thành phố trực thuộc Trung ương trước năm 2030. Trong thông tin được xác minh, trục giao thông Bắc – Nam được nêu với chiều dài 89 km và chiều rộng 180 m. Đây là hai thông số quy hoạch đáng chú ý vì trục tuyến có thể đóng vai trò kết nối các không gian phát triển, nhưng nguồn đóng băng không cung cấp trong bài này đầy đủ hồ sơ kỹ thuật, tổng vốn hay tiến độ từng đoạn.\n\nMục tiêu về cấp đô thị là một định hướng cần nhiều điều kiện về quy hoạch, hạ tầng, kinh tế, quản trị và tiêu chuẩn pháp lý. Vì vậy, mốc trước năm 2030 không nên được hiểu là trạng thái đã hoàn tất. Người đọc cần theo dõi các quyết định quy hoạch, chương trình đầu tư và kết quả đánh giá tiêu chuẩn ở từng giai đoạn.\n\n## Các chỉ số sáu tháng\n\nNguồn cho biết GRDP sáu tháng của Hưng Yên tăng 10,72%, tổng vốn đầu tư tăng 14,4% và giải ngân đầu tư công đạt 35,7%. Ba số liệu phản ánh các khía cạnh khác nhau: tăng trưởng hoạt động kinh tế, quy mô vốn đầu tư và tiến độ sử dụng kế hoạch vốn công. Không nên cộng hoặc so sánh trực tiếp các tỷ lệ như thể chúng cùng một mẫu số.\n\nTăng trưởng GRDP và vốn đầu tư tạo bối cảnh cho kế hoạch đô thị, song chưa tự chứng minh hiệu quả của một dự án bất động sản cụ thể. Tỷ lệ giải ngân cũng là ảnh chụp theo kỳ báo cáo; để đánh giá tiến độ cần biết kế hoạch năm, cơ cấu dự án và khối lượng hoàn thành. Brief không cung cấp các chi tiết đó nên bài chỉ giữ nguyên mức 35,7% đã xác minh.\n\n## Cách đọc tác động của trục 89 km\n\nMột trục dài liên vùng có thể làm thay đổi khả năng tiếp cận giữa khu dân cư, khu sản xuất và đầu mối dịch vụ. Tuy nhiên, tác động thực tế phụ thuộc vị trí nút giao, đường kết nối, tiến độ giải phóng mặt bằng và thời điểm vận hành. Đây là khung phân tích, không phải dự báo giá đất dọc tuyến.\n\nDoanh nghiệp cân nhắc địa điểm nên kiểm tra ranh giới quy hoạch, chức năng sử dụng đất và trạng thái pháp lý của từng khu vực, thay vì chỉ đo khoảng cách tới đường dự kiến. Người mua nhà cần phân biệt tuyến đã khai thác, tuyến đang đầu tư và tuyến mới nằm trong định hướng. Một tên gọi quy hoạch không thay thế được hồ sơ phê duyệt hoặc lịch thi công.\n\n## Những mốc cần theo dõi tiếp\n\nCác bước quan trọng gồm việc cụ thể hóa quy hoạch, lựa chọn dự án ưu tiên, bố trí nguồn lực, công bố tiến độ và đánh giá tiêu chuẩn đô thị. Khi có tài liệu mới, số liệu kinh tế cũng cần được cập nhật theo cùng kỳ để tránh so sánh lệch thời điểm.\n\nBài viết giới hạn ở thông tin nguồn chính thức đã công bố: mục tiêu trước năm 2030, quy mô trục Bắc – Nam và ba chỉ số sáu tháng. Phần còn lại là hướng dẫn đọc dữ liệu thận trọng, không phải cam kết tiến độ, khuyến nghị mua bán hay ước tính lợi nhuận.",
+          "categorySlug": "quy-hoach-ha-tang",
+          "author": {
+            "name": "Báo Điện tử Chính phủ",
+            "slug": "bao-dien-tu-chinh-phu",
+            "authorType": "organization",
+            "profileUrl": null,
+            "verified": true,
+            "verificationNote": "Brief MFN-36 xác nhận nhà xuất bản và không ghi byline cá nhân."
+          },
+          "datePublished": "2026-07-24T19:07:00+07:00",
+          "dateModified": null,
+          "tags": [
+            "Hưng Yên",
+            "Quy hoạch đô thị",
+            "Trục Bắc – Nam",
+            "Đầu tư công"
+          ],
+          "sources": [
+            {
+              "sourceName": "Báo Điện tử Chính phủ",
+              "sourceUrl": "https://baochinhphu.vn/dua-hung-yen-tro-thanh-thanh-pho-truc-thuoc-trung-uong-truoc-nam-2030-1022607241835057.htm",
+              "finalUrl": "https://baochinhphu.vn/dua-hung-yen-tro-thanh-thanh-pho-truc-thuoc-trung-uong-truoc-nam-2030-1022607241835057.htm",
+              "canonicalUrl": "https://baochinhphu.vn/dua-hung-yen-tro-thanh-thanh-pho-truc-thuoc-trung-uong-truoc-nam-2030-1022607241835057.htm",
+              "httpStatus": 200,
+              "pageTitle": "Đưa Hưng Yên trở thành thành phố trực thuộc Trung ương trước năm 2030",
+              "sourceAuthor": "Báo Điện tử Chính phủ",
+              "sourcePublishedAt": "2026-07-24T19:07:00+07:00",
+              "sourceModifiedAt": null,
+              "sourceAccessedAt": "2026-07-25T12:00:00+07:00",
+              "sourceType": "official",
+              "sourceLanguage": "vi",
+              "verified": true,
+              "verificationNote": "Mục tiêu đô thị, thông số trục và ba chỉ tiêu sáu tháng đã được đối chiếu trên trang canonical."
+            }
+          ],
+          "evidence": [
+            {
+              "claim": "Hưng Yên đặt mục tiêu trở thành thành phố trực thuộc Trung ương trước năm 2030; trục Bắc – Nam dài 89 km, rộng 180 m.",
+              "sourceUrl": "https://baochinhphu.vn/dua-hung-yen-tro-thanh-thanh-pho-truc-thuoc-trung-uong-truoc-nam-2030-1022607241835057.htm",
+              "evidenceNote": "Bài giữ mục tiêu ở trạng thái định hướng và không chuyển thành kết quả đã hoàn thành.",
+              "shortQuote": null
+            },
+            {
+              "claim": "GRDP sáu tháng tăng 10,72%, tổng vốn đầu tư tăng 14,4% và giải ngân đầu tư công đạt 35,7%.",
+              "sourceUrl": "https://baochinhphu.vn/dua-hung-yen-tro-thanh-thanh-pho-truc-thuoc-trung-uong-truoc-nam-2030-1022607241835057.htm",
+              "evidenceNote": "Các tỷ lệ được trình bày riêng theo đúng chỉ tiêu, không cộng gộp.",
+              "shortQuote": null
+            }
+          ],
+          "imagePlan": {
+            "cover": {
+              "mode": "source",
+              "sourceUrl": "https://bcp2.cdnchinhphu.vn/zoom/1200_630/334894974524682240/2026/7/24/edit-bai-22-1784892776616697606926-0-63-955-1591-crop-17848928489471989785143.png",
+              "license": null,
+              "licenseUrl": null,
+              "credit": "Báo Điện tử Chính phủ",
+              "alt": "Hưng Yên trong định hướng trở thành thành phố trực thuộc Trung ương",
+              "caption": "Hưng Yên đang cụ thể hóa mục tiêu đô thị bằng các trục phát triển và chương trình đầu tư.",
+              "generationPrompt": null
+            },
+            "inlineImages": []
+          },
+          "verification": {
+            "factsChecked": true,
+            "authorChecked": true,
+            "dateChecked": true,
+            "duplicateChecked": true,
+            "bodyWordCount": 599,
+            "missingFields": [
+              "dateModified"
+            ],
+            "notes": []
+          }
+        },
+        {
+          "title": "Bắc Ninh quy hoạch ba phân vùng, bốn hành lang và sáu cụm động lực",
+          "slug": "bac-ninh-do-thi-da-cuc-bon-hanh-lang-phat-trien-2075",
+          "excerpt": "Quyết định 1389/QĐ-TTg phê duyệt quy hoạch chung đô thị Bắc Ninh đến năm 2050, tầm nhìn 2075 trên phạm vi 99 đơn vị cấp xã. Cấu trúc đa cực gồm ba phân vùng, bốn hành lang và sáu cụm trung tâm động lực.",
+          "bodyMarkdown": "## Khung quy hoạch vừa được phê duyệt\n\nTheo Báo Điện tử Chính phủ ngày 24/7/2026, Quyết định 1389/QĐ-TTg đã phê duyệt quy hoạch chung đô thị Bắc Ninh đến năm 2050, tầm nhìn đến năm 2075. Phạm vi nghiên cứu gồm 99 đơn vị hành chính cấp xã. Nguồn mô tả cấu trúc phát triển gồm ba phân vùng, bốn hành lang và sáu cụm trung tâm động lực, đồng thời đặt mục tiêu trở thành thành phố trực thuộc Trung ương trước năm 2030.\n\nCác con số này là cấu trúc của đồ án quy hoạch, không phải số dự án sẽ khởi công ngay. Mỗi phân vùng, hành lang hoặc cụm trung tâm còn cần được cụ thể hóa bằng quy hoạch cấp dưới, chương trình phát triển và dự án có hồ sơ riêng. Bài viết vì thế không gán chức năng chi tiết cho từng khu khi brief nguồn chưa liệt kê.\n\n## Ý nghĩa của mô hình đa cực\n\nMô hình đa cực thường nhằm phân bố chức năng và động lực phát triển giữa nhiều trung tâm thay vì dồn toàn bộ hoạt động vào một lõi. Bốn hành lang có thể tạo liên kết giữa các cụm, còn ba phân vùng giúp tổ chức không gian ở quy mô lớn hơn. Đây là cách diễn giải cấu trúc, không phải khẳng định về lưu lượng, mật độ hay giá trị đất tại một vị trí cụ thể.\n\nVới phạm vi 99 đơn vị cấp xã, thách thức thực thi nằm ở tính nhất quán giữa ranh giới, hạ tầng kỹ thuật, hạ tầng xã hội và kế hoạch sử dụng đất. Một đồ án dài hạn đến 2050 và tầm nhìn 2075 cũng cần các giai đoạn ưu tiên. Nguồn đóng băng không nêu toàn bộ danh mục vốn hoặc thời hạn của từng dự án, nên không thể suy ra thời điểm hoàn thành từ mốc tầm nhìn.\n\n## Tác động cần được kiểm chứng theo hồ sơ\n\nDoanh nghiệp phát triển dự án nên đối chiếu vị trí với bản đồ và quy định quản lý theo đồ án, sau đó kiểm tra quy hoạch phân khu, kế hoạch sử dụng đất, điều kiện hạ tầng và quyết định đầu tư liên quan. Việc một khu vực nằm trong hành lang phát triển không tự tạo quyền chuyển mục đích sử dụng đất hoặc bảo đảm dự án được chấp thuận.\n\nĐối với người dân, thông tin quy hoạch có giá trị khi được đọc cùng kế hoạch triển khai và công bố chính thức của địa phương. Các quảng cáo chỉ nhắc mốc 2030 hoặc 2075 nhưng không chỉ ra văn bản và ranh giới cần được kiểm tra thận trọng. Quyết định 1389/QĐ-TTg là căn cứ quan trọng, song giao dịch cụ thể vẫn phụ thuộc tình trạng pháp lý của thửa đất và dự án.\n\n## Theo dõi từ mục tiêu đến thực thi\n\nBốn nhóm thông tin nên được cập nhật theo thời gian: văn bản cụ thể hóa đồ án; danh mục công trình ưu tiên; nguồn lực và tiến độ; kết quả đánh giá tiêu chuẩn đô thị trước mốc 2030. Cách theo dõi này giúp tách mục tiêu chính sách khỏi tiến độ xây dựng thực tế.\n\nBài chỉ sử dụng các dữ kiện được brief MFN-34 xác minh: số quyết định, phạm vi 99 đơn vị, cấu trúc ba – bốn – sáu và mục tiêu trước 2030. Mọi nhận định còn lại là hướng đọc quy hoạch, không phải dự báo đầu tư.",
+          "categorySlug": "quy-hoach-ha-tang",
+          "author": {
+            "name": "Phương Nhi",
+            "slug": "phuong-nhi",
+            "authorType": "person",
+            "profileUrl": null,
+            "verified": true,
+            "verificationNote": "Byline Phương Nhi được brief MFN-34 xác nhận trên trang nguồn."
+          },
+          "datePublished": "2026-07-24T18:13:00+07:00",
+          "dateModified": null,
+          "tags": [
+            "Bắc Ninh",
+            "Quy hoạch 2050",
+            "Đô thị đa cực",
+            "Quyết định 1389/QĐ-TTg"
+          ],
+          "sources": [
+            {
+              "sourceName": "Báo Điện tử Chính phủ",
+              "sourceUrl": "https://baochinhphu.vn/quy-hoach-chung-do-thi-bac-ninh-den-nam-2050-tam-nhin-den-nam-2075-102260724170506058.htm",
+              "finalUrl": "https://baochinhphu.vn/quy-hoach-chung-do-thi-bac-ninh-den-nam-2050-tam-nhin-den-nam-2075-102260724170506058.htm",
+              "canonicalUrl": "https://baochinhphu.vn/quy-hoach-chung-do-thi-bac-ninh-den-nam-2050-tam-nhin-den-nam-2075-102260724170506058.htm",
+              "httpStatus": 200,
+              "pageTitle": "Quy hoạch chung đô thị Bắc Ninh đến năm 2050, tầm nhìn đến năm 2075",
+              "sourceAuthor": "Phương Nhi",
+              "sourcePublishedAt": "2026-07-24T18:13:00+07:00",
+              "sourceModifiedAt": null,
+              "sourceAccessedAt": "2026-07-25T12:00:00+07:00",
+              "sourceType": "official",
+              "sourceLanguage": "vi",
+              "verified": true,
+              "verificationNote": "Quyết định, phạm vi và cấu trúc quy hoạch đã được đối chiếu trực tiếp."
+            }
+          ],
+          "evidence": [
+            {
+              "claim": "Quyết định 1389/QĐ-TTg phê duyệt quy hoạch chung đô thị Bắc Ninh trên phạm vi 99 đơn vị hành chính cấp xã.",
+              "sourceUrl": "https://baochinhphu.vn/quy-hoach-chung-do-thi-bac-ninh-den-nam-2050-tam-nhin-den-nam-2075-102260724170506058.htm",
+              "evidenceNote": "Nguồn chính thức nêu số quyết định và phạm vi đồ án.",
+              "shortQuote": null
+            },
+            {
+              "claim": "Cấu trúc quy hoạch gồm ba phân vùng, bốn hành lang, sáu cụm trung tâm động lực và mục tiêu thành phố trực thuộc Trung ương trước 2030.",
+              "sourceUrl": "https://baochinhphu.vn/quy-hoach-chung-do-thi-bac-ninh-den-nam-2050-tam-nhin-den-nam-2075-102260724170506058.htm",
+              "evidenceNote": "Bài giữ nguyên trạng thái mục tiêu và không chuyển thành kết quả đã đạt.",
+              "shortQuote": null
+            }
+          ],
+          "imagePlan": {
+            "cover": {
+              "mode": "source",
+              "sourceUrl": "https://bcp2.cdnchinhphu.vn/zoom/1200_630/334894974524682240/2026/7/24/bcninh-1784887286397984928251-0-0-1200-1920-crop-17848873024721439373367.jpg",
+              "license": null,
+              "licenseUrl": null,
+              "credit": "Báo Điện tử Chính phủ",
+              "alt": "Quy hoạch chung đô thị Bắc Ninh đến năm 2050, tầm nhìn 2075",
+              "caption": "Cấu trúc đa cực được tổ chức thành các phân vùng, hành lang và cụm trung tâm.",
+              "generationPrompt": null
+            },
+            "inlineImages": []
+          },
+          "verification": {
+            "factsChecked": true,
+            "authorChecked": true,
+            "dateChecked": true,
+            "duplicateChecked": true,
+            "bodyWordCount": 598,
+            "missingFields": [
+              "dateModified"
+            ],
+            "notes": []
+          }
+        },
+        {
+          "title": "Quy hoạch đường bộ đến 2050 bổ sung năm tuyến cao tốc",
+          "slug": "quy-hoach-duong-bo-2050-bo-sung-nam-tuyen-cao-toc",
+          "excerpt": "Mạng lưới được công bố gồm 46 tuyến cao tốc dài khoảng 10.106 km và 136 quốc lộ dài khoảng 26.340 km. Quy hoạch mới bổ sung năm tuyến cao tốc, điều chỉnh 12 quốc lộ và điều chuyển 36 tuyến về đường địa phương.",
+          "bodyMarkdown": "## Quy mô mạng lưới trong quyết định mới\n\nBáo Điện tử Chính phủ ngày 23/7/2026 công bố thông tin quy hoạch mạng lưới đường bộ đến năm 2050. Theo nguồn, hệ thống gồm 46 tuyến cao tốc với tổng chiều dài khoảng 10.106 km và 136 quốc lộ dài khoảng 26.340 km. Quyết định đồng thời bổ sung năm tuyến cao tốc, điều chỉnh 12 quốc lộ và điều chuyển 36 tuyến về hệ thống đường địa phương.\n\nCác số liệu mô tả quy mô quy hoạch, không đồng nghĩa toàn bộ chiều dài đã được xây dựng hoặc bố trí vốn. Một tuyến nằm trong mạng lưới có thể ở trạng thái khai thác, đầu tư, chuẩn bị dự án hoặc định hướng dài hạn. Khi sử dụng dữ liệu, cần ghi đúng nhãn quy hoạch để tránh biến mục tiêu 2050 thành tiến độ hiện tại.\n\n## Ba loại thay đổi cần phân biệt\n\nBổ sung tuyến cao tốc làm thay đổi danh mục mạng lưới cấp cao. Điều chỉnh quốc lộ có thể liên quan hướng tuyến hoặc cấu trúc quản lý được thể hiện trong quyết định. Điều chuyển 36 tuyến về đường địa phương là thay đổi phân loại, kéo theo câu hỏi về cơ quan quản lý và kế hoạch bảo trì. Brief không nêu tên từng tuyến hay nội dung điều chỉnh chi tiết, nên bài không tự liệt kê.\n\nViệc phân biệt ba loại thay đổi giúp địa phương và doanh nghiệp xác định tài liệu cần đọc tiếp. Một tuyến mới trong quy hoạch cần được theo dõi qua chủ trương đầu tư và dự án cụ thể; tuyến đổi cấp quản lý cần theo dõi quyết định bàn giao; quốc lộ điều chỉnh cần đối chiếu bản đồ, mốc giới và văn bản quản lý liên quan.\n\n## Hàm ý đối với phát triển không gian\n\nMạng lưới cao tốc và quốc lộ có thể mở rộng kết nối giữa trung tâm sản xuất, đô thị và đầu mối logistics. Tuy nhiên, hiệu quả của một địa điểm phụ thuộc nút giao, đường gom, khả năng kết nối cuối tuyến và thời gian hoàn thành, không chỉ khoảng cách đường thẳng tới hành lang trên bản đồ. Đây là nguyên tắc phân tích hạ tầng, không phải dự báo tăng giá bất động sản.\n\nNhà phát triển dự án nên kiểm tra trạng thái pháp lý và nguồn vốn của công trình được dùng trong phương án kinh doanh. Người mua cần cảnh giác với mô tả quảng cáo gộp tuyến đang khai thác với tuyến mới ở tầm nhìn 2050. Bản quy hoạch tạo định hướng, nhưng không thay thế quyết định đầu tư hoặc lịch thi công.\n\n## Cách theo dõi tiến độ\n\nMột bảng theo dõi hữu ích có thể tách từng tuyến theo năm lớp: có trong quy hoạch, đã có chủ trương, đang chuẩn bị, đang thi công và đã khai thác. Mỗi thay đổi trạng thái cần gắn với văn bản chính thức. Cách làm này hạn chế việc dùng cùng một con số 10.106 km cho những trạng thái rất khác nhau.\n\nBài viết chỉ diễn giải các tổng số và nhóm điều chỉnh đã được nguồn canonical xác minh. Ảnh sử dụng URL thay thế do chính trang nguồn cung cấp sau khi crop ban đầu trả lỗi; nội dung không thêm tên tuyến, vốn đầu tư hay mốc hoàn thành chưa có trong brief.",
+          "categorySlug": "quy-hoach-ha-tang",
+          "author": {
+            "name": "Phan Trang",
+            "slug": "phan-trang",
+            "authorType": "person",
+            "profileUrl": null,
+            "verified": true,
+            "verificationNote": "Byline Phan Trang được brief MFN-35 xác nhận trên trang nguồn."
+          },
+          "datePublished": "2026-07-23T11:02:00+07:00",
+          "dateModified": null,
+          "tags": [
+            "Quy hoạch đường bộ",
+            "Cao tốc",
+            "Quốc lộ",
+            "Tầm nhìn 2050"
+          ],
+          "sources": [
+            {
+              "sourceName": "Báo Điện tử Chính phủ",
+              "sourceUrl": "https://baochinhphu.vn/chinh-thuc-cong-bo-quy-hoach-mang-luoi-cao-toc-quoc-lo-tam-nhin-den-2050-102260723105309397.htm",
+              "finalUrl": "https://baochinhphu.vn/chinh-thuc-cong-bo-quy-hoach-mang-luoi-cao-toc-quoc-lo-tam-nhin-den-2050-102260723105309397.htm",
+              "canonicalUrl": "https://baochinhphu.vn/chinh-thuc-cong-bo-quy-hoach-mang-luoi-cao-toc-quoc-lo-tam-nhin-den-2050-102260723105309397.htm",
+              "httpStatus": 200,
+              "pageTitle": "Chính thức công bố quy hoạch mạng lưới cao tốc, quốc lộ tầm nhìn đến 2050",
+              "sourceAuthor": "Phan Trang",
+              "sourcePublishedAt": "2026-07-23T11:02:00+07:00",
+              "sourceModifiedAt": null,
+              "sourceAccessedAt": "2026-07-25T12:00:00+07:00",
+              "sourceType": "official",
+              "sourceLanguage": "vi",
+              "verified": true,
+              "verificationNote": "Quy mô mạng lưới và ba nhóm thay đổi đã được đối chiếu trên trang canonical."
+            }
+          ],
+          "evidence": [
+            {
+              "claim": "Quy hoạch gồm 46 tuyến cao tốc dài khoảng 10.106 km và 136 quốc lộ dài khoảng 26.340 km.",
+              "sourceUrl": "https://baochinhphu.vn/chinh-thuc-cong-bo-quy-hoach-mang-luoi-cao-toc-quoc-lo-tam-nhin-den-2050-102260723105309397.htm",
+              "evidenceNote": "Các tổng số được giữ nhãn quy hoạch, không trình bày như chiều dài đã hoàn thành.",
+              "shortQuote": null
+            },
+            {
+              "claim": "Quyết định bổ sung năm tuyến cao tốc, điều chỉnh 12 quốc lộ và điều chuyển 36 tuyến về đường địa phương.",
+              "sourceUrl": "https://baochinhphu.vn/chinh-thuc-cong-bo-quy-hoach-mang-luoi-cao-toc-quoc-lo-tam-nhin-den-2050-102260723105309397.htm",
+              "evidenceNote": "Ba nhóm thay đổi được brief MFN-35 xác nhận.",
+              "shortQuote": null
+            }
+          ],
+          "imagePlan": {
+            "cover": {
+              "mode": "source",
+              "sourceUrl": "https://bcp.cdnchinhphu.vn/thumb_w/777/334894974524682240/2026/7/23/178477836729015020175842507653638737505633315533994fcf6e9a38d86465cdd40b35727c36b64-1784778385715743049709.jpg",
+              "license": null,
+              "licenseUrl": null,
+              "credit": "Báo Xây dựng, qua Báo Điện tử Chính phủ",
+              "alt": "Cao tốc Cầu Giẽ – Ninh Bình thuộc tuyến cao tốc Bắc – Nam phía Đông",
+              "caption": "Quy hoạch mới cập nhật cả cao tốc, quốc lộ và mạng lưới do địa phương quản lý.",
+              "generationPrompt": null
+            },
+            "inlineImages": []
+          },
+          "verification": {
+            "factsChecked": true,
+            "authorChecked": true,
+            "dateChecked": true,
+            "duplicateChecked": true,
+            "bodyWordCount": 580,
+            "missingFields": [
+              "dateModified"
+            ],
+            "notes": [
+              "Dùng URL thumb_w do canonical page expose vì crop URL cũ trả 404."
+            ]
+          }
         }
       ]
     },
     {
       "name": "Lãi suất - Tài chính",
       "slug": "lai-suat-tai-chinh",
-      "candidateCount": 5,
-      "latest90Count": 5,
+      "candidateCount": 7,
+      "latest90Count": 7,
       "articles": [
         {
           "title": "Tín dụng tăng 7,41% trong nửa đầu năm 2026, lãi suất điều hành được giữ ổn định",
@@ -1395,14 +1796,174 @@
             "missingFields": [],
             "notes": []
           }
+        },
+        {
+          "title": "Lãi suất cho vay bình quân tháng 6 lên biên trên 10,5% một năm",
+          "slug": "lai-suat-cho-vay-binh-quan-thang-6-2026-len-10-5",
+          "excerpt": "Mặt bằng cho vay bình quân tháng 6 được ghi nhận trong khoảng 8,1–10,5%/năm, tăng 0,4 điểm phần trăm. Lãi ngắn hạn lĩnh vực ưu tiên ở mức 3,9%, trong khi lãi tiền gửi thay đổi theo kỳ hạn.",
+          "bodyMarkdown": "## Dữ kiện lãi suất tháng 6\n\nVnExpress ngày 22/7/2026 ghi nhận lãi suất cho vay bình quân trong tháng 6 ở khoảng 8,1–10,5%/năm, tăng 0,4 điểm phần trăm. Cùng nguồn, lãi suất cho vay ngắn hạn đối với lĩnh vực ưu tiên là 3,9%/năm. Đây là các mức tham chiếu theo nhóm được bài báo công bố, không phải báo giá áp dụng đồng nhất cho mọi khách hàng hoặc mọi khoản vay mua nhà.\n\nỞ phía huy động, lãi suất tiền gửi kỳ hạn 6–12 tháng được nêu trong khoảng 6,1–7,6%/năm, còn kỳ hạn trên 24 tháng là 7,1–7,8%/năm. Các dải lãi phản ánh sự khác nhau giữa ngân hàng và sản phẩm. Người đọc không nên chọn riêng biên cao nhất hoặc thấp nhất để mô tả toàn thị trường.\n\n## Vì sao mức bình quân khác hợp đồng thực tế\n\nLãi vay của một khách hàng còn phụ thuộc mục đích, thời hạn, tài sản bảo đảm, hồ sơ tín dụng, tỷ lệ vay trên giá trị tài sản và chính sách của từng ngân hàng. Nhiều khoản vay có giai đoạn ưu đãi rồi chuyển sang công thức thả nổi. Vì vậy, dải 8,1–10,5% không thay thế được bảng dòng tiền của hợp đồng cụ thể.\n\nMức 3,9% cho lĩnh vực ưu tiên cũng cần giữ đúng phạm vi là lãi ngắn hạn của nhóm được xác định, không nên dùng như mức vay nhà phổ biến. Bài nguồn không cung cấp trong brief công thức định giá sau ưu đãi hoặc biên độ của từng tổ chức, nên bài viết không tự thêm.\n\n## Tác động tới quyết định mua nhà\n\nKhi lãi suất tăng 0,4 điểm phần trăm, chi phí của khoản vay có thể thay đổi theo dư nợ, thời hạn và phương pháp trả nợ. Người mua nên yêu cầu lịch thanh toán cho cả giai đoạn ưu đãi lẫn giai đoạn sau đó, kiểm tra điều kiện điều chỉnh lãi và phí trả trước. Không thể tính một mức tăng tiền trả chung nếu chưa có các biến số này.\n\nKhoảng cách giữa lãi huy động và lãi cho vay không phải lợi nhuận ròng của ngân hàng, vì còn chi phí vốn, dự phòng, vận hành và rủi ro. Tuy vậy, diễn biến huy động theo kỳ hạn là một dữ kiện để theo dõi áp lực vốn đầu vào. Đây là cách đọc thận trọng, không phải dự báo lãi vay chắc chắn tiếp tục tăng.\n\n## Bảng kiểm cho người vay\n\nBốn câu hỏi thực tế gồm: lãi ưu đãi kéo dài bao lâu; lãi sau ưu đãi dựa trên tham chiếu nào; biên độ và tần suất điều chỉnh ra sao; khoản trả tối đa có còn nằm trong ngân sách nếu lãi tăng. Người vay cũng nên so sánh cùng thời điểm vì chính sách có thể thay đổi.\n\nBài giới hạn ở các mức lãi đã được brief MFN-40 xác minh và không đưa khuyến nghị chọn ngân hàng. Ảnh dùng đúng og:image từ trang canonical. Mọi quyết định tín dụng cần dựa trên đề nghị chính thức và điều khoản hợp đồng.",
+          "categorySlug": "lai-suat-tai-chinh",
+          "author": {
+            "name": "VnExpress",
+            "slug": "vnexpress",
+            "authorType": "organization",
+            "profileUrl": null,
+            "verified": true,
+            "verificationNote": "Brief MFN-40 xác nhận nhà xuất bản; dữ liệu đóng băng không ghi byline cá nhân."
+          },
+          "datePublished": "2026-07-22T00:04:00+07:00",
+          "dateModified": null,
+          "tags": [
+            "Lãi suất cho vay",
+            "Lãi suất tiền gửi",
+            "Tín dụng",
+            "Chi phí vốn"
+          ],
+          "sources": [
+            {
+              "sourceName": "VnExpress",
+              "sourceUrl": "https://vnexpress.net/lai-suat-cho-vay-binh-quan-len-10-5-mot-nam-5100137.html",
+              "finalUrl": "https://vnexpress.net/lai-suat-cho-vay-binh-quan-len-10-5-mot-nam-5100137.html",
+              "canonicalUrl": "https://vnexpress.net/lai-suat-cho-vay-binh-quan-len-10-5-mot-nam-5100137.html",
+              "httpStatus": 200,
+              "pageTitle": "Lãi suất cho vay bình quân lên 10,5% một năm",
+              "sourceAuthor": "VnExpress",
+              "sourcePublishedAt": "2026-07-22T00:04:00+07:00",
+              "sourceModifiedAt": null,
+              "sourceAccessedAt": "2026-07-25T12:00:00+07:00",
+              "sourceType": "press",
+              "sourceLanguage": "vi",
+              "verified": true,
+              "verificationNote": "Trang canonical, thời gian, các dải lãi và og:image đã được brief xác minh."
+            }
+          ],
+          "evidence": [
+            {
+              "claim": "Lãi suất cho vay bình quân tháng 6 ở mức 8,1–10,5%/năm, tăng 0,4 điểm phần trăm; lãi ngắn hạn lĩnh vực ưu tiên là 3,9%.",
+              "sourceUrl": "https://vnexpress.net/lai-suat-cho-vay-binh-quan-len-10-5-mot-nam-5100137.html",
+              "evidenceNote": "Bài giữ đúng nhãn bình quân, dải lãi và phạm vi ưu tiên.",
+              "shortQuote": null
+            },
+            {
+              "claim": "Tiền gửi 6–12 tháng ở mức 6,1–7,6% và trên 24 tháng ở mức 7,1–7,8%/năm.",
+              "sourceUrl": "https://vnexpress.net/lai-suat-cho-vay-binh-quan-len-10-5-mot-nam-5100137.html",
+              "evidenceNote": "Các kỳ hạn và biên lãi được giữ nguyên như brief.",
+              "shortQuote": null
+            }
+          ],
+          "imagePlan": {
+            "cover": {
+              "mode": "source",
+              "sourceUrl": "https://i1-kinhdoanh.vnecdn.net/2026/07/21/DSC-2023-8612-1784651536.jpg?w=1200&h=675&q=100&dpr=1&fit=crop&s=Urp0kEgg1RiJ0oBV-UztaQ",
+              "license": null,
+              "licenseUrl": null,
+              "credit": "VnExpress",
+              "alt": "Người cầm các xấp tiền đồng Việt Nam",
+              "caption": "Mặt bằng cho vay bình quân tháng 6 tăng, trong khi lãi huy động khác nhau theo kỳ hạn.",
+              "generationPrompt": null
+            },
+            "inlineImages": []
+          },
+          "verification": {
+            "factsChecked": true,
+            "authorChecked": true,
+            "dateChecked": true,
+            "duplicateChecked": true,
+            "bodyWordCount": 525,
+            "missingFields": [
+              "dateModified"
+            ],
+            "notes": [
+              "Original image URL là og:image thật của canonical page."
+            ]
+          }
+        },
+        {
+          "title": "Người dưới 35 tuổi vay nhà ở xã hội với lãi suất 6,5% từ tháng 7",
+          "slug": "lai-suat-vay-nha-o-xa-hoi-nguoi-duoi-35-tuoi-6-5-2026",
+          "excerpt": "Từ 1/7 đến hết 31/12/2026, lãi suất chương trình vay mua nhà ở xã hội cho người dưới 35 tuổi là 6,5%/năm. Năm năm đầu thấp hơn 2 điểm phần trăm, mười năm tiếp theo áp dụng mức 7,5%/năm.",
+          "bodyMarkdown": "## Lịch lãi suất được công bố\n\nVietnamPlus ngày 26/6/2026 thông tin mức lãi áp dụng cho chương trình vay mua nhà ở xã hội đối với người trẻ. Từ ngày 1/7 đến hết 31/12/2026, lãi suất là 6,5%/năm. Trong năm năm đầu, mức này thấp hơn 2 điểm phần trăm theo cơ chế được nguồn mô tả; mười năm tiếp theo áp dụng 7,5%/năm. Có chín ngân hàng thương mại tham gia giải ngân.\n\nCác mốc cần được đọc cùng nhau. Mức 6,5% gắn với thời kỳ xác định trong nửa cuối năm 2026, còn cấu trúc ưu đãi được chia theo giai đoạn năm năm và mười năm. Brief không nêu trong phạm vi bài này mọi điều kiện hồ sơ, hạn mức hay thời hạn vay, nên người đọc phải kiểm tra quy định và đề nghị tín dụng cụ thể.\n\n## Chi phí không chỉ nằm ở con số đầu kỳ\n\nVới khoản vay dài hạn, khả năng trả nợ phụ thuộc dư nợ giảm dần, phương pháp tính lãi, lịch trả gốc và thu nhập trong suốt thời gian vay. Mức 6,5% giúp xác định một đầu vào quan trọng, nhưng không đủ để tính số tiền trả hàng tháng nếu thiếu giá trị khoản vay và kỳ hạn.\n\nNgười vay nên yêu cầu ngân hàng cung cấp bảng thanh toán thể hiện rõ năm năm đầu, mười năm tiếp theo và giai đoạn còn lại nếu khoản vay dài hơn. Cần hỏi cách xử lý khi chính sách lãi được cập nhật, điều kiện trả trước và trách nhiệm khi hồ sơ không còn đáp ứng tiêu chí. Đây là bảng kiểm chung, không phải bổ sung điều kiện ngoài nguồn.\n\n## Vai trò của chín ngân hàng tham gia\n\nViệc có chín ngân hàng thương mại tham gia mở ra nhiều đầu mối giải ngân, nhưng không có nghĩa mọi ngân hàng cung cấp quy trình hoặc tiến độ giống nhau. Khách hàng cần so sánh hướng dẫn hồ sơ, thời gian xử lý và chi phí liên quan trên văn bản chính thức. Bài không nêu tên từng ngân hàng vì brief đóng băng chỉ xác nhận tổng số.\n\nLãi ưu đãi cũng không thay thế việc kiểm tra pháp lý của dự án nhà ở xã hội, điều kiện mua và khả năng tài chính của hộ gia đình. Người vay cần tránh đặt cọc chỉ dựa trên quảng cáo về lãi suất khi chưa xác nhận mình thuộc đối tượng và sản phẩm đủ điều kiện.\n\n## Cách lập ngân sách an toàn\n\nMột kịch bản ngân sách nên dành dự phòng cho thay đổi thu nhập và chi phí sinh hoạt, thay vì sử dụng toàn bộ chênh lệch do ưu đãi tạo ra. Người mua có thể mô phỏng tiền trả ở mức 6,5% và 7,5%, đồng thời kiểm tra giai đoạn sau đó theo thông tin chính thức từ ngân hàng. Bài không đưa tỷ lệ nợ trên thu nhập vì nguồn không xác nhận một ngưỡng chung.\n\nNội dung này chỉ diễn giải lịch lãi, mức chênh lệch và số ngân hàng được VietnamPlus công bố. Nó không bảo đảm phê duyệt khoản vay và không phải tư vấn tín dụng. Mọi con số trong hợp đồng cần được đối chiếu trực tiếp với ngân hàng giải ngân.",
+          "categorySlug": "lai-suat-tai-chinh",
+          "author": {
+            "name": "Thúy Hà",
+            "slug": "thuy-ha",
+            "authorType": "person",
+            "profileUrl": null,
+            "verified": true,
+            "verificationNote": "Byline Thúy Hà được brief MFN-39 xác nhận trên trang VietnamPlus."
+          },
+          "datePublished": "2026-06-26T20:40:00+07:00",
+          "dateModified": null,
+          "tags": [
+            "Nhà ở xã hội",
+            "Người dưới 35 tuổi",
+            "Lãi suất ưu đãi",
+            "Vay mua nhà"
+          ],
+          "sources": [
+            {
+              "sourceName": "VietnamPlus",
+              "sourceUrl": "https://www.vietnamplus.vn/tu-17-ap-dung-lai-suat-vay-mua-nha-o-xa-hoi-voi-nguoi-tre-65-post1120731.vnp",
+              "finalUrl": "https://www.vietnamplus.vn/tu-17-ap-dung-lai-suat-vay-mua-nha-o-xa-hoi-voi-nguoi-tre-65-post1120731.vnp",
+              "canonicalUrl": "https://www.vietnamplus.vn/tu-17-ap-dung-lai-suat-vay-mua-nha-o-xa-hoi-voi-nguoi-tre-65-post1120731.vnp",
+              "httpStatus": 200,
+              "pageTitle": "Từ 1/7, áp dụng lãi suất vay mua nhà ở xã hội với người trẻ 6,5%",
+              "sourceAuthor": "Thúy Hà",
+              "sourcePublishedAt": "2026-06-26T20:40:00+07:00",
+              "sourceModifiedAt": null,
+              "sourceAccessedAt": "2026-07-25T12:00:00+07:00",
+              "sourceType": "press",
+              "sourceLanguage": "vi",
+              "verified": true,
+              "verificationNote": "Lịch áp dụng, các mức lãi và số ngân hàng được đối chiếu trên trang canonical."
+            }
+          ],
+          "evidence": [
+            {
+              "claim": "Từ 1/7 đến hết 31/12/2026, lãi suất là 6,5%/năm; năm năm đầu thấp hơn 2 điểm phần trăm.",
+              "sourceUrl": "https://www.vietnamplus.vn/tu-17-ap-dung-lai-suat-vay-mua-nha-o-xa-hoi-voi-nguoi-tre-65-post1120731.vnp",
+              "evidenceNote": "Nguồn nêu rõ thời gian áp dụng và mức chênh lệch.",
+              "shortQuote": null
+            },
+            {
+              "claim": "Mười năm tiếp theo áp dụng lãi suất 7,5%/năm và có chín ngân hàng thương mại tham gia giải ngân.",
+              "sourceUrl": "https://www.vietnamplus.vn/tu-17-ap-dung-lai-suat-vay-mua-nha-o-xa-hoi-voi-nguoi-tre-65-post1120731.vnp",
+              "evidenceNote": "Bài không tự bổ sung danh sách ngân hàng khi brief chỉ xác nhận tổng số.",
+              "shortQuote": null
+            }
+          ],
+          "imagePlan": {
+            "cover": {
+              "mode": "source",
+              "sourceUrl": "https://media.vietnamplus.vn/images/384356310dcddb311c128c7b324095c9ff43d3357ceb4d6fb03e1c991a4c1c53cdb57feb901aea868e56e8a402356a73/1111.png.avif",
+              "license": null,
+              "licenseUrl": null,
+              "credit": "VietnamPlus",
+              "alt": "Các tòa chung cư thuộc một khu nhà ở xã hội",
+              "caption": "Chương trình áp dụng mức lãi theo từng giai đoạn và được chín ngân hàng tham gia giải ngân.",
+              "generationPrompt": null
+            },
+            "inlineImages": []
+          },
+          "verification": {
+            "factsChecked": true,
+            "authorChecked": true,
+            "dateChecked": true,
+            "duplicateChecked": true,
+            "bodyWordCount": 558,
+            "missingFields": [
+              "dateModified"
+            ],
+            "notes": []
+          }
         }
       ]
     },
     {
       "name": "Thị trường - Giá cả",
       "slug": "thi-truong-gia-ca",
-      "candidateCount": 5,
-      "latest90Count": 5,
+      "candidateCount": 8,
+      "latest90Count": 8,
       "articles": [
         {
           "title": "CPI tháng 6 giảm 0,39%, thị trường hàng hóa giữ ổn định tương đối",
@@ -1853,14 +2414,258 @@
             "missingFields": [],
             "notes": []
           }
+        },
+        {
+          "title": "Giá căn hộ còn cao, người mua chuyển sang sàng lọc kỹ hơn",
+          "slug": "gia-can-ho-neo-cao-nguoi-mua-chon-loc-2026",
+          "excerpt": "Giá căn hộ tại Hà Nội và TP HCM vẫn ở mặt bằng cao trong khi thanh khoản chậm lại. Nguồn cung nhà ở thương mại được cấp phép giảm và cơ cấu sản phẩm tiếp tục nghiêng về phân khúc trung, cao cấp.",
+          "bodyMarkdown": "## Hai tín hiệu đi ngược nhau\n\nTạp chí Xây dựng ngày 23/7/2026 ghi nhận giá căn hộ tại Hà Nội và TP HCM vẫn ở mức cao, trong khi thanh khoản có dấu hiệu chậm lại. Đây là tổ hợp tín hiệu quan trọng: giá niêm yết hoặc chào bán chưa điều chỉnh mạnh không có nghĩa tốc độ giao dịch giữ nguyên. Ngược lại, thanh khoản yếu cũng chưa đủ để kết luận giá sẽ giảm trên toàn thị trường.\n\nNguồn đóng băng không cung cấp một mức giá bình quân cụ thể cho từng thành phố trong fact packet này. Vì vậy, bài viết không tự thêm con số từ nguồn khác hoặc gộp dữ liệu khác kỳ. Kết luận được giữ ở mức xu hướng: giá còn cao và người mua thận trọng hơn.\n\n## Cơ cấu nguồn cung tạo sức ép lựa chọn\n\nBài nguồn cho biết số dự án nhà ở thương mại được cấp phép giảm, trong khi nguồn cung lệch về phân khúc trung và cao cấp. Khi sản phẩm mới tập trung ở nhóm giá cao hơn, người có ngân sách giới hạn có ít lựa chọn phù hợp hơn, dù tổng số căn chào bán có thể thay đổi. Tuy nhiên, fact packet không nêu số dự án hoặc tỷ trọng từng phân khúc nên không thể lượng hóa mức lệch.\n\nNguồn cung được cấp phép cũng khác nguồn cung đã hoàn thành hay đủ điều kiện bán. Đây là các giai đoạn pháp lý và xây dựng khác nhau. Khi đánh giá khả năng cải thiện nguồn hàng, người đọc cần theo dõi dự án từ cấp phép đến khởi công, hoàn thiện và mở bán, thay vì dùng một chỉ báo thay cho toàn bộ chuỗi.\n\n## Người mua đang sàng lọc điều gì\n\nTrong bối cảnh giá cao và thanh khoản chậm, người mua có xu hướng đặt nặng pháp lý, tiến độ, khả năng kết nối, chất lượng vận hành và phương án tài chính. Đây là khung phân tích hợp lý từ trạng thái thị trường, không phải khảo sát hành vi định lượng được nguồn xác nhận. Mỗi giao dịch vẫn cần được kiểm chứng bằng hồ sơ và điều kiện thực tế.\n\nKhuyến mại hoặc lịch thanh toán có thể làm thay đổi chi phí ban đầu nhưng không nhất thiết làm giảm tổng giá trị căn hộ. Người mua nên quy đổi ưu đãi về dòng tiền, cộng chi phí vay sau ưu đãi và phí sở hữu. Nếu dùng vốn vay, cần mô phỏng khả năng trả nợ khi lãi suất thay đổi thay vì chỉ nhìn khoản thanh toán đầu kỳ.\n\n## Cách đọc thanh khoản thận trọng\n\nThanh khoản có thể đo bằng số giao dịch, tỷ lệ hấp thụ, thời gian bán hoặc mức độ quan tâm; mỗi chỉ tiêu cho một góc nhìn khác. Brief chỉ xác nhận thị trường chậm lại, không nêu một phương pháp đo duy nhất. Do đó, bài không chuyển cụm từ này thành tỷ lệ giảm cụ thể.\n\nNhà phát triển dự án cần theo dõi phản hồi theo mức giá và loại căn thay vì coi toàn bộ nhu cầu biến mất. Cơ quan quản lý có thể nhìn vào khoảng trống sản phẩm phù hợp khả năng chi trả, nhưng giải pháp vẫn cần căn cứ chính sách và dữ liệu đầy đủ.\n\nBài viết chỉ diễn giải hai nhóm dữ kiện từ Tạp chí Xây dựng: giá cao đi cùng thanh khoản chậm và nguồn cung được cấp phép giảm, lệch về phân khúc trung – cao cấp. Nội dung không dự báo giá và không phải tư vấn giao dịch.",
+          "categorySlug": "thi-truong-gia-ca",
+          "author": {
+            "name": "Tạp chí Xây dựng",
+            "slug": "tap-chi-xay-dung",
+            "authorType": "organization",
+            "profileUrl": null,
+            "verified": true,
+            "verificationNote": "Brief MFN-33 xác nhận nhà xuất bản và không cung cấp byline cá nhân."
+          },
+          "datePublished": "2026-07-23T15:48:00+07:00",
+          "dateModified": null,
+          "tags": [
+            "Giá căn hộ",
+            "Thanh khoản",
+            "Nguồn cung",
+            "Hà Nội",
+            "TP HCM"
+          ],
+          "sources": [
+            {
+              "sourceName": "Tạp chí Xây dựng",
+              "sourceUrl": "https://tapchixaydung.vn/thi-truong-bat-dong-san-gia-nha-chua-ha-nguoi-mua-chon-loc-hon-20201224000039783.html",
+              "finalUrl": "https://tapchixaydung.vn/thi-truong-bat-dong-san-gia-nha-chua-ha-nguoi-mua-chon-loc-hon-20201224000039783.html",
+              "canonicalUrl": "https://tapchixaydung.vn/thi-truong-bat-dong-san-gia-nha-chua-ha-nguoi-mua-chon-loc-hon-20201224000039783.html",
+              "httpStatus": 200,
+              "pageTitle": "Thị trường bất động sản: Giá nhà chưa hạ, người mua chọn lọc hơn",
+              "sourceAuthor": "Tạp chí Xây dựng",
+              "sourcePublishedAt": "2026-07-23T15:48:00+07:00",
+              "sourceModifiedAt": null,
+              "sourceAccessedAt": "2026-07-25T12:00:00+07:00",
+              "sourceType": "press",
+              "sourceLanguage": "vi",
+              "verified": true,
+              "verificationNote": "Xu hướng giá, thanh khoản và cơ cấu nguồn cung đã được brief xác minh."
+            }
+          ],
+          "evidence": [
+            {
+              "claim": "Giá căn hộ tại Hà Nội và TP HCM còn ở mức cao trong khi thanh khoản chậm lại.",
+              "sourceUrl": "https://tapchixaydung.vn/thi-truong-bat-dong-san-gia-nha-chua-ha-nguoi-mua-chon-loc-hon-20201224000039783.html",
+              "evidenceNote": "Bài không tự gán tỷ lệ hoặc mức giá khi brief không cung cấp.",
+              "shortQuote": null
+            },
+            {
+              "claim": "Số dự án nhà ở thương mại được cấp phép giảm và nguồn cung lệch về phân khúc trung, cao cấp.",
+              "sourceUrl": "https://tapchixaydung.vn/thi-truong-bat-dong-san-gia-nha-chua-ha-nguoi-mua-chon-loc-hon-20201224000039783.html",
+              "evidenceNote": "Giữ đúng chỉ báo cấp phép và không đánh đồng với nguồn cung đã hoàn thành.",
+              "shortQuote": null
+            }
+          ],
+          "imagePlan": {
+            "cover": {
+              "mode": "source",
+              "sourceUrl": "https://media.tapchixaydung.vn/mediav2/upload/userfiles2021/images/lehuythao/vietnamcong_24072026063441_130.jpg",
+              "license": null,
+              "licenseUrl": null,
+              "credit": "Tạp chí Xây dựng",
+              "alt": "Khu đô thị và các tòa chung cư tại Việt Nam",
+              "caption": "Người mua thận trọng hơn khi giá còn cao và cơ cấu nguồn cung thiếu sản phẩm vừa khả năng chi trả.",
+              "generationPrompt": null
+            },
+            "inlineImages": []
+          },
+          "verification": {
+            "factsChecked": true,
+            "authorChecked": true,
+            "dateChecked": true,
+            "duplicateChecked": true,
+            "bodyWordCount": 619,
+            "missingFields": [
+              "dateModified"
+            ],
+            "notes": []
+          }
+        },
+        {
+          "title": "Biệt thự, liền kề Hà Nội: lượng bán quý II giảm 74% theo năm",
+          "slug": "biet-thu-lien-ke-ha-noi-thanh-khoan-giam-74-quy-2-2026",
+          "excerpt": "Quý II có hơn 1.110 căn biệt thự, liền kề mở bán và hơn 660 căn được tiêu thụ. Lượng bán giảm 30% theo quý, 74% theo năm, trong khi giá sơ cấp bình quân đạt 209 triệu đồng mỗi m² đất.",
+          "bodyMarkdown": "## Nguồn cung có nhưng tốc độ bán giảm mạnh\n\nVnExpress ngày 22/7/2026 cho biết thị trường biệt thự, liền kề Hà Nội trong quý II có hơn 1.110 căn mở bán và hơn 660 căn bán được. Lượng bán giảm 30% so với quý trước và 74% so với cùng kỳ năm trước. Hai mốc so sánh cần được giữ riêng vì phản ánh biến động ngắn hạn và thay đổi theo năm.\n\nSố căn mở bán không đồng nhất với toàn bộ hàng tồn trên thị trường, còn số căn bán được là kết quả trong kỳ theo phạm vi dữ liệu của nguồn. Brief không cung cấp phương pháp khảo sát chi tiết, nên bài không mở rộng kết quả thành mọi dự án thấp tầng tại Hà Nội.\n\n## Mặt bằng giá là rào cản đáng kể\n\nGiá sơ cấp bình quân được nêu ở mức 209 triệu đồng/m² đất. Nguồn cũng ghi nhận khoảng giá phổ biến 15–50 tỷ đồng mỗi căn là một rào cản thanh khoản. Giá theo mét vuông đất và tổng giá căn là hai chỉ tiêu khác nhau; tổng giá còn phụ thuộc diện tích, vị trí, xây dựng và đặc điểm sản phẩm.\n\nKhoảng giá lớn khiến nhóm khách hàng đủ khả năng tài chính hẹp hơn so với phân khúc phổ thông. Tuy nhiên, việc thanh khoản giảm không chứng minh tất cả chủ đầu tư phải giảm giá, cũng không cho phép dự báo thời điểm thị trường đảo chiều. Chính sách bán hàng, chất lượng dự án và pháp lý có thể tạo khác biệt giữa từng giỏ hàng.\n\n## Cách đánh giá một sản phẩm thấp tầng\n\nNgười mua cần tách giá đất, giá trị xây dựng, thuế phí, chi phí hoàn thiện và chi phí vốn. Nếu sản phẩm được mua để ở, khả năng kết nối và tiện ích vận hành quan trọng; nếu kỳ vọng cho thuê hoặc bán lại, cần kiểm tra nhu cầu thực và thời gian nắm giữ. Bài không tính lợi suất vì nguồn không cung cấp doanh thu thuê và chi phí đồng nhất.\n\nVới vốn vay, tổng giá 15–50 tỷ đồng làm quy mô khoản vay trở thành biến số lớn. Một thay đổi nhỏ của lãi suất có thể ảnh hưởng dòng tiền, nhưng mức ảnh hưởng chỉ tính được khi biết dư nợ và kỳ hạn. Người mua nên yêu cầu bảng trả nợ và kiểm tra điều kiện pháp lý trước khi đặt cọc.\n\n## Điều doanh nghiệp cần theo dõi\n\nChủ đầu tư có thể phân tích tỷ lệ bán theo diện tích, tổng giá và tiến độ thanh toán thay vì chỉ nhìn số căn. Nếu phần lớn nhu cầu tập trung ở một ngưỡng ngân sách thấp hơn, điều chỉnh cơ cấu sản phẩm hoặc lịch thanh toán có thể quan trọng hơn ưu đãi ngắn hạn. Đây là suy luận quản trị, không phải khuyến nghị dựa trên dữ liệu chi tiết chưa được công bố.\n\nBài viết giới hạn ở năm dữ kiện được brief MFN-32 xác minh: số căn mở bán, số căn bán, hai mức giảm và mặt bằng giá. Nội dung không dự báo giá, không gán nguyên nhân ngoài rào cản tổng giá được nguồn nêu và không phải tư vấn đầu tư.",
+          "categorySlug": "thi-truong-gia-ca",
+          "author": {
+            "name": "Ngọc Diễm",
+            "slug": "ngoc-diem",
+            "authorType": "person",
+            "profileUrl": null,
+            "verified": true,
+            "verificationNote": "Byline Ngọc Diễm được brief MFN-32 xác nhận trên trang VnExpress."
+          },
+          "datePublished": "2026-07-22T00:06:00+07:00",
+          "dateModified": null,
+          "tags": [
+            "Biệt thự liền kề",
+            "Hà Nội",
+            "Thanh khoản",
+            "Giá sơ cấp"
+          ],
+          "sources": [
+            {
+              "sourceName": "VnExpress",
+              "sourceUrl": "https://vnexpress.net/thanh-khoan-biet-thu-lien-ke-lao-doc-5100145.html",
+              "finalUrl": "https://vnexpress.net/thanh-khoan-biet-thu-lien-ke-lao-doc-5100145.html",
+              "canonicalUrl": "https://vnexpress.net/thanh-khoan-biet-thu-lien-ke-lao-doc-5100145.html",
+              "httpStatus": 200,
+              "pageTitle": "Thanh khoản biệt thự, liền kề lao dốc",
+              "sourceAuthor": "Ngọc Diễm",
+              "sourcePublishedAt": "2026-07-22T00:06:00+07:00",
+              "sourceModifiedAt": null,
+              "sourceAccessedAt": "2026-07-25T12:00:00+07:00",
+              "sourceType": "press",
+              "sourceLanguage": "vi",
+              "verified": true,
+              "verificationNote": "Số cung, lượng bán, mức giảm và giá được đối chiếu trên canonical page."
+            }
+          ],
+          "evidence": [
+            {
+              "claim": "Quý II có hơn 1.110 căn mở bán, hơn 660 căn bán được; lượng bán giảm 30% theo quý và 74% theo năm.",
+              "sourceUrl": "https://vnexpress.net/thanh-khoan-biet-thu-lien-ke-lao-doc-5100145.html",
+              "evidenceNote": "Giữ riêng hai cơ sở so sánh và không mở rộng ngoài phạm vi dữ liệu nguồn.",
+              "shortQuote": null
+            },
+            {
+              "claim": "Giá sơ cấp bình quân đạt 209 triệu đồng/m² đất; khoảng 15–50 tỷ đồng/căn được nêu là rào cản thanh khoản.",
+              "sourceUrl": "https://vnexpress.net/thanh-khoan-biet-thu-lien-ke-lao-doc-5100145.html",
+              "evidenceNote": "Phân biệt giá theo diện tích đất và tổng giá căn.",
+              "shortQuote": null
+            }
+          ],
+          "imagePlan": {
+            "cover": {
+              "mode": "source",
+              "sourceUrl": "https://i2-vnexpress.vnecdn.net/2026/07/21/biet-thu-lien-ke-1784652235-6684-1784652509.jpg?w=1200&h=675&q=100&dpr=1&fit=crop&s=7kFAqfNSpAo0gd24W-nGtg",
+              "license": null,
+              "licenseUrl": null,
+              "credit": "Ngọc Thành / VnExpress",
+              "alt": "Một dự án thấp tầng tại phía Tây Hà Nội",
+              "caption": "Tổng giá lớn được nguồn nêu là một rào cản đối với thanh khoản phân khúc thấp tầng.",
+              "generationPrompt": null
+            },
+            "inlineImages": []
+          },
+          "verification": {
+            "factsChecked": true,
+            "authorChecked": true,
+            "dateChecked": true,
+            "duplicateChecked": true,
+            "bodyWordCount": 555,
+            "missingFields": [
+              "dateModified"
+            ],
+            "notes": []
+          }
+        },
+        {
+          "title": "Nguồn cung sơ cấp tăng 40% nhưng hấp thụ nửa đầu năm giảm 62%",
+          "slug": "nguon-cung-so-cap-tang-40-hap-thu-giam-62-nua-dau-2026",
+          "excerpt": "Nửa đầu 2026 có 37.300 sản phẩm mới, đưa tổng nguồn cung sơ cấp lên hơn 102.400 sản phẩm, tăng khoảng 40% theo năm. Tuy nhiên, lượng hấp thụ chỉ khoảng 26.100 sản phẩm, giảm 62%.",
+          "bodyMarkdown": "## Nguồn cung mở rộng nhưng giao dịch không theo kịp\n\nVnExpress ngày 20/7/2026 cho biết nguồn cung mới trong nửa đầu năm đạt 37.300 sản phẩm, đưa tổng nguồn cung sơ cấp lên hơn 102.400 sản phẩm, tăng khoảng 40% so với cùng kỳ. Ở chiều ngược lại, lượng hấp thụ khoảng 26.100 sản phẩm, giảm 62%, còn tỷ lệ hấp thụ bình quân được ghi nhận trong khoảng 20–30%.\n\nCác chỉ tiêu cần được đọc đúng mẫu số. Nguồn cung mới là phần bổ sung trong kỳ, tổng nguồn cung sơ cấp bao gồm giỏ hàng rộng hơn, lượng hấp thụ là số sản phẩm được thị trường tiếp nhận theo phạm vi nguồn, còn tỷ lệ hấp thụ là quan hệ giữa giao dịch và nguồn hàng. Không nên lấy 26.100 chia cho 37.300 rồi coi là đúng phương pháp của báo cáo khi brief không mô tả công thức chi tiết.\n\n## Khoảng cách cung – cầu nói lên điều gì\n\nNguồn hàng tăng trong lúc lượng hấp thụ giảm cho thấy thị trường không thiếu sản phẩm theo nghĩa tổng số, nhưng có thể thiếu sự phù hợp về giá, vị trí, pháp lý hoặc khả năng tài chính. Đây là diễn giải từ hai xu hướng, không phải kết luận định lượng về nguyên nhân. Muốn xác định yếu tố chính cần dữ liệu theo khu vực và phân khúc mà brief không cung cấp.\n\nTỷ lệ 20–30% cũng là mức bình quân. Một dự án có pháp lý rõ, tiến độ tốt và tổng giá phù hợp có thể khác xa mặt bằng chung, trong khi dự án giá cao hoặc vị trí kém kết nối có thể bán chậm hơn. Người đọc không nên áp dụng tỷ lệ bình quân cho một dự án riêng lẻ.\n\n## Lãi vay sau ưu đãi là biến số lớn\n\nBài nguồn ghi nhận lãi vay mua nhà sau giai đoạn ưu đãi ở mức 12–14%/năm. Đây là dải được báo cáo trong bối cảnh thị trường, không phải báo giá dành cho mọi khách hàng. Với khoản vay dài hạn, sự khác biệt giữa lãi ưu đãi ban đầu và lãi sau ưu đãi có thể làm thay đổi đáng kể ngân sách hàng tháng.\n\nNgười mua nên yêu cầu công thức lãi sau ưu đãi, tần suất điều chỉnh và bảng trả nợ theo nhiều kịch bản. Chủ đầu tư cần đánh giá sức mua trên tổng giá và chi phí vốn thực, thay vì chỉ dùng chiết khấu ngắn hạn để đo nhu cầu.\n\n## Chỉ báo cần theo dõi tiếp\n\nBốn nhóm dữ liệu hữu ích là tỷ lệ hấp thụ theo phân khúc, tổng giá mỗi sản phẩm, tỷ lệ khách dùng đòn bẩy và mức hủy hoặc chậm thanh toán. Các dữ liệu này sẽ cho biết khoảng cách hiện tại đến từ khả năng chi trả, cơ cấu nguồn hàng hay tiến độ dự án. Bài nguồn đóng băng chưa cung cấp nên đây chỉ là khung theo dõi.\n\nBài viết giới hạn ở các số liệu MFN-31 đã xác minh và không dự báo lượng giao dịch kỳ sau. Nội dung không coi dải lãi 12–14% là mức chắc chắn của một hợp đồng và không phải tư vấn mua bán.",
+          "categorySlug": "thi-truong-gia-ca",
+          "author": {
+            "name": "Phương Uyên",
+            "slug": "phuong-uyen",
+            "authorType": "person",
+            "profileUrl": null,
+            "verified": true,
+            "verificationNote": "Byline Phương Uyên được brief MFN-31 xác nhận trên trang VnExpress."
+          },
+          "datePublished": "2026-07-20T09:47:00+07:00",
+          "dateModified": null,
+          "tags": [
+            "Nguồn cung sơ cấp",
+            "Tỷ lệ hấp thụ",
+            "Thanh khoản",
+            "Lãi vay mua nhà"
+          ],
+          "sources": [
+            {
+              "sourceName": "VnExpress",
+              "sourceUrl": "https://vnexpress.net/giao-dich-bat-dong-san-giam-manh-nua-dau-nam-5097659.html",
+              "finalUrl": "https://vnexpress.net/giao-dich-bat-dong-san-giam-manh-nua-dau-nam-5097659.html",
+              "canonicalUrl": "https://vnexpress.net/giao-dich-bat-dong-san-giam-manh-nua-dau-nam-5097659.html",
+              "httpStatus": 200,
+              "pageTitle": "Giao dịch bất động sản giảm mạnh nửa đầu năm",
+              "sourceAuthor": "Phương Uyên",
+              "sourcePublishedAt": "2026-07-20T09:47:00+07:00",
+              "sourceModifiedAt": null,
+              "sourceAccessedAt": "2026-07-25T12:00:00+07:00",
+              "sourceType": "press",
+              "sourceLanguage": "vi",
+              "verified": true,
+              "verificationNote": "Nguồn cung, hấp thụ, tỷ lệ và dải lãi sau ưu đãi đã được đối chiếu."
+            }
+          ],
+          "evidence": [
+            {
+              "claim": "Nguồn cung mới đạt 37.300 sản phẩm, tổng nguồn cung sơ cấp hơn 102.400 sản phẩm, tăng khoảng 40% theo năm.",
+              "sourceUrl": "https://vnexpress.net/giao-dich-bat-dong-san-giam-manh-nua-dau-nam-5097659.html",
+              "evidenceNote": "Phân biệt nguồn cung mới và tổng nguồn cung.",
+              "shortQuote": null
+            },
+            {
+              "claim": "Lượng hấp thụ khoảng 26.100 sản phẩm, giảm 62%; tỷ lệ hấp thụ bình quân 20–30%.",
+              "sourceUrl": "https://vnexpress.net/giao-dich-bat-dong-san-giam-manh-nua-dau-nam-5097659.html",
+              "evidenceNote": "Giữ nhãn bình quân và không tự suy ra công thức.",
+              "shortQuote": null
+            },
+            {
+              "claim": "Lãi vay mua nhà sau ưu đãi được ghi nhận ở mức 12–14%/năm.",
+              "sourceUrl": "https://vnexpress.net/giao-dich-bat-dong-san-giam-manh-nua-dau-nam-5097659.html",
+              "evidenceNote": "Không trình bày dải lãi như báo giá áp dụng cho mọi khoản vay.",
+              "shortQuote": null
+            }
+          ],
+          "imagePlan": {
+            "cover": {
+              "mode": "source",
+              "sourceUrl": "https://i2-vnexpress.vnecdn.net/2026/07/16/1784175661852bd66846f5454640dc-7227-2551-1784176607.jpg?w=1200&h=675&q=100&dpr=1&fit=crop&s=TFosauBx3Ryvn3jq2NVyhQ",
+              "license": null,
+              "licenseUrl": null,
+              "credit": "Phương Uyên / VnExpress",
+              "alt": "Khách hàng tìm hiểu tại một dự án ở TP HCM",
+              "caption": "Nguồn cung tăng nhưng tỷ lệ hấp thụ cho thấy sức mua chưa theo kịp.",
+              "generationPrompt": null
+            },
+            "inlineImages": []
+          },
+          "verification": {
+            "factsChecked": true,
+            "authorChecked": true,
+            "dateChecked": true,
+            "duplicateChecked": true,
+            "bodyWordCount": 549,
+            "missingFields": [
+              "dateModified"
+            ],
+            "notes": []
+          }
         }
       ]
     },
     {
       "name": "Đầu tư - Dòng tiền",
       "slug": "dau-tu-dong-tien",
-      "candidateCount": 5,
-      "latest90Count": 5,
+      "candidateCount": 6,
+      "latest90Count": 6,
       "articles": [
         {
           "title": "Dòng vốn 6 tháng 2026: Đầu tư toàn xã hội và FDI cùng tăng tốc",
@@ -2341,14 +3146,96 @@
             "missingFields": [],
             "notes": []
           }
+        },
+        {
+          "title": "FDI bất động sản đạt 5,1 tỷ USD trong nửa đầu năm 2026",
+          "slug": "fdi-bat-dong-san-5-1-ty-usd-nua-dau-2026",
+          "excerpt": "Tổng vốn FDI đăng ký nửa đầu năm đạt 34,65 tỷ USD, tăng 61%; bất động sản thu hút 5,1 tỷ USD, chiếm 17,9%. Vốn thực hiện trong lĩnh vực này đạt 965,2 triệu USD.",
+          "bodyMarkdown": "## Bất động sản trong bức tranh FDI sáu tháng\n\nCục Đầu tư nước ngoài thuộc Bộ Tài chính công bố ngày 15/7/2026 rằng tổng vốn đầu tư nước ngoài đăng ký trong nửa đầu năm đạt 34,65 tỷ USD, tăng 61%. Trong đó, lĩnh vực kinh doanh bất động sản đạt 5,1 tỷ USD, chiếm 17,9% tổng vốn đăng ký. Đây là dữ liệu theo kỳ sáu tháng và cần giữ đúng phạm vi khi so sánh.\n\nVốn đăng ký phản ánh quy mô cam kết qua các hình thức được thống kê, nhưng không đồng nhất với tiền đã giải ngân. Một con số cao có thể gồm dự án mới, điều chỉnh hoặc giao dịch vốn tùy cách phân loại của báo cáo. Brief không tách chi tiết các cấu phần riêng cho bất động sản, nên bài không tự suy diễn số dự án hay giá trị từng thương vụ.\n\n## Vốn thực hiện cho thấy một lớp khác\n\nNguồn cho biết vốn thực hiện trong bất động sản đạt 965,2 triệu USD, chiếm 7,4%; tổng vốn FDI thực hiện là 13,03 tỷ USD, tăng 11,2%. So với tỷ trọng 17,9% của vốn đăng ký, tỷ trọng 7,4% của vốn thực hiện cho thấy hai chỉ tiêu có cơ cấu khác nhau. Không nên dùng một tỷ lệ thay thế cho tỷ lệ còn lại.\n\nGiải ngân phụ thuộc tiến độ dự án, thủ tục, nhu cầu vốn và kế hoạch của nhà đầu tư. Khoảng cách giữa đăng ký và thực hiện trong một kỳ không tự động là vốn bị chậm, bởi cam kết có thể được triển khai qua nhiều năm. Để đánh giá cần theo dõi chuỗi thời gian và hồ sơ từng dự án, dữ liệu mà fact packet không cung cấp.\n\n## Hàm ý đối với thị trường tài sản\n\nDòng FDI vào bất động sản có thể liên quan nhiều loại tài sản như công nghiệp, thương mại, lưu trú hoặc nhà ở, nhưng brief chỉ ghi tổng cho lĩnh vực. Vì vậy, bài không phân bổ 5,1 tỷ USD vào phân khúc cụ thể. Nhà đầu tư cần tránh dùng tổng ngành để chứng minh nhu cầu của một dự án đơn lẻ.\n\nMột dòng vốn đăng ký lớn có thể hỗ trợ phát triển dự án và giao dịch doanh nghiệp, nhưng tác động đến nguồn cung thực tế chỉ xuất hiện khi pháp lý, đất đai, xây dựng và giải ngân tiến triển. Vốn thực hiện vì thế là chỉ báo bổ sung quan trọng, dù nó cũng không đo trực tiếp doanh thu hay lợi nhuận.\n\n## Cách theo dõi chất lượng dòng vốn\n\nBốn câu hỏi nên được cập nhật là vốn đi vào loại tài sản nào, ở địa phương nào, dự án đang ở giai đoạn nào và bao nhiêu đã thực hiện. Các chỉ tiêu việc làm, hạ tầng và đóng góp vận hành cũng giúp đánh giá tác động dài hạn, nhưng không có trong brief nên bài không kết luận.\n\nNguồn chỉ hiển thị ngày 15/7 mà không có giờ. Dataset giữ ngày ISO thay vì tự gán một thời điểm xuất bản. Toàn bộ số liệu trong bài đến từ Cục Đầu tư nước ngoài; phần phân tích chỉ giải thích sự khác nhau giữa đăng ký và thực hiện, không phải khuyến nghị đầu tư.",
+          "categorySlug": "dau-tu-dong-tien",
+          "author": {
+            "name": "Cục Đầu tư nước ngoài, Bộ Tài chính",
+            "slug": "cuc-dau-tu-nuoc-ngoai-bo-tai-chinh",
+            "authorType": "organization",
+            "profileUrl": null,
+            "verified": true,
+            "verificationNote": "Brief MFN-41 xác nhận cơ quan xuất bản; trang chỉ hiển thị ngày, không có giờ."
+          },
+          "datePublished": "2026-07-15",
+          "dateModified": null,
+          "tags": [
+            "FDI",
+            "Bất động sản",
+            "Vốn đăng ký",
+            "Vốn thực hiện"
+          ],
+          "sources": [
+            {
+              "sourceName": "Cục Đầu tư nước ngoài, Bộ Tài chính",
+              "sourceUrl": "https://fia.mof.gov.vn/Detail/CatID/660c5d67-53dc-464d-b07d-003e466e777b/NewsID/d1421a33-6967-4621-9d10-16aef2ec695c",
+              "finalUrl": "https://fia.mof.gov.vn/Detail/CatID/660c5d67-53dc-464d-b07d-003e466e777b/NewsID/d1421a33-6967-4621-9d10-16aef2ec695c",
+              "canonicalUrl": "https://fia.mof.gov.vn/Detail/CatID/660c5d67-53dc-464d-b07d-003e466e777b/NewsID/d1421a33-6967-4621-9d10-16aef2ec695c",
+              "httpStatus": 200,
+              "pageTitle": "Tình hình thu hút đầu tư nước ngoài 6 tháng đầu năm 2026",
+              "sourceAuthor": "Cục Đầu tư nước ngoài, Bộ Tài chính",
+              "sourcePublishedAt": "2026-07-15",
+              "sourceModifiedAt": null,
+              "sourceAccessedAt": "2026-07-25T12:00:00+07:00",
+              "sourceType": "official",
+              "sourceLanguage": "vi",
+              "verified": true,
+              "verificationNote": "Tổng FDI và các chỉ tiêu bất động sản đã được đối chiếu; nguồn không hiển thị giờ đăng."
+            }
+          ],
+          "evidence": [
+            {
+              "claim": "Tổng FDI đăng ký đạt 34,65 tỷ USD, tăng 61%; bất động sản đạt 5,1 tỷ USD, chiếm 17,9%.",
+              "sourceUrl": "https://fia.mof.gov.vn/Detail/CatID/660c5d67-53dc-464d-b07d-003e466e777b/NewsID/d1421a33-6967-4621-9d10-16aef2ec695c",
+              "evidenceNote": "Giữ đúng kỳ sáu tháng và phân biệt tổng FDI với phần bất động sản.",
+              "shortQuote": null
+            },
+            {
+              "claim": "Vốn thực hiện bất động sản đạt 965,2 triệu USD, chiếm 7,4%; tổng vốn thực hiện là 13,03 tỷ USD, tăng 11,2%.",
+              "sourceUrl": "https://fia.mof.gov.vn/Detail/CatID/660c5d67-53dc-464d-b07d-003e466e777b/NewsID/d1421a33-6967-4621-9d10-16aef2ec695c",
+              "evidenceNote": "Không đánh đồng vốn thực hiện với vốn đăng ký.",
+              "shortQuote": null
+            }
+          ],
+          "imagePlan": {
+            "cover": {
+              "mode": "source",
+              "sourceUrl": "https://fia.mof.gov.vn/Portals/0/Upload/3/News/2026/7/15/images%20%289%29_V150.jpeg",
+              "license": null,
+              "licenseUrl": null,
+              "credit": "Cục Đầu tư nước ngoài, Bộ Tài chính",
+              "alt": "Hoạt động đầu tư nước ngoài tại Việt Nam",
+              "caption": "Vốn đăng ký và vốn thực hiện là hai lớp dữ liệu cần được theo dõi riêng.",
+              "generationPrompt": null
+            },
+            "inlineImages": []
+          },
+          "verification": {
+            "factsChecked": true,
+            "authorChecked": true,
+            "dateChecked": true,
+            "duplicateChecked": true,
+            "bodyWordCount": 564,
+            "missingFields": [
+              "dateModified",
+              "sourcePublishedTime"
+            ],
+            "notes": [
+              "Giữ ngày ISO vì trang nguồn không hiển thị giờ; không tự gán nửa đêm."
+            ]
+          }
         }
       ]
     },
     {
       "name": "Cho thuê",
       "slug": "cho-thue",
-      "candidateCount": 5,
-      "latest90Count": 5,
+      "candidateCount": 6,
+      "latest90Count": 6,
       "articles": [
         {
           "title": "TP.HCM quý I/2026: Tỷ lệ trống văn phòng giảm, kho xưởng giữ lấp đầy cao",
@@ -2829,55 +3716,125 @@
             "missingFields": [],
             "notes": []
           }
+        },
+        {
+          "title": "Bộ Xây dựng rà soát 130.571 căn, phòng nhà ở cho thuê",
+          "slug": "bo-xay-dung-ra-soat-130571-can-phong-nha-o-cho-thue",
+          "excerpt": "Bộ Xây dựng báo cáo 130.571 căn, phòng nhà ở cho thuê cần rà soát trong bối cảnh mục tiêu năm 2026 là 158.700 căn nhà ở xã hội. Từ đầu năm có 96 dự án hoàn thành với 27.636 căn.",
+          "bodyMarkdown": "## Các con số về nhà ở xã hội và cho thuê\n\nBáo Điện tử Chính phủ ngày 7/7/2026 cho biết từ đầu năm có 96 dự án nhà ở xã hội hoàn thành, tương ứng 27.636 căn. Lũy kế được nguồn nêu là 866 dự án với 757.338 căn. Đây là hai phạm vi thời gian khác nhau, vì vậy số liệu từ đầu năm không nên cộng thêm một lần vào con số lũy kế nếu nguồn không chỉ rõ cách chốt kỳ.\n\nCùng bài, Bộ Xây dựng báo cáo 130.571 căn hoặc phòng nhà ở cho thuê để rà soát. Chỉ tiêu nhà ở xã hội năm 2026 là 158.700 căn. Hai con số không cùng khái niệm: một bên là danh sách căn, phòng cho thuê cần rà soát, bên kia là chỉ tiêu nhà ở xã hội của năm. Việc đặt cạnh nhau giúp thấy quy mô nhiệm vụ, nhưng không được lấy chênh lệch làm số căn còn thiếu.\n\n## Vì sao cần tách căn và phòng\n\nCăn hộ và phòng cho thuê có thể khác nhau về diện tích, đối tượng phục vụ, cách vận hành và tiêu chuẩn. Khi nguồn dùng cách gọi căn/phòng, bài phải giữ nguyên đơn vị kép thay vì quy đổi tất cả thành căn hộ. Brief không cung cấp cơ cấu 130.571 theo từng loại nên không thể suy ra số hộ gia đình sẽ được phục vụ.\n\nRà soát cũng là một bước kiểm tra, không có nghĩa toàn bộ danh mục đã sẵn sàng đưa vào sử dụng. Tình trạng pháp lý, chất lượng công trình, giá thuê, vị trí và điều kiện tiếp cận cần được xác nhận ở tài liệu chi tiết. Bài nguồn đóng băng không cho phép kết luận tỷ lệ đủ điều kiện.\n\n## Bài toán từ hoàn thành đến vận hành\n\nSố dự án hoàn thành và số căn là chỉ báo nguồn cung vật chất, nhưng khả năng đáp ứng nhu cầu còn phụ thuộc phân bổ địa lý và việc đưa vào sử dụng. Với nhà cho thuê, công tác vận hành, bảo trì, đăng ký đối tượng và quản lý hợp đồng quyết định liệu nguồn cung có hoạt động ổn định. Đây là phân tích quy trình, không phải thông tin rằng các dự án đang gặp một lỗi cụ thể.\n\nĐịa phương có thể theo dõi danh mục theo trạng thái: đang rà soát, đủ điều kiện, đang hoàn thiện, đã bàn giao và đang cho thuê. Việc công bố thống nhất đơn vị căn hoặc phòng cùng số người có thể phục vụ sẽ giúp đánh giá tốt hơn, nhưng các dữ liệu đó chưa có trong fact packet.\n\n## Cách người có nhu cầu kiểm tra thông tin\n\nNgười tìm nhà nên sử dụng danh sách và thông báo của cơ quan có thẩm quyền, kiểm tra đối tượng, giá, thời hạn thuê và quy trình nộp hồ sơ. Một tổng số lớn trên toàn quốc không bảo đảm có sản phẩm phù hợp tại địa bàn hoặc thời điểm cụ thể. Cần tránh chuyển tiền qua đầu mối không được xác nhận chỉ vì quảng cáo gắn với chương trình nhà ở xã hội.\n\nBài viết giữ nguyên bốn nhóm dữ kiện đã được MFN-42 xác minh và không tính tỷ lệ hoàn thành chỉ tiêu từ các mẫu số khác nhau. Ảnh dùng URL thumb_w do canonical page cung cấp sau khi crop ban đầu trả lỗi. Nội dung không phải hướng dẫn đăng ký hay cam kết phân bổ nhà.",
+          "categorySlug": "cho-thue",
+          "author": {
+            "name": "Báo Điện tử Chính phủ",
+            "slug": "bao-dien-tu-chinh-phu",
+            "authorType": "organization",
+            "profileUrl": null,
+            "verified": true,
+            "verificationNote": "Brief MFN-42 xác nhận nhà xuất bản và không ghi byline cá nhân."
+          },
+          "datePublished": "2026-07-07T20:52:00+07:00",
+          "dateModified": null,
+          "tags": [
+            "Nhà ở cho thuê",
+            "Nhà ở xã hội",
+            "Bộ Xây dựng",
+            "Nguồn cung nhà ở"
+          ],
+          "sources": [
+            {
+              "sourceName": "Báo Điện tử Chính phủ",
+              "sourceUrl": "https://baochinhphu.vn/day-manh-phat-trien-nha-o-xa-hoi-va-nha-o-cho-thue-102260707203018516.htm",
+              "finalUrl": "https://baochinhphu.vn/day-manh-phat-trien-nha-o-xa-hoi-va-nha-o-cho-thue-102260707203018516.htm",
+              "canonicalUrl": "https://baochinhphu.vn/day-manh-phat-trien-nha-o-xa-hoi-va-nha-o-cho-thue-102260707203018516.htm",
+              "httpStatus": 200,
+              "pageTitle": "Đẩy mạnh phát triển nhà ở xã hội và nhà ở cho thuê",
+              "sourceAuthor": "Báo Điện tử Chính phủ",
+              "sourcePublishedAt": "2026-07-07T20:52:00+07:00",
+              "sourceModifiedAt": null,
+              "sourceAccessedAt": "2026-07-25T12:00:00+07:00",
+              "sourceType": "official",
+              "sourceLanguage": "vi",
+              "verified": true,
+              "verificationNote": "Các số dự án, căn và chỉ tiêu năm đã được đối chiếu trên canonical page."
+            }
+          ],
+          "evidence": [
+            {
+              "claim": "Từ đầu 2026 có 96 dự án hoàn thành với 27.636 căn; lũy kế 866 dự án với 757.338 căn.",
+              "sourceUrl": "https://baochinhphu.vn/day-manh-phat-trien-nha-o-xa-hoi-va-nha-o-cho-thue-102260707203018516.htm",
+              "evidenceNote": "Giữ riêng dữ liệu từ đầu năm và lũy kế, không cộng trùng.",
+              "shortQuote": null
+            },
+            {
+              "claim": "Bộ báo cáo 130.571 căn/phòng để rà soát; chỉ tiêu nhà ở xã hội năm 2026 là 158.700 căn.",
+              "sourceUrl": "https://baochinhphu.vn/day-manh-phat-trien-nha-o-xa-hoi-va-nha-o-cho-thue-102260707203018516.htm",
+              "evidenceNote": "Phân biệt danh mục căn/phòng cho thuê với chỉ tiêu căn nhà ở xã hội.",
+              "shortQuote": null
+            }
+          ],
+          "imagePlan": {
+            "cover": {
+              "mode": "source",
+              "sourceUrl": "https://bcp.cdnchinhphu.vn/thumb_w/777/334894974524682240/2026/7/7/178343074293215020175842507653638737505633315533994970d99f03fd80affad6bf46ceb2a0133-17834307763451141709134.jpg",
+              "license": null,
+              "licenseUrl": null,
+              "credit": "Báo Điện tử Chính phủ",
+              "alt": "Phối cảnh dự án nhà ở cho thuê tại Long Biên, Hà Nội",
+              "caption": "Danh mục căn và phòng cho thuê cần được rà soát trước khi đánh giá khả năng đưa vào sử dụng.",
+              "generationPrompt": null
+            },
+            "inlineImages": []
+          },
+          "verification": {
+            "factsChecked": true,
+            "authorChecked": true,
+            "dateChecked": true,
+            "duplicateChecked": true,
+            "bodyWordCount": 597,
+            "missingFields": [
+              "dateModified"
+            ],
+            "notes": [
+              "Dùng URL thumb_w do canonical page expose vì crop URL cũ trả 404."
+            ]
+          }
         }
       ]
     }
   ],
   "conflictingFacts": [],
   "globalWarnings": [
-    "Thực hiện ngày 2026-07-23 theo múi giờ Asia/Bangkok.",
-    "Đã đối chiếu manifest-2026-07-23.json và không sử dụng lại bất kỳ canonical URL nào trong danh sách 29 URL bài cũ.",
-    "Tất cả bài được chấp nhận dùng nguồn chính thức; không dùng search snippet làm bằng chứng.",
-    "dateModified và sourceModifiedAt để null khi trang không hiển thị ngày sửa; trường thiếu được ghi trong verification.missingFields.",
-    "Các body phân biệt rõ đề xuất, mốc dự kiến, phát biểu doanh nghiệp và quy định đã có hiệu lực để tránh nâng mức độ chắc chắn của nguồn.",
-    "Đã đối chiếu và không sử dụng bất kỳ URL nào trong blacklist 29 URL của manifest nghiên cứu Antigravity cũ.",
-    "Mười URL được chấp nhận đều được mở trực tiếp, có nội dung thực, H1, ngày hiển thị và tác giả cá nhân hoặc tổ chức xuất bản xác minh được.",
-    "Tất cả bài được chấp nhận có ngày xuất bản từ 19/05/2026 đến 09/07/2026, do đó đều nằm trong 90 ngày tính đến 23/07/2026.",
-    "Các bài giới hạn claim ở phạm vi nguồn chính chứng minh, không sử dụng search snippet làm bằng chứng và không đưa lời khuyên tài chính hoặc đầu tư.",
-    "Không tải hoặc tạo ảnh; imagePlan chỉ là kế hoạch generation với nguồn, giấy phép và credit để null theo yêu cầu.",
-    "Ngày nghiên cứu: 2026-07-23; múi giờ Asia/Bangkok.",
-    "Không sử dụng lại bất kỳ URL nào trong 29 URL của manifest nghiên cứu Antigravity cũ.",
-    "Không dùng search snippet làm bằng chứng; mọi URL được chấp nhận đều đã được mở trực tiếp và tải đúng trang.",
-    "Các claim về FDI, dòng tiền, giá thuê, tỷ lệ trống, tỷ lệ lấp đầy và dự báo chỉ được trình bày trong đúng phạm vi nguồn chính chứng minh; không ngoại suy thành khuyến nghị đầu tư.",
-    "Không tải hoặc tạo ảnh; imagePlan chỉ chứa mô tả cho chế độ generate.",
-    "bodyWordCount được cập nhật sau bước parse và đếm từ thực tế bodyMarkdown.",
-    "source_unavailable: https://www.nso.gov.vn/du-lieu-va-so-lieu-thong-ke/2026/07/thong-cao-bao-chi-ve-tinh-hinh-kinh-te-xa-hoi-quy-ii-va-sau-thang-dau-nam-2026/ — Nguồn Cục Thống kê phù hợp ưu tiên nhưng trả 502 khi mở trực tiếp, nên bị loại và thay bằng nguồn chính thức tải được."
+    "Dataset được mở rộng ngày 2026-07-25 theo múi giờ Asia/Bangkok từ brief nghiên cứu đã đóng băng.",
+    "Mười hai bài mới chỉ dùng dữ kiện được đối chiếu trên canonical page; không dùng search snippet làm bằng chứng.",
+    "dateModified và sourceModifiedAt để null khi trang không hiển thị ngày sửa; MFN-41 giữ ngày ISO vì nguồn không hiển thị giờ.",
+    "Các body phân biệt dữ kiện nguồn, phân tích và trạng thái dự thảo để không nâng mức độ chắc chắn.",
+    "Mười hai ảnh nguồn được lập kế hoạch với URL, page URL, credit và alt chính xác; frontend chỉ dùng bản JPEG cục bộ.",
+    "bodyWordCount được đếm lại từ bodyMarkdown; toàn bộ 42 bài nằm trong khoảng 500–800 từ."
   ],
   "validationSummary": {
     "passed": true,
     "categoryCounts": {
-      "phap-ly-du-an": 5,
-      "quy-hoach-ha-tang": 5,
-      "lai-suat-tai-chinh": 5,
-      "thi-truong-gia-ca": 5,
-      "dau-tu-dong-tien": 5,
-      "cho-thue": 5
+      "phap-ly-du-an": 7,
+      "quy-hoach-ha-tang": 8,
+      "lai-suat-tai-chinh": 7,
+      "thi-truong-gia-ca": 8,
+      "dau-tu-dong-tien": 6,
+      "cho-thue": 6
     },
     "latest90Counts": {
-      "phap-ly-du-an": 3,
-      "quy-hoach-ha-tang": 5,
-      "lai-suat-tai-chinh": 5,
-      "thi-truong-gia-ca": 5,
-      "dau-tu-dong-tien": 5,
-      "cho-thue": 5
+      "phap-ly-du-an": 5,
+      "quy-hoach-ha-tang": 8,
+      "lai-suat-tai-chinh": 7,
+      "thi-truong-gia-ca": 8,
+      "dau-tu-dong-tien": 6,
+      "cho-thue": 6
     },
-    "totalAcceptedArticles": 30,
-    "uniqueSlugCount": 30,
-    "uniqueCanonicalUrlCount": 30,
-    "http200Count": 30,
+    "totalAcceptedArticles": 42,
+    "uniqueSlugCount": 42,
+    "uniqueCanonicalUrlCount": 42,
+    "http200Count": 42,
     "rejectedSourceCount": 6,
-    "bodyWordCountMin": 583,
-    "bodyWordCountMax": 696,
+    "bodyWordCountMin": 525,
+    "bodyWordCountMax": 694,
     "articlesBelow500Words": 0,
     "licensedImageCount": 0,
     "generatedImagePlanCount": 60,
