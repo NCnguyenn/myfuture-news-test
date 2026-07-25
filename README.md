@@ -10,7 +10,6 @@ experience with Next.js, NestJS/Fastify, PostgreSQL/Prisma and Redis.
 
 - [Live demo](https://myfuture-news-web.vercel.app)
 - [GitHub repository](https://github.com/NCnguyenn/myfuture-news-test)
-- [Production API health](https://myfuture-news-api.vercel.app/api/health)
 
 ## Scope and screenshot-free feature summary
 
@@ -70,10 +69,17 @@ equivalent if execution policy blocks `npm.ps1`. PostgreSQL is exposed on
 `localhost:5434`, Redis on `localhost:6379`, the API on
 `http://localhost:4000/api`, and the web app on `http://localhost:3000`.
 
-Start the API and web application in separate terminals:
+Start the API and web application in separate terminals.
+
+Terminal 1 (API):
 
 ```bash
 npm run dev:api
+```
+
+Terminal 2 (web):
+
+```bash
 npm run dev:web
 ```
 
@@ -117,6 +123,8 @@ The frontend and backend are separate Vercel projects in Singapore. Neon
 provides PostgreSQL and Upstash provides Redis; provider values remain only in
 their dashboards. See [the deployment runbook](docs/deployment/README.md) for
 runtime, migration, deployment-order, and rollback guidance.
+
+Secondary verification link: [Production API health](https://myfuture-news-api.vercel.app/api/health).
 
 ## Redis fallback
 
