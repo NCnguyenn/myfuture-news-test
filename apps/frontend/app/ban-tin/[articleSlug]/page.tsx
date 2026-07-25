@@ -16,6 +16,7 @@ import {
   getCategories,
   isNotFoundError,
 } from '../../../lib/api-client';
+import { loadArticlePageData } from '../../../lib/article-page-data';
 import { selectPopularStories } from '../../../lib/news-overview';
 import styles from './page.module.css';
 
@@ -62,15 +63,17 @@ export async function generateMetadata({
 
 export default async function ArticlePage({ params }: ArticlePageProps) {
   const { articleSlug } = await params;
-  const [article, categoriesResponse, popularResponse] = await Promise.all([
-    loadArticle(articleSlug),
-    getCategories(),
-    getArticles({
-      page: 1,
-      limit: 6,
-      sort: 'popular',
-    }),
-  ]);
+  const { article, categoriesResponse, popularResponse } =
+    await loadArticlePageData({
+      loadArticle: () => loadArticle(articleSlug),
+      loadCategories: getCategories,
+      loadPopular: () =>
+        getArticles({
+          page: 1,
+          limit: 6,
+          sort: 'popular',
+        }),
+    });
   const popularSelection = selectPopularStories(
     popularResponse.data,
     article.relatedArticles,
