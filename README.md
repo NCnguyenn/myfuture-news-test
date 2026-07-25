@@ -1,205 +1,132 @@
-# MyFuture News Module
+# MyFuture News
 
-A recruiter-ready News module built with Next.js App Router, React, NestJS with Fastify, PostgreSQL with Prisma, and Redis cache-aside.
+Recruitment take-home implementing the seven-tab News flow and article detail
+experience with Next.js, NestJS/Fastify, PostgreSQL/Prisma and Redis.
 
-The demo exposes seven UI tabs: one aggregate Overview plus six persisted Categories. Redis is used only as a read cache; there is no queue, authentication, admin UI, or CMS.
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Open%20production-0f766e?style=flat-square)](https://myfuture-news-web.vercel.app)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?style=flat-square&logo=github)](https://github.com/NCnguyenn/myfuture-news-test)
 
-## Prerequisites
+## Live Demo and Repository
 
-- Git
-- Node.js 20 or newer with npm
-- Docker Desktop (or Docker Engine) with Docker Compose
+- [Live demo](https://myfuture-news-web.vercel.app)
+- [GitHub repository](https://github.com/NCnguyenn/myfuture-news-test)
+- [Production API health](https://myfuture-news-api.vercel.app/api/health)
 
-## Clone to run
+## Scope and screenshot-free feature summary
 
-Run every command from the repository root unless a step says to use a second terminal.
+MyFuture News is a public, recruiter-facing news experience with no login or
+setup required to inspect the deployed demo. It provides:
 
-### 1. Clone the repository
+- Seven visible news tabs: one aggregate overview and six persisted database
+  categories.
+- A deterministic editorial dataset of 30 published articles, including 5
+  featured articles.
+- Responsive overview, category, pagination, article-detail, related-story,
+  loading, empty, and error states.
+- Public API-backed navigation and detail pages, including these production
+  routes:
+  - [/ban-tin](https://myfuture-news-web.vercel.app/ban-tin)
+  - [/ban-tin/chuyen-muc/phap-ly-du-an](https://myfuture-news-web.vercel.app/ban-tin/chuyen-muc/phap-ly-du-an)
+  - [/ban-tin/chuyen-muc/phap-ly-du-an?page=2](https://myfuture-news-web.vercel.app/ban-tin/chuyen-muc/phap-ly-du-an?page=2)
+  - [/ban-tin/hai-luat-nha-o-kinh-doanh-bat-dong-san-sua-doi-cap-bach-2026](https://myfuture-news-web.vercel.app/ban-tin/hai-luat-nha-o-kinh-doanh-bat-dong-san-sua-doi-cap-bach-2026)
+
+## Architecture
+
+This npm-workspaces monorepo separates the web application from the API.
+The browser requests Next.js routes; Next.js reads the NestJS/Fastify API;
+the API uses Prisma with PostgreSQL as the source of truth. Redis implements
+cache-aside for successful reads only, while article HTML is sanitized before
+it is cached or returned.
+
+## Tech stack
+
+- Frontend: Next.js App Router, React, TypeScript, and CSS Modules.
+- Backend: NestJS, Fastify, Prisma, TypeScript, and PostgreSQL.
+- Cache: Redis with cache-aside reads and a PostgreSQL fail-safe path.
+- Production: Vercel frontend and API projects, Neon PostgreSQL, and Upstash
+  Redis in Singapore.
+- Runtime: production uses Node.js 22; CI validates Node.js 20 and Node.js 22.
+
+## Local setup
+
+Prerequisites: Git, Node.js 22, npm, Docker, and Docker Compose. Node.js 22
+matches production; CI also checks compatibility with Node.js 20.
 
 ```bash
 git clone https://github.com/NCnguyenn/myfuture-news-test.git
 cd myfuture-news-test
-```
-
-### 2. Start PostgreSQL and Redis
-
-```bash
 docker compose -f infrastructure/docker-compose.yml up -d
-docker compose -f infrastructure/docker-compose.yml ps
-```
-
-Wait until both services are healthy. PostgreSQL maps container port `5432` to host port **`5434`**; Redis uses host port `6379`.
-
-### 3. Create the local environment file
-
-macOS/Linux:
-
-```bash
 cp .env.example .env
-```
-
-Windows PowerShell:
-
-```powershell
-Copy-Item .env.example .env
-```
-
-The checked-in example contains local-development placeholders only:
-
-```dotenv
-DATABASE_URL=postgresql://news:news@localhost:5434/myfuture_news
-REDIS_URL=redis://localhost:6379
-API_PORT=4000
-WEB_ORIGIN=http://localhost:3000
-API_BASE_URL=http://localhost:4000/api
-NODE_ENV=development
-```
-
-`API_BASE_URL` is read only by the Next.js server. Do not rename it to a `NEXT_PUBLIC_*` variable. Keep `.env` local; it is ignored by Git.
-
-### 4. Install dependencies and generate Prisma Client
-
-```bash
-npm install
+npm ci
 npm run db:validate
 npm run db:generate
-```
-
-### 5. Apply migrations and seed demo data
-
-Use the committed migration so setup is deterministic:
-
-```bash
 npm run db:migrate:deploy
 npm run db:seed
+npm run db:verify
 ```
 
-The idempotent seed creates exactly six Categories and 30 Articles. Overview / Toàn cảnh is a UI-only aggregate and is not inserted into the Category table. Article images and fallback SVG files are committed under `apps/frontend/public/images/news/`.
+On Windows PowerShell, use `Copy-Item .env.example .env` and the `npm.cmd`
+equivalent if execution policy blocks `npm.ps1`. PostgreSQL is exposed on
+`localhost:5434`, Redis on `localhost:6379`, the API on
+`http://localhost:4000/api`, and the web app on `http://localhost:3000`.
 
-### 6. Start the API and web app
-
-Terminal 1:
+Start the API and web application in separate terminals:
 
 ```bash
 npm run dev:api
-```
-
-Terminal 2:
-
-```bash
 npm run dev:web
 ```
 
-The API listens on `http://localhost:4000/api`; the web app listens on `http://localhost:3000`.
+## Test/build commands
 
-### 7. Verify the demo
-
-Check API, PostgreSQL, and Redis connectivity:
+Run these commands from the repository root after dependencies are installed:
 
 ```bash
-curl http://localhost:4000/api/health
-```
-
-Then open:
-
-- `http://localhost:3000/ban-tin` — Overview, featured stories, and latest articles.
-- `http://localhost:3000/ban-tin/chuyen-muc/phap-ly-du-an` — Category listing.
-- `http://localhost:3000/ban-tin/phap-ly-du-an-bai-01` — Article detail and related articles.
-
-An additional pagination sample is available at `http://localhost:3000/ban-tin/chuyen-muc/phap-ly-du-an?page=2`.
-
-## Windows PowerShell commands
-
-If PowerShell blocks `npm.ps1` or `npx.ps1` with `PSSecurityException`, use the `.cmd` shims. The complete setup sequence is:
-
-```powershell
-docker compose -f infrastructure/docker-compose.yml up -d
-docker compose -f infrastructure/docker-compose.yml ps
-Copy-Item .env.example .env
-npm.cmd install
-npm.cmd run db:validate
-npm.cmd run db:generate
-npm.cmd run db:migrate:deploy
-npm.cmd run db:seed
-npm.cmd run dev:api
-```
-
-Start the web app in a second PowerShell terminal:
-
-```powershell
-npm.cmd run dev:web
-```
-
-## Test, typecheck, and build
-
-Run the reviewer gates from the repository root:
-
-```bash
+npm run lint
+npm run db:validate
+npm run db:generate
+npm run test:web
 npm run test:api
 npm run typecheck
-npm run build:web
-npm run build:api
+npm run build
 ```
 
-Windows PowerShell equivalents:
-
-```powershell
-npm.cmd run test:api
-npm.cmd run typecheck
-npm.cmd run build:web
-npm.cmd run build:api
-```
-
-The API production entry point can be checked after `build:api`:
-
-```bash
-npm --workspace apps/backend run start
-```
-
-To run both production builds locally, start the API with the command above and run this in a second terminal:
-
-```bash
-npm --workspace apps/frontend run start
-```
-
-There is intentionally no lint script in this small take-home repository. The handoff gates are the existing focused API tests, TypeScript checks, and production builds; Phase 9 does not add an ESLint stack solely for checklist symmetry.
+CI runs the quality gates on Node.js 20 and Node.js 22; Vercel production
+builds use Node.js 22.
 
 ## API examples
 
+The local API base URL is `http://localhost:4000/api`.
+
 ```bash
+curl http://localhost:4000/api/health
 curl http://localhost:4000/api/categories
 curl "http://localhost:4000/api/articles?page=1&limit=10"
 curl "http://localhost:4000/api/articles?category=phap-ly-du-an&featured=true"
-curl http://localhost:4000/api/articles/phap-ly-du-an-bai-01
+curl http://localhost:4000/api/articles/hai-luat-nha-o-kinh-doanh-bat-dong-san-sua-doi-cap-bach-2026
 ```
 
-Article lists return `data` plus pagination `meta`. Invalid query parameters return HTTP 400, unknown API category/article slugs return HTTP 404, and page overflow returns HTTP 200 with an empty `data` array. Article `contentHtml` is sanitized by the backend before it is cached or returned.
+Lists return `data` and pagination `meta`. Invalid query parameters return
+HTTP 400, and unknown category or article slugs return HTTP 404.
 
-## Redis behavior
+## Production deployment summary
 
-Redis caches successful read responses only:
+The stable production frontend is [myfuture-news-web.vercel.app](https://myfuture-news-web.vercel.app),
+and the stable backend API is [myfuture-news-api.vercel.app/api](https://myfuture-news-api.vercel.app/api).
+The frontend and backend are separate Vercel projects in Singapore. Neon
+provides PostgreSQL and Upstash provides Redis; provider values remain only in
+their dashboards. See [the deployment runbook](docs/deployment/README.md) for
+runtime, migration, deployment-order, and rollback guidance.
 
-- Categories: 30 minutes.
-- Article lists: 10 minutes.
-- Article detail: 15 minutes.
+## Redis fallback
 
-If Redis is unavailable, reads fall back to PostgreSQL and the API remains usable. After reseeding, clear only News cache keys:
+Redis is an optional read cache. If it is unavailable, the API continues to
+serve reads from PostgreSQL; cache failures do not make the news experience
+unavailable. Health checks report the state of both services.
 
-```bash
-docker compose -f infrastructure/docker-compose.yml exec redis sh -c 'redis-cli --scan --pattern "news:*" | xargs -r redis-cli DEL'
-```
+## Intentional non-goals
 
-## Known local behavior
-
-- Dynamic App Router routes stream their response. For an unknown category or article, Next.js can send an HTTP 200 header before `notFound()` resolves; the rendered result is the custom 404 UI and carries `noindex` metadata. The backend API still returns HTTP 404 for unknown slugs.
-- Some Windows PowerShell policies require `npm.cmd` / `npx.cmd`, as documented above.
-- Docker Compose may print an environment-specific user-config access warning while still completing successfully; confirm actual service state with `docker compose -f infrastructure/docker-compose.yml ps`.
-
-## Project documentation
-
-- `apps/frontend/` contains the independently deployable Next.js application. Use `apps/frontend` as the Vercel Root Directory.
-- `apps/backend/` contains the NestJS/Fastify API and its Prisma schema, migrations, and seed.
-- `docs/` contains architecture, delivery, decisions, research, and internal project records.
-- `infrastructure/` contains local Docker Compose configuration.
-
-No deployment is required for local review.
+- Authentication, authorization, and user accounts.
+- An editorial admin interface or CMS.
+- Background jobs, queues, and content authoring workflows.
+- Redis as a source of truth or a dependency for successful database reads.
