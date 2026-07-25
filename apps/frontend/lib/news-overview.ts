@@ -43,10 +43,12 @@ export function selectPopularStories(
   latestArticles: ArticleListItem[],
   featuredArticles: ArticleListItem[],
 ): PopularStorySelection {
-  const popularSelection = uniqueBySlug(popularArticles).slice(
-    0,
-    POPULAR_STORY_LIMIT,
+  const featuredSlugs = new Set(
+    featuredArticles.map((article) => article.slug),
   );
+  const popularSelection = uniqueBySlug(popularArticles)
+    .filter((article) => !featuredSlugs.has(article.slug))
+    .slice(0, POPULAR_STORY_LIMIT);
 
   if (
     popularSelection.some(
@@ -56,9 +58,6 @@ export function selectPopularStories(
     return { articles: popularSelection, title: 'Đọc nhiều' };
   }
 
-  const featuredSlugs = new Set(
-    featuredArticles.map((article) => article.slug),
-  );
   const fallbackArticles = uniqueBySlug(latestArticles)
     .filter((article) => !featuredSlugs.has(article.slug))
     .slice(0, POPULAR_STORY_LIMIT);

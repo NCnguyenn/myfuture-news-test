@@ -77,6 +77,69 @@ test('editorial UI: overview labels selected positive-view stories as popular', 
   );
 });
 
+test('editorial UI: overview excludes hero stories before selecting positive-view recommendations', () => {
+  const popularArticles = [
+    article('hero-a', 14),
+    article('popular-a', 9),
+    article('popular-b'),
+  ];
+  const latestArticles = [article('latest-a')];
+  const featuredArticles = [article('hero-a')];
+  const originalPopularOrder = popularArticles.map(({ slug }) => slug);
+
+  const selected = selectPopularStories(
+    popularArticles,
+    latestArticles,
+    featuredArticles,
+  );
+
+  assert.equal(selected.title, 'Đọc nhiều');
+  assert.deepEqual(
+    selected.articles.map(({ slug }) => slug),
+    ['popular-a', 'popular-b'],
+  );
+  assert.deepEqual(
+    popularArticles.map(({ slug }) => slug),
+    originalPopularOrder,
+  );
+});
+
+test('editorial UI: overview falls back when every positive-view story is featured', () => {
+  const popularArticles = [
+    article('hero-a', 14),
+    article('hero-b', 9),
+  ];
+  const latestArticles = [
+    article('hero-a'),
+    article('latest-a'),
+    article('latest-a'),
+    article('hero-b'),
+    article('latest-b'),
+    article('latest-c'),
+    article('latest-d'),
+    article('latest-e'),
+    article('latest-f'),
+  ];
+  const featuredArticles = [article('hero-a'), article('hero-b')];
+  const originalLatestOrder = latestArticles.map(({ slug }) => slug);
+
+  const selected = selectPopularStories(
+    popularArticles,
+    latestArticles,
+    featuredArticles,
+  );
+
+  assert.equal(selected.title, 'Đáng chú ý');
+  assert.deepEqual(
+    selected.articles.map(({ slug }) => slug),
+    ['latest-a', 'latest-b', 'latest-c', 'latest-d', 'latest-e'],
+  );
+  assert.deepEqual(
+    latestArticles.map(({ slug }) => slug),
+    originalLatestOrder,
+  );
+});
+
 test('editorial UI: overview uses unique non-hero latest stories for zero-view fallback', () => {
   const selected = selectPopularStories(
     [article('seed-a'), article('seed-b')],
