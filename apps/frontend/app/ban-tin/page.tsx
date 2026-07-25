@@ -10,7 +10,7 @@ import { PopularStories } from '../../components/news/PopularStories';
 import { getArticles, getCategories } from '../../lib/api-client';
 import {
   parseOverviewPage,
-  resolveOverviewPageRedirect,
+  resolvePageRedirect,
   selectPopularStories,
 } from '../../lib/news-overview';
 import styles from './page.module.css';
@@ -57,7 +57,7 @@ export default async function NewsOverviewPage({
     getArticles({ page: 1, limit: 5, sort: 'popular' }),
   ]);
 
-  const redirectTo = resolveOverviewPageRedirect(page, latestResponse.meta);
+  const redirectTo = resolvePageRedirect(page, latestResponse.meta, '/ban-tin');
   if (redirectTo) redirect(redirectTo);
 
   const featuredArticles =

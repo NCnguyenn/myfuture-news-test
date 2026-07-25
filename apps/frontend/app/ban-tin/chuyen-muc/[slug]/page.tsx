@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { CategoryDirectory } from '../../../../components/news/CategoryDirectory';
 import { NewsCard } from '../../../../components/news/NewsCard';
 import { NewsList } from '../../../../components/news/NewsList';
@@ -14,7 +14,10 @@ import {
   isNotFoundError,
 } from '../../../../lib/api-client';
 import { CATEGORY_PAGE_SIZE } from '../../../../lib/news-config';
-import { selectPopularStories } from '../../../../lib/news-overview';
+import {
+  resolvePageRedirect,
+  selectPopularStories,
+} from '../../../../lib/news-overview';
 import styles from './page.module.css';
 
 export const dynamic = 'force-dynamic';
@@ -96,6 +99,13 @@ export default async function CategoryPage({
     throw error;
   }
 
+  const redirectTo = resolvePageRedirect(
+    page,
+    articlesResponse.meta,
+    `/ban-tin/chuyen-muc/${category.slug}`,
+  );
+  if (redirectTo) redirect(redirectTo);
+
   const categoryLead =
     page === 1 ? articlesResponse.data[0] : undefined;
   const feedArticles =
@@ -119,7 +129,7 @@ export default async function CategoryPage({
       <section className={styles.intro}>
         <p className="eyebrow">CHUYÊN MỤC</p>
         <h1>{category.name}</h1>
-        <p>
+        <p className={styles.description}>
           {category.description ?? 'Các bài viết mới nhất trong chuyên mục.'}
         </p>
         <p className={styles.articleCount}>

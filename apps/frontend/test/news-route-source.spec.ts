@@ -99,6 +99,23 @@ test('overview redirects out-of-range pages after reading response metadata', ()
   );
 
   assert.match(source, /import\s+\{\s*redirect\s*\}\s+from\s+'next\/navigation'/);
-  assert.match(source, /resolveOverviewPageRedirect\(page,\s*latestResponse\.meta\)/);
+  assert.match(source, /resolvePageRedirect\(page,\s*latestResponse\.meta,\s*'\/ban-tin'\)/);
+  assert.match(source, /if\s*\(redirectTo\)\s*redirect\(redirectTo\)/);
+});
+
+test('category redirects out-of-range pages after validating the slug and reading response metadata', () => {
+  const source = readFileSync(
+    path.join(
+      workspaceRoot,
+      'apps/frontend/app/ban-tin/chuyen-muc/[slug]/page.tsx',
+    ),
+    'utf8',
+  );
+
+  assert.match(source, /import\s+\{\s*notFound,\s*redirect\s*\}\s+from\s+'next\/navigation'/);
+  assert.match(
+    source,
+    /resolvePageRedirect\(\s*page,\s*articlesResponse\.meta,\s*`\/ban-tin\/chuyen-muc\/\$\{category\.slug\}`\s*,?\s*\)/,
+  );
   assert.match(source, /if\s*\(redirectTo\)\s*redirect\(redirectTo\)/);
 });

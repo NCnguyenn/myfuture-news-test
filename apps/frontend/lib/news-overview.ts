@@ -17,15 +17,16 @@ export function parseOverviewPage(
   return Number.isInteger(parsed) && parsed > 0 ? parsed : 1;
 }
 
-export function resolveOverviewPageRedirect(
+export function resolvePageRedirect(
   requestedPage: number,
   meta: Pick<PaginationMeta, 'totalPages'>,
+  basePath: string,
 ): string | null {
   if (requestedPage <= meta.totalPages || requestedPage === 1) return null;
 
   return meta.totalPages > 1
-    ? `/ban-tin?page=${meta.totalPages}`
-    : '/ban-tin';
+    ? `${basePath}?page=${meta.totalPages}`
+    : basePath;
 }
 
 function uniqueBySlug(articles: ArticleListItem[]): ArticleListItem[] {

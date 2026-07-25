@@ -181,6 +181,19 @@ test('editorial UI: category layout collapses to one column below desktop', () =
   );
 });
 
+test('editorial UI: category description styling does not override the eyebrow', () => {
+  const source = read(
+    'apps/frontend/app/ban-tin/chuyen-muc/[slug]/page.tsx',
+  );
+  const css = read(
+    'apps/frontend/app/ban-tin/chuyen-muc/[slug]/page.module.css',
+  );
+
+  assert.match(source, /<p className=\{styles\.description\}>/);
+  assert.match(css, /\.description\s*\{/);
+  assert.doesNotMatch(css, /\.intro\s*>\s*p:not\(\.articleCount\)/);
+});
+
 test('editorial UI: news list forwards category-aware empty copy', () => {
   const source = read('apps/frontend/components/news/NewsList.tsx');
   const stateSource = read('apps/frontend/components/news/NewsStates.tsx');

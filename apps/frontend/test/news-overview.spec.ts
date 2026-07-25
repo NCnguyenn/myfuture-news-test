@@ -5,7 +5,7 @@ import * as React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import {
   parseOverviewPage,
-  resolveOverviewPageRedirect,
+  resolvePageRedirect,
   selectPopularStories,
 } from '../lib/news-overview';
 import type { ArticleListItem, PaginationMeta } from '../types/news';
@@ -55,12 +55,26 @@ test('editorial UI: overview page parser accepts only positive integers', () => 
   assert.equal(parseOverviewPage(['3', '8']), 3);
 });
 
-test('editorial UI: overview redirects requests beyond available metadata', () => {
-  assert.equal(resolveOverviewPageRedirect(4, meta(4, 3)), '/ban-tin?page=3');
-  assert.equal(resolveOverviewPageRedirect(2, meta(2, 1)), '/ban-tin');
-  assert.equal(resolveOverviewPageRedirect(2, meta(2, 0)), '/ban-tin');
-  assert.equal(resolveOverviewPageRedirect(1, meta(1, 0)), null);
-  assert.equal(resolveOverviewPageRedirect(2, meta(2, 3)), null);
+test('editorial UI: pages redirect requests beyond response metadata canonically', () => {
+  assert.equal(
+    resolvePageRedirect(4, meta(4, 3), '/ban-tin'),
+    '/ban-tin?page=3',
+  );
+  assert.equal(resolvePageRedirect(2, meta(2, 1), '/ban-tin'), '/ban-tin');
+  assert.equal(resolvePageRedirect(2, meta(2, 0), '/ban-tin'), '/ban-tin');
+  assert.equal(resolvePageRedirect(1, meta(1, 0), '/ban-tin'), null);
+  assert.equal(resolvePageRedirect(2, meta(2, 3), '/ban-tin'), null);
+});
+
+test('editorial UI: category pages canonicalize an out-of-range request', () => {
+  const basePath = '/ban-tin/chuyen-muc/thi-truong';
+
+  assert.equal(
+    resolvePageRedirect(999, meta(999, 3), basePath),
+    `${basePath}?page=3`,
+  );
+  assert.equal(resolvePageRedirect(2, meta(2, 1), basePath), basePath);
+  assert.equal(resolvePageRedirect(2, meta(2, 0), basePath), basePath);
 });
 
 test('editorial UI: overview labels selected positive-view stories as popular', () => {
