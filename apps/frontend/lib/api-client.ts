@@ -47,6 +47,7 @@ export function getCategories(): Promise<{ data: NewsCategory[] }> {
 
 export function getArticles(query: ArticleQuery = {}): Promise<ArticleListResponse> {
   const search = new URLSearchParams();
+  if (query.q) search.set('q', query.q);
   if (query.category) search.set('category', query.category);
   if (query.page !== undefined) search.set('page', String(query.page));
   if (query.limit !== undefined) search.set('limit', String(query.limit));

@@ -29,6 +29,8 @@ export type ImageProvenance = {
   isPlaceholder: boolean;
 };
 
+export type SearchMatchedField = 'title' | 'excerpt' | 'category' | 'body';
+
 export type ArticleListItem = {
   id: string;
   title: string;
@@ -40,6 +42,8 @@ export type ArticleListItem = {
   viewCount?: number;
   category: ArticleCategory;
   author: Pick<ArticleAuthor, 'name' | 'slug' | 'authorType'>;
+  searchSnippet?: string;
+  matchedFields?: SearchMatchedField[];
 };
 
 export type PaginationMeta = {
@@ -82,4 +86,5 @@ export type ArticleQuery = {
   limit?: number;
   featured?: boolean;
   sort?: 'newest' | 'oldest' | 'popular';
+  q?: string;
 };
