@@ -1,3 +1,9 @@
+import {
+  EXPECTED_ARTICLE_COUNTS,
+  EXPECTED_FEATURED_ARTICLES,
+  EXPECTED_PUBLISHED_ARTICLES,
+} from './news-dataset-contract';
+
 export type SeedSnapshot = {
   categories: Array<{
     slug: string;
@@ -17,21 +23,26 @@ function uniqueCount(values: string[]): number {
 }
 
 export function assertSeedSnapshot(snapshot: SeedSnapshot): void {
-  if (snapshot.categories.length !== 6) {
+  if (snapshot.categories.length !== Object.keys(EXPECTED_ARTICLE_COUNTS).length) {
     throw new Error('Seed must contain exactly 6 categories');
   }
-  if (snapshot.articles.length !== 30) {
-    throw new Error('Seed must contain exactly 30 published articles');
+  if (snapshot.articles.length !== EXPECTED_PUBLISHED_ARTICLES) {
+    throw new Error(
+      `Seed must contain exactly ${EXPECTED_PUBLISHED_ARTICLES} published articles`,
+    );
   }
   if (snapshot.overviewCategoryCount !== 0) {
     throw new Error('Overview must not be stored as a category');
   }
-  if (
-    snapshot.categories.some(
-      (category) => category.publishedArticleCount !== 5,
-    )
-  ) {
-    throw new Error('Each category must contain 5 published articles');
+  for (const [slug, expectedCount] of Object.entries(EXPECTED_ARTICLE_COUNTS)) {
+    const category = snapshot.categories.find(
+      (candidate) => candidate.slug === slug,
+    );
+    if (!category || category.publishedArticleCount !== expectedCount) {
+      throw new Error(
+        `Category ${slug} must contain exactly ${expectedCount} published articles`,
+      );
+    }
   }
   const slugs = snapshot.articles.map((article) => article.slug);
   if (uniqueCount(slugs) !== slugs.length) {
@@ -44,8 +55,13 @@ export function assertSeedSnapshot(snapshot: SeedSnapshot): void {
   ) {
     throw new Error('Seed must contain unique non-empty source URLs');
   }
-  if (snapshot.articles.filter((article) => article.isFeatured).length !== 5) {
-    throw new Error('Seed must contain exactly 5 featured articles');
+  if (
+    snapshot.articles.filter((article) => article.isFeatured).length !==
+    EXPECTED_FEATURED_ARTICLES
+  ) {
+    throw new Error(
+      `Seed must contain exactly ${EXPECTED_FEATURED_ARTICLES} featured articles`,
+    );
   }
   const categorySlugs = new Set(
     snapshot.categories.map((category) => category.slug),
