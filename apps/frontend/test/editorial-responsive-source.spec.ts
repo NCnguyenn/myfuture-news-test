@@ -228,7 +228,14 @@ test('editorial responsive: loading, errors, and not-found states match each rou
   assert.match(overviewLoading, /OverviewLoadingSkeleton/);
   assert.match(categoryLoading, /CategoryLoadingSkeleton/);
   assert.match(articleLoading, /ArticleLoadingSkeleton/);
-  assert.match(states, /Array\.from\(\{\s*length:\s*2\s*\}/);
+  const overviewSkeleton = exportedFunction(
+    states,
+    'OverviewLoadingSkeleton',
+  );
+  assert.match(
+    overviewSkeleton,
+    /Array\.from\(\{\s*length:\s*2\s*\}/,
+  );
   assert.match(
     states,
     /function SkeletonBlock[\s\S]*?aria-hidden="true"[\s\S]*?\n\}/,
