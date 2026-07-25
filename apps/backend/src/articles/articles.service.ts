@@ -5,6 +5,11 @@ import { articleDetailCacheKey, articleListCacheKey } from '../cache/cache.keys'
 import { CacheService } from '../cache/cache.service';
 import { ContentSanitizerService } from '../content/content-sanitizer.service';
 import { PrismaService } from '../prisma/prisma.service';
+import {
+  normalizeVietnameseSearch,
+  rankArticleSearch,
+  type SearchMatchedField,
+} from './article-search';
 import { ArticleSort, ArticlesQueryDto } from './articles-query.dto';
 
 type ArticleListQuery = Partial<ArticlesQueryDto> & {
@@ -30,6 +35,11 @@ const listSelect = {
   category: { select: { name: true, slug: true } },
 } satisfies Prisma.ArticleSelect;
 
+const searchSelect = {
+  ...listSelect,
+  contentHtml: true,
+} satisfies Prisma.ArticleSelect;
+
 type ArticleListItem = {
   id: string;
   title: string;
@@ -45,6 +55,8 @@ type ArticleListItem = {
     slug: string;
     authorType: string;
   };
+  searchSnippet?: string;
+  matchedFields?: SearchMatchedField[];
 };
 
 type ArticleListResponse = {
@@ -188,16 +200,64 @@ export class ArticlesService {
       where.categoryId = category.id;
     }
 
+    const normalizedQuery = query.q
+      ? normalizeVietnameseSearch(query.q)
+      : undefined;
     const cacheKey = articleListCacheKey({
       category: query.category,
       page,
       limit,
       featured: query.featured,
       sort,
+      q: normalizedQuery,
     });
     const cached = await this.cache.getJson<ArticleListResponse>(cacheKey);
     if (cached) {
       return cached;
+    }
+
+    if (normalizedQuery) {
+      const candidates = await this.prisma.article.findMany({
+        where,
+        orderBy: [{ publishedAt: 'desc' }, { id: 'desc' }],
+        select: searchSelect,
+      });
+      const ranked = candidates
+        .flatMap((candidate) => {
+          const match = rankArticleSearch(candidate, normalizedQuery);
+          return match ? [{ candidate, match }] : [];
+        })
+        .sort(
+          (left, right) =>
+            right.match.score - left.match.score ||
+            right.candidate.publishedAt.getTime() -
+              left.candidate.publishedAt.getTime(),
+        );
+      const totalItems = ranked.length;
+      const totalPages = Math.ceil(totalItems / limit);
+      const pageItems = ranked.slice((page - 1) * limit, page * limit);
+      const response: ArticleListResponse = {
+        data: pageItems.map(({ candidate, match }) => ({
+          ...mapListItem(candidate),
+          searchSnippet: match.searchSnippet,
+          matchedFields: match.matchedFields,
+        })),
+        meta: {
+          page,
+          limit,
+          totalItems,
+          totalPages,
+          hasNextPage: page < totalPages,
+          hasPreviousPage: page > 1,
+        },
+      };
+
+      await this.cache.setJson(
+        cacheKey,
+        response,
+        CACHE_TTL_SECONDS.articleList,
+      );
+      return response;
     }
 
     const totalItems = await this.prisma.article.count({ where });

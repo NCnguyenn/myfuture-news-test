@@ -27,6 +27,36 @@ const baseListRow = {
   category: { name: 'Pháp lý dự án', slug: 'phap-ly-du-an' },
 };
 
+const searchRows = [
+  {
+    ...baseListRow,
+    id: 'search-title',
+    title: 'Bất động sản dẫn đầu',
+    slug: 'bat-dong-san-dan-dau',
+    excerpt: 'Bất động sản tiếp tục được quan tâm.',
+    contentHtml: '<p>Dữ liệu thị trường mới nhất.</p>',
+    publishedAt: new Date('2026-07-22T00:00:00.000Z'),
+  },
+  {
+    ...baseListRow,
+    id: 'search-excerpt',
+    title: 'Dòng vốn trên thị trường',
+    slug: 'dong-von-thi-truong',
+    excerpt: 'Dòng vốn bất động sản đang dịch chuyển.',
+    contentHtml: '<p>Phân tích nguồn vốn.</p>',
+    publishedAt: new Date('2026-07-21T00:00:00.000Z'),
+  },
+  {
+    ...baseListRow,
+    id: 'search-unrelated',
+    title: 'Tiến độ đường cao tốc',
+    slug: 'tien-do-duong-cao-toc',
+    excerpt: 'Dự án giao thông bước vào giai đoạn mới.',
+    contentHtml: '<p>Thông tin hạ tầng liên vùng.</p>',
+    publishedAt: new Date('2026-07-20T00:00:00.000Z'),
+  },
+];
+
 test('returns published article list data with pagination metadata', async () => {
   const prisma = {
     category: {
@@ -123,6 +153,77 @@ test('returns cached article list without querying Prisma on a normalized key hi
   );
 
   assert.deepEqual(await service.list({ page: 1, limit: 10, sort: 'newest' }), cached);
+});
+
+test('searches published articles without diacritics and ranks title matches first', async () => {
+  let findManyArgs: Record<string, unknown> | undefined;
+  const prisma = {
+    category: {
+      findUnique: async () => ({ id: 'category-id' }),
+    },
+    article: {
+      count: async () => searchRows.length,
+      findMany: async (args: Record<string, unknown>) => {
+        findManyArgs = args;
+        return searchRows;
+      },
+    },
+  };
+  const cache = { getJson: async () => null, setJson: async () => true };
+  const service = new ArticlesService(
+    prisma as never,
+    createSanitizer() as never,
+    cache as never,
+  );
+
+  const result = await service.list({
+    q: 'bat dong san',
+    page: 1,
+    limit: 2,
+  });
+
+  assert.equal(result.meta.totalItems, 2);
+  assert.equal(result.data.length, 2);
+  assert.equal(result.data[0].title, 'Bất động sản dẫn đầu');
+  assert.match(result.data[0].searchSnippet ?? '', /bất động sản/i);
+  assert.deepEqual(result.data[0].matchedFields, ['title', 'excerpt']);
+  assert.equal('contentHtml' in result.data[0], false);
+  assert.deepEqual(findManyArgs?.where, { isPublished: true });
+});
+
+test('paginates relevance-ranked search results after filtering', async () => {
+  const prisma = {
+    category: {
+      findUnique: async () => ({ id: 'category-id' }),
+    },
+    article: {
+      count: async () => searchRows.length,
+      findMany: async () => searchRows,
+    },
+  };
+  const cache = { getJson: async () => null, setJson: async () => true };
+  const service = new ArticlesService(
+    prisma as never,
+    createSanitizer() as never,
+    cache as never,
+  );
+
+  const result = await service.list({
+    q: 'bat dong san',
+    page: 2,
+    limit: 1,
+  });
+
+  assert.deepEqual(result.meta, {
+    page: 2,
+    limit: 1,
+    totalItems: 2,
+    totalPages: 2,
+    hasNextPage: false,
+    hasPreviousPage: true,
+  });
+  assert.equal(result.data.length, 1);
+  assert.equal(result.data[0].slug, 'dong-von-thi-truong');
 });
 
 test('detail returns author, image provenance, evidence and sanitizes contentHtml', async () => {
