@@ -145,6 +145,55 @@ test('editorial UI: category page separates the first-page lead from the feed', 
   assert.match(source, /categoryLead/);
 });
 
+test('editorial UI: category page composes real metadata and filtered side panels', () => {
+  const source = read(
+    'apps/frontend/app/ban-tin/chuyen-muc/[slug]/page.tsx',
+  );
+
+  assert.match(source, /category\.description/);
+  assert.match(source, /articlesResponse\.meta\.totalItems/);
+  assert.match(
+    source,
+    /getArticles\(\{[\s\S]*category:\s*category\.slug[\s\S]*sort:\s*'popular'/,
+  );
+  assert.match(source, /<aside\b/);
+  assert.match(source, /<PopularStories/);
+  assert.match(source, /<CategoryDirectory/);
+  assert.match(
+    source,
+    /const emptyTitle\s*=\s*categoryLead\s*\?\s*`Chưa có thêm bài viết[^`]*\$\{category\.name\}/,
+  );
+  assert.match(source, /:\s*`Chưa có bài viết[^`]*\$\{category\.name\}/);
+  assert.match(source, /emptyTitle=\{emptyTitle\}/);
+  assert.match(source, /emptyDescription=/);
+  assert.doesNotMatch(source, /<main\b/);
+});
+
+test('editorial UI: category layout collapses to one column below desktop', () => {
+  const css = read(
+    'apps/frontend/app/ban-tin/chuyen-muc/[slug]/page.module.css',
+  );
+
+  assert.match(css, /grid-template-columns:\s*minmax\(0,\s*2fr\)\s+minmax\(/);
+  assert.match(
+    css,
+    /@media\s*\(max-width:\s*1023px\)[\s\S]*grid-template-columns:\s*1fr/,
+  );
+});
+
+test('editorial UI: news list forwards category-aware empty copy', () => {
+  const source = read('apps/frontend/components/news/NewsList.tsx');
+  const stateSource = read('apps/frontend/components/news/NewsStates.tsx');
+
+  assert.match(source, /emptyTitle\?:\s*string/);
+  assert.match(source, /emptyDescription\?:\s*string/);
+  assert.match(
+    source,
+    /<EmptyState\s+title=\{emptyTitle\}\s+description=\{emptyDescription\}\s*\/>/,
+  );
+  assert.match(stateSource, /href="\/ban-tin"/);
+});
+
 test('editorial UI: pagination exposes current page semantics', () => {
   const source = read('apps/frontend/components/news/Pagination.tsx');
   assert.match(source, /aria-current/);

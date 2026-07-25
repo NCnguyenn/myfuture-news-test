@@ -44,8 +44,38 @@ test('category pagination uses the demonstrable page size', () => {
     ),
     'utf8',
   );
+  const configSource = readFileSync(
+    path.join(workspaceRoot, 'apps/frontend/lib/news-config.ts'),
+    'utf8',
+  );
+
+  assert.match(configSource, /CATEGORY_PAGE_SIZE\s*=\s*4/);
   assert.match(source, /limit:\s*CATEGORY_PAGE_SIZE/);
   assert.doesNotMatch(source, /limit:\s*10/);
+});
+
+test('category route preserves first-page lead and later-page feed semantics', () => {
+  const source = readFileSync(
+    path.join(
+      workspaceRoot,
+      'apps/frontend/app/ban-tin/chuyen-muc/[slug]/page.tsx',
+    ),
+    'utf8',
+  );
+
+  assert.match(
+    source,
+    /page === 1\s*\?\s*articlesResponse\.data\[0\]\s*:\s*undefined/,
+  );
+  assert.match(
+    source,
+    /page === 1\s*\?\s*articlesResponse\.data\.slice\(1\)\s*:\s*articlesResponse\.data/,
+  );
+  assert.match(source, /meta\.totalItems/);
+  assert.match(
+    source,
+    /basePath=\{`\/ban-tin\/chuyen-muc\/\$\{category\.slug\}`\}/,
+  );
 });
 
 test('overview pagination parses the selected page and keeps a fixed page size', () => {
