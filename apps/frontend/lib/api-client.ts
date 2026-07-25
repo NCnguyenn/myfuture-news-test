@@ -20,9 +20,16 @@ export class ApiClientError extends Error {
 }
 
 type ErrorBody = { message?: string; code?: string };
+type RequestOptions = { signal?: AbortSignal };
 
-async function request<T>(path: string): Promise<T> {
-  const response = await fetch(`${API_BASE_URL}${path}`, { cache: 'no-store' });
+async function request<T>(
+  path: string,
+  options: RequestOptions = {},
+): Promise<T> {
+  const response = await fetch(`${API_BASE_URL}${path}`, {
+    cache: 'no-store',
+    signal: options.signal,
+  });
 
   if (!response.ok) {
     let errorBody: ErrorBody = {};
@@ -45,7 +52,10 @@ export function getCategories(): Promise<{ data: NewsCategory[] }> {
   return request<{ data: NewsCategory[] }>('/categories');
 }
 
-export function getArticles(query: ArticleQuery = {}): Promise<ArticleListResponse> {
+export function getArticles(
+  query: ArticleQuery = {},
+  options: RequestOptions = {},
+): Promise<ArticleListResponse> {
   const search = new URLSearchParams();
   if (query.q) search.set('q', query.q);
   if (query.category) search.set('category', query.category);
@@ -54,7 +64,10 @@ export function getArticles(query: ArticleQuery = {}): Promise<ArticleListRespon
   if (query.featured !== undefined) search.set('featured', String(query.featured));
   if (query.sort) search.set('sort', query.sort);
   const queryString = search.toString();
-  return request<ArticleListResponse>(`/articles${queryString ? `?${queryString}` : ''}`);
+  return request<ArticleListResponse>(
+    `/articles${queryString ? `?${queryString}` : ''}`,
+    options,
+  );
 }
 
 export function getArticleBySlug(slug: string): Promise<ArticleDetailResponse> {

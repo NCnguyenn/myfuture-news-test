@@ -4,10 +4,11 @@ import { ApiClientError, getArticles } from '../../../lib/api-client';
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const query = (url.searchParams.get('q') ?? '').trim();
-  const requestedLimit = Number(url.searchParams.get('limit') ?? '6');
+  const parsedLimit = Number(url.searchParams.get('limit') ?? '6');
+  const requestedLimit = Number.isInteger(parsedLimit) ? parsedLimit : 6;
   const limit = Math.max(
     1,
-    Math.min(6, Number.isFinite(requestedLimit) ? requestedLimit : 6),
+    Math.min(6, requestedLimit),
   );
 
   if (query.length < 2 || query.length > 100) {
@@ -21,7 +22,10 @@ export async function GET(request: Request) {
   }
 
   try {
-    const response = await getArticles({ q: query, page: 1, limit });
+    const response = await getArticles(
+      { q: query, page: 1, limit },
+      { signal: request.signal },
+    );
     return NextResponse.json(response);
   } catch (error) {
     if (error instanceof ApiClientError) {

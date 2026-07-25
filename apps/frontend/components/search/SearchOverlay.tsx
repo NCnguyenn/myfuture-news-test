@@ -45,6 +45,7 @@ export function SearchOverlay({ onClose }: SearchOverlayProps) {
   const router = useRouter();
   const dialogRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const requestIdRef = useRef(0);
   const [query, setQuery] = useState('');
   const [retryToken, setRetryToken] = useState(0);
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -70,12 +71,11 @@ export function SearchOverlay({ onClose }: SearchOverlayProps) {
       return;
     }
 
+    const requestId = requestIdRef.current;
     const controller = new AbortController();
     const timer = window.setTimeout(async () => {
-      setState((current) => ({
-        status: 'loading',
-        results: current.results,
-      }));
+      setState({ status: 'loading', results: [] });
+      setActiveIndex(-1);
       try {
         const response = await fetch(
           `/api/news-search?q=${encodeURIComponent(trimmedQuery)}&limit=6`,
@@ -83,10 +83,16 @@ export function SearchOverlay({ onClose }: SearchOverlayProps) {
         );
         if (!response.ok) throw new Error(`Search failed: ${response.status}`);
         const payload = (await response.json()) as ArticleListResponse;
+        if (requestId !== requestIdRef.current) return;
         setState({ status: 'success', results: payload.data });
         setActiveIndex(payload.data.length > 0 ? 0 : -1);
       } catch (error) {
-        if (error instanceof DOMException && error.name === 'AbortError') return;
+        if (
+          (error instanceof DOMException && error.name === 'AbortError') ||
+          requestId !== requestIdRef.current
+        ) {
+          return;
+        }
         setState({ status: 'error', results: [], message: copy.error });
         setActiveIndex(-1);
       }
@@ -97,6 +103,20 @@ export function SearchOverlay({ onClose }: SearchOverlayProps) {
       controller.abort();
     };
   }, [retryToken, trimmedQuery]);
+
+  function handleQueryChange(value: string) {
+    requestIdRef.current += 1;
+    setQuery(value);
+    setState({ status: 'idle', results: [] });
+    setActiveIndex(-1);
+  }
+
+  function retrySearch() {
+    requestIdRef.current += 1;
+    setState({ status: 'idle', results: [] });
+    setActiveIndex(-1);
+    setRetryToken((value) => value + 1);
+  }
 
   function openResult(article: ArticleListItem) {
     onClose();
@@ -208,6 +228,7 @@ export function SearchOverlay({ onClose }: SearchOverlayProps) {
             ref={inputRef}
             type="search"
             role="combobox"
+            aria-label="Từ khóa tìm kiếm"
             aria-expanded={state.results.length > 0}
             aria-controls="quick-search-results"
             aria-activedescendant={
@@ -216,7 +237,7 @@ export function SearchOverlay({ onClose }: SearchOverlayProps) {
             value={query}
             maxLength={100}
             placeholder="Tìm pháp lý, quy hoạch, lãi suất…"
-            onChange={(event) => setQuery(event.target.value)}
+            onChange={(event) => handleQueryChange(event.target.value)}
           />
           <button
             type="submit"
@@ -237,7 +258,7 @@ export function SearchOverlay({ onClose }: SearchOverlayProps) {
                   <button
                     type="button"
                     key={suggestion}
-                    onClick={() => setQuery(suggestion)}
+                    onClick={() => handleQueryChange(suggestion)}
                   >
                     {suggestion}
                   </button>
@@ -256,7 +277,7 @@ export function SearchOverlay({ onClose }: SearchOverlayProps) {
           {state.status === 'error' ? (
             <div className={styles.status}>
               <p>{state.message ?? copy.error}</p>
-              <button type="button" onClick={() => setRetryToken((v) => v + 1)}>
+              <button type="button" onClick={retrySearch}>
                 Thử lại
               </button>
             </div>

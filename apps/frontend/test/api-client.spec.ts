@@ -33,3 +33,36 @@ test('serializes a Vietnamese article search query', async () => {
     globalThis.fetch = originalFetch;
   }
 });
+
+test('forwards an abort signal to the upstream article request', async () => {
+  let receivedSignal: AbortSignal | null | undefined;
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = (async (
+    _input: string | URL | Request,
+    init?: RequestInit,
+  ) => {
+    receivedSignal = init?.signal;
+    return new Response(
+      JSON.stringify({
+        data: [],
+        meta: {
+          page: 1,
+          limit: 6,
+          totalItems: 0,
+          totalPages: 0,
+          hasNextPage: false,
+          hasPreviousPage: false,
+        },
+      }),
+      { status: 200, headers: { 'content-type': 'application/json' } },
+    );
+  }) as typeof fetch;
+  const controller = new AbortController();
+
+  try {
+    await getArticles({ q: 'nhà ở' }, { signal: controller.signal });
+    assert.equal(receivedSignal, controller.signal);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});

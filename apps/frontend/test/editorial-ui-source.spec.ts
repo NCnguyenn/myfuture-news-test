@@ -26,10 +26,22 @@ test('renders the approved prominent search launcher', () => {
   const launcher = read(
     'apps/frontend/components/search/SearchLauncher.tsx',
   );
+  const overlay = read(
+    'apps/frontend/components/search/SearchOverlay.tsx',
+  );
+  const overlayStyles = read(
+    'apps/frontend/components/search/SearchOverlay.module.css',
+  );
   assert.match(launcher, /Tìm kiếm/);
   assert.match(launcher, /SearchOverlay/);
   assert.match(launcher, /event\.metaKey \|\| event\.ctrlKey/);
   assert.match(launcher, /event\.key\.toLowerCase\(\) === 'k'/);
+  assert.match(launcher, /createPortal/);
+  assert.match(launcher, /document\.body/);
+  assert.match(overlay, /requestIdRef/);
+  assert.match(overlay, /handleQueryChange/);
+  assert.match(overlay, /aria-label="Từ khóa tìm kiếm"/);
+  assert.match(overlayStyles, /\.searchForm:focus-within/);
 });
 
 test('provides the four approved story-card variants', () => {

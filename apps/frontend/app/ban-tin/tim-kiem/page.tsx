@@ -13,19 +13,27 @@ export const metadata: Metadata = {
 };
 
 type SearchPageProps = {
-  searchParams: Promise<{ q?: string; page?: string }>;
+  searchParams: Promise<{
+    q?: string | string[];
+    page?: string | string[];
+  }>;
 };
+
+function firstParam(value: string | string[] | undefined): string {
+  return Array.isArray(value) ? (value[0] ?? '') : (value ?? '');
+}
 
 export default async function SearchPage({
   searchParams,
 }: SearchPageProps) {
   const params = await searchParams;
-  const query = (params.q ?? '').trim().slice(0, 100);
-  const parsedPage = Number(params.page ?? '1');
+  const query = firstParam(params.q).trim();
+  const parsedPage = Number(firstParam(params.page) || '1');
   const page =
     Number.isInteger(parsedPage) && parsedPage > 0 ? parsedPage : 1;
+  const isValidQuery = query.length >= 2 && query.length <= 100;
   const response =
-    query.length >= 2
+    isValidQuery
       ? await getArticles({ q: query, page, limit: 10 })
       : null;
 
@@ -40,9 +48,11 @@ export default async function SearchPage({
         <p className="eyebrow">KHÁM PHÁ NỘI DUNG</p>
         <h1>Kết quả tìm kiếm</h1>
         <p>
-          {query.length >= 2
+          {isValidQuery
             ? `Tìm thấy ${response?.meta.totalItems ?? 0} bài viết cho “${query}”.`
-            : 'Nhập ít nhất 2 ký tự từ nút Tìm kiếm trên đầu trang.'}
+            : query.length > 100
+              ? 'Từ khóa tìm kiếm không được vượt quá 100 ký tự.'
+              : 'Nhập ít nhất 2 ký tự từ nút Tìm kiếm trên đầu trang.'}
         </p>
       </header>
       {response ? (
@@ -60,7 +70,11 @@ export default async function SearchPage({
       ) : (
         <div className={styles.prompt}>
           <span aria-hidden="true">⌕</span>
-          <p>Mở Tìm kiếm trên thanh đầu trang để bắt đầu khám phá.</p>
+          <p>
+            {query.length > 100
+              ? 'Hãy rút gọn từ khóa rồi tìm kiếm lại.'
+              : 'Mở Tìm kiếm trên thanh đầu trang để bắt đầu khám phá.'}
+          </p>
         </div>
       )}
     </div>

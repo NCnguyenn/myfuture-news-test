@@ -27,3 +27,11 @@ test('rejects search queries outside the 2 to 100 character range', async () => 
   assert.ok((await validate(shortQuery)).some((error) => error.property === 'q'));
   assert.ok((await validate(longQuery)).some((error) => error.property === 'q'));
 });
+
+test('rejects search queries without at least two letters or numbers', async () => {
+  const punctuationOnly = plainToInstance(ArticlesQueryDto, { q: '--' });
+
+  assert.ok(
+    (await validate(punctuationOnly)).some((error) => error.property === 'q'),
+  );
+});

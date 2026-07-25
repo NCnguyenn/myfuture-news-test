@@ -181,6 +181,24 @@ export class ArticlesService {
     const limit = query.limit ?? 10;
     const sort = query.sort ?? 'newest';
     const where: Prisma.ArticleWhereInput = { isPublished: true };
+    const isSearchRequest = typeof query.q === 'string';
+    const normalizedQuery = isSearchRequest
+      ? normalizeVietnameseSearch(query.q ?? '')
+      : undefined;
+
+    if (isSearchRequest && (!normalizedQuery || normalizedQuery.length < 2)) {
+      return {
+        data: [],
+        meta: {
+          page,
+          limit,
+          totalItems: 0,
+          totalPages: 0,
+          hasNextPage: false,
+          hasPreviousPage: page > 1,
+        },
+      };
+    }
 
     if (query.featured !== undefined) {
       where.isFeatured = query.featured;
@@ -200,9 +218,6 @@ export class ArticlesService {
       where.categoryId = category.id;
     }
 
-    const normalizedQuery = query.q
-      ? normalizeVietnameseSearch(query.q)
-      : undefined;
     const cacheKey = articleListCacheKey({
       category: query.category,
       page,

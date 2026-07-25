@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { SearchOverlay } from './SearchOverlay';
 import styles from './SearchOverlay.module.css';
 
@@ -43,7 +44,12 @@ export function SearchLauncher() {
         <span>Tìm kiếm</span>
         <kbd>Ctrl K</kbd>
       </button>
-      {open ? <SearchOverlay onClose={closeSearch} /> : null}
+      {open
+        ? createPortal(
+            <SearchOverlay onClose={closeSearch} />,
+            document.body,
+          )
+        : null}
     </>
   );
 }

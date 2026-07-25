@@ -12,6 +12,9 @@ test('search page server-renders API results and preserves the query', () => {
   assert.match(page, /getArticles\(\{[\s\S]*?q:/);
   assert.match(page, /Kết quả tìm kiếm/);
   assert.match(page, /query=\{\{\s*q:\s*query\s*\}\}/);
+  assert.match(page, /string \| string\[\]/);
+  assert.match(page, /Array\.isArray/);
+  assert.doesNotMatch(page, /\.slice\(0, 100\)/);
 });
 
 test('pagination merges query parameters instead of concatenating question marks', () => {

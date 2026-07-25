@@ -7,6 +7,7 @@ import {
   IsString,
   Max,
   MaxLength,
+  Matches,
   Min,
   MinLength,
 } from 'class-validator';
@@ -35,6 +36,9 @@ export class ArticlesQueryDto {
   @IsString()
   @MinLength(2)
   @MaxLength(100)
+  @Matches(/[\p{L}\p{N}].*[\p{L}\p{N}]/u, {
+    message: 'Search query must contain at least two letters or numbers',
+  })
   q?: string;
 
   @Transform(({ value }) => value === '' ? undefined : value)

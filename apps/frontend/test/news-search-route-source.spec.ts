@@ -12,5 +12,7 @@ test('quick-search route validates, bounds, and proxies through api-client', () 
   assert.match(source, /query\.length < 2/);
   assert.match(source, /query\.length > 100/);
   assert.match(source, /Math\.min\(6/);
+  assert.match(source, /Number\.isInteger/);
+  assert.match(source, /request\.signal/);
   assert.doesNotMatch(source, /API_BASE_URL/);
 });

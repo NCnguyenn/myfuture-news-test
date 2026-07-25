@@ -226,6 +226,56 @@ test('paginates relevance-ranked search results after filtering', async () => {
   assert.equal(result.data[0].slug, 'dong-von-thi-truong');
 });
 
+test('does not turn punctuation-only search into the ordinary article feed', async () => {
+  let prismaCalls = 0;
+  const prisma = {
+    category: {
+      findUnique: async () => {
+        prismaCalls += 1;
+        return null;
+      },
+    },
+    article: {
+      count: async () => {
+        prismaCalls += 1;
+        return 0;
+      },
+      findMany: async () => {
+        prismaCalls += 1;
+        return [];
+      },
+    },
+  };
+  const cache = {
+    getJson: async () => {
+      throw new Error('Invalid search must not use the ordinary list cache');
+    },
+    setJson: async () => {
+      throw new Error('Invalid search must not populate the list cache');
+    },
+  };
+  const service = new ArticlesService(
+    prisma as never,
+    createSanitizer() as never,
+    cache as never,
+  );
+
+  const result = await service.list({ q: '--', page: 1, limit: 6 });
+
+  assert.deepEqual(result, {
+    data: [],
+    meta: {
+      page: 1,
+      limit: 6,
+      totalItems: 0,
+      totalPages: 0,
+      hasNextPage: false,
+      hasPreviousPage: false,
+    },
+  });
+  assert.equal(prismaCalls, 0);
+});
+
 test('detail returns author, image provenance, evidence and sanitizes contentHtml', async () => {
   const sanitizeCalls: string[] = [];
   const prisma = {
