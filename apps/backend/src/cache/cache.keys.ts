@@ -6,6 +6,7 @@ export type ArticleListCacheKeyInput = {
   limit: number;
   featured?: boolean;
   sort: ArticleSort;
+  q?: string;
 };
 
 export function categoriesCacheKey(): string {
@@ -15,7 +16,8 @@ export function categoriesCacheKey(): string {
 export function articleListCacheKey(input: ArticleListCacheKeyInput): string {
   const category = input.category || 'all';
   const featured = input.featured === undefined ? 'any' : String(input.featured);
-  return `news:articles:${category}:${input.page}:${input.limit}:${featured}:${input.sort}`;
+  const search = input.q ? `:q:${encodeURIComponent(input.q)}` : '';
+  return `news:articles:${category}:${input.page}:${input.limit}:${featured}:${input.sort}${search}`;
 }
 
 export function articleDetailCacheKey(slug: string): string {

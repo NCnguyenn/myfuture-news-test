@@ -13,7 +13,7 @@
     "build": "npm run build:web && npm run build:api",
     "typecheck": "npm run typecheck:web && npm run typecheck:api",
     "test:web": "tsx --test apps/frontend/test/**/*.spec.ts",
-    "test:api": "tsx --test apps/backend/test/**/*.spec.ts",
+    "test:api": "tsx --tsconfig apps/backend/tsconfig.json --test apps/backend/test/**/*.spec.ts",
     "typecheck:web": "npm --workspace apps/frontend run typecheck",
     "typecheck:api": "npm --workspace apps/backend run typecheck",
     "db:validate": "prisma validate --schema apps/backend/prisma/schema.prisma",
