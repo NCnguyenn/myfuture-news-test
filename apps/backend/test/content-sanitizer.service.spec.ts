@@ -28,3 +28,14 @@ test('keeps article markup while excluding foreign-content and raw-text tags', (
     assert.doesNotMatch(sanitized, /onload|onerror|onclick|javascript:/i);
   }
 });
+
+test('rejects paired foreign-content and raw-text parser-boundary payloads', () => {
+  const service = new ContentSanitizerService();
+  const sanitized = service.sanitize(
+    '<p>Allowed <strong>article markup</strong></p><svg><textarea></svg><script>alert(1)</script><img src="https://cdn.example/unsafe.jpg" onerror="alert(1)" /><a href="javascript:alert(1)" onclick="alert(1)">unsafe link</a></textarea></svg><math><xmp></math><script>alert(2)</script><img src="https://cdn.example/unsafe.jpg" onerror="alert(2)" /><a href="javascript:alert(2)" onclick="alert(2)">unsafe link</a></xmp></math>',
+  );
+
+  assert.match(sanitized, /<p>Allowed <strong>article markup<\/strong><\/p>/);
+  assert.doesNotMatch(sanitized, /<(?:svg|math|textarea|xmp|script)\b/i);
+  assert.doesNotMatch(sanitized, /onerror|onclick|javascript:/i);
+});
