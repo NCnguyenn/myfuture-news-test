@@ -26,10 +26,10 @@ export type NewsCardProps = {
 
 const IMAGE_SIZES = {
   lead: '(max-width: 768px) 100vw, 66vw',
-  supporting: '(max-width: 768px) 100vw, 34vw',
-  feed: '(max-width: 768px) 100vw, 320px',
-  compact: '112px',
-  related: '(max-width: 768px) 100vw, 33vw',
+  supporting: '(max-width: 360px) 96px, (max-width: 768px) 112px, 34vw',
+  feed: '(max-width: 360px) 96px, (max-width: 768px) 112px, 230px',
+  compact: '(max-width: 360px) 96px, 112px',
+  related: '(max-width: 600px) 100vw, (max-width: 850px) 50vw, 33vw',
 } satisfies Record<NonNullable<NewsCardProps['variant']>, string>;
 
 const VARIANT_METADATA = {

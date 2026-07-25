@@ -1,14 +1,21 @@
 .tabs {
   min-width: 0;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
+  scroll-padding-inline: 6px;
+  scrollbar-width: thin;
   border-bottom: 1px solid var(--line);
   background: transparent;
 }
 
 .track {
+  width: max-content;
+  min-width: 100%;
   display: flex;
   justify-content: space-between;
   gap: clamp(16px, 2.5vw, 36px);
+  padding: 6px;
 }
 
 .tab {
@@ -36,19 +43,7 @@
 }
 
 @media (max-width: 768px) {
-  .tabs {
-    overflow-x: auto;
-    scrollbar-width: none;
-    overscroll-behavior-inline: contain;
-  }
-
-  .tabs::-webkit-scrollbar {
-    display: none;
-  }
-
   .track {
-    width: max-content;
-    min-width: 100%;
     justify-content: flex-start;
     gap: 22px;
   }

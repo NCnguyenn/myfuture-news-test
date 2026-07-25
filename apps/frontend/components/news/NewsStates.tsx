@@ -94,9 +94,13 @@ export function OverviewLoadingSkeleton() {
   return (
     <div
       className={`page-shell ${styles.loadingRoot}`}
+      role="status"
+      aria-live="polite"
       aria-busy="true"
-      aria-label="Đang tải trang tổng quan Bản tin"
     >
+      <span className={styles.srOnly}>
+        Đang tải trang tổng quan Bản tin
+      </span>
       <SkeletonIntro />
       <section className={styles.skeletonFeatured} aria-hidden="true">
         <div className={styles.skeletonLead}>
@@ -136,9 +140,11 @@ export function CategoryLoadingSkeleton() {
   return (
     <div
       className={`page-shell ${styles.loadingRoot}`}
+      role="status"
+      aria-live="polite"
       aria-busy="true"
-      aria-label="Đang tải chuyên mục"
     >
+      <span className={styles.srOnly}>Đang tải chuyên mục</span>
       <SkeletonIntro />
       <div className={styles.skeletonCategoryGrid} aria-hidden="true">
         <SkeletonFeed rows={5} />
@@ -157,9 +163,11 @@ export function ArticleLoadingSkeleton() {
   return (
     <div
       className={`page-shell ${styles.loadingRoot}`}
+      role="status"
+      aria-live="polite"
       aria-busy="true"
-      aria-label="Đang tải bài viết"
     >
+      <span className={styles.srOnly}>Đang tải bài viết</span>
       <div className={styles.skeletonTabs} aria-hidden="true">
         {Array.from({ length: 7 }, (_, index) => (
           <SkeletonBlock key={index} className={styles.skeletonTab} />

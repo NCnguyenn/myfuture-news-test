@@ -121,11 +121,14 @@ export default async function CategoryPage({
 
   return (
     <div className={`page-shell ${styles.page}`}>
-      <div className="breadcrumb">
-        <Link href="/ban-tin">Bản tin</Link>
-        <span>/</span>
-        <span>{category.name}</span>
-      </div>
+      <nav className={styles.breadcrumb} aria-label="Đường dẫn">
+        <ol>
+          <li>
+            <Link href="/ban-tin">Bản tin</Link>
+          </li>
+          <li aria-current="page">{category.name}</li>
+        </ol>
+      </nav>
       <section className={styles.intro}>
         <p className="eyebrow">CHUYÊN MỤC</p>
         <h1>{category.name}</h1>

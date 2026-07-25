@@ -18,10 +18,19 @@ test('news presentation: cards show supported metadata and deterministic image s
   assert.match(card, /article\.readingTime/);
   assert.match(card, /sizes=\{IMAGE_SIZES\[variant\]\}/);
   assert.match(card, /lead:\s*'\(max-width: 768px\) 100vw, 66vw'/);
-  assert.match(card, /supporting:\s*'\(max-width: 768px\) 100vw, 34vw'/);
-  assert.match(card, /feed:\s*'\(max-width: 768px\) 100vw, 320px'/);
-  assert.match(card, /compact:\s*'112px'/);
-  assert.match(card, /related:\s*'\(max-width: 768px\) 100vw, 33vw'/);
+  assert.match(
+    card,
+    /supporting:\s*'\(max-width: 360px\) 96px, \(max-width: 768px\) 112px, 34vw'/,
+  );
+  assert.match(
+    card,
+    /feed:\s*'\(max-width: 360px\) 96px, \(max-width: 768px\) 112px, 230px'/,
+  );
+  assert.match(card, /compact:\s*'\(max-width: 360px\) 96px, 112px'/);
+  assert.match(
+    card,
+    /related:\s*'\(max-width: 600px\) 100vw, \(max-width: 850px\) 50vw, 33vw'/,
+  );
   assert.match(featured, /primary\.author\.name/);
 });
 
