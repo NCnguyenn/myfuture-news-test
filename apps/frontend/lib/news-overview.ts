@@ -21,12 +21,18 @@ export function resolvePageRedirect(
   requestedPage: number,
   meta: Pick<PaginationMeta, 'totalPages'>,
   basePath: string,
+  query: Record<string, string> = {},
 ): string | null {
   if (requestedPage <= meta.totalPages || requestedPage === 1) return null;
 
-  return meta.totalPages > 1
-    ? `${basePath}?page=${meta.totalPages}`
-    : basePath;
+  const search = new URLSearchParams(query);
+  if (meta.totalPages > 1) {
+    search.set('page', String(meta.totalPages));
+  } else {
+    search.delete('page');
+  }
+  const queryString = search.toString();
+  return queryString ? `${basePath}?${queryString}` : basePath;
 }
 
 function uniqueBySlug(articles: ArticleListItem[]): ArticleListItem[] {
