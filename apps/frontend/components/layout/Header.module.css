@@ -26,7 +26,7 @@
 .wordmark {
   font-size: 1.28rem;
   font-weight: 900;
-  letter-spacing: -0.055em;
+  letter-spacing: normal;
 }
 
 .wordmark span {

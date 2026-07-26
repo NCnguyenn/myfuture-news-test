@@ -11,7 +11,7 @@
 .evidence h2 {
   margin: 7px 0 9px;
   font-size: clamp(1.45rem, 3vw, 1.7rem);
-  letter-spacing: -0.03em;
+  letter-spacing: normal;
 }
 
 .intro {

@@ -20,7 +20,7 @@
 .content h3 {
   color: var(--ink);
   line-height: 1.25;
-  letter-spacing: -0.025em;
+  letter-spacing: normal;
 }
 
 .content h2 {

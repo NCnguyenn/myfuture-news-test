@@ -46,6 +46,14 @@ test('Vietnamese headings use the dedicated font without negative tracking', () 
     'apps/frontend/components/news/NewsCard.module.css',
     'utf8',
   );
+  const articleContent = readFileSync(
+    'apps/frontend/components/news/ArticleContent.module.css',
+    'utf8',
+  );
+  const directory = readFileSync(
+    'apps/frontend/components/news/CategoryDirectory.module.css',
+    'utf8',
+  );
 
   assert.match(
     globals,
@@ -75,4 +83,6 @@ test('Vietnamese headings use the dedicated font without negative tracking', () 
     newsCard,
     /\.lead \.body h3\s*\{[^}]*letter-spacing:\s*normal/,
   );
+  assert.doesNotMatch(articleContent, /letter-spacing:\s*-[0-9]/);
+  assert.doesNotMatch(directory, /letter-spacing:\s*-[0-9]/);
 });

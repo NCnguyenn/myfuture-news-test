@@ -45,10 +45,14 @@ export async function generateMetadata({
     return {
       title: `${article.title} | MyFuture News`,
       description: article.excerpt,
+      alternates: {
+        canonical: `/ban-tin/${article.slug}`,
+      },
       openGraph: {
         type: 'article',
         title: article.title,
         description: article.excerpt,
+        url: `/ban-tin/${article.slug}`,
       },
     };
   } catch (error) {

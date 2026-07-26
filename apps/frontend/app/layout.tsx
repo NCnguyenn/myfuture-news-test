@@ -11,13 +11,23 @@ const vietnameseFont = Be_Vietnam_Pro({
   variable: '--font-vietnamese',
 });
 
+const siteOrigin =
+  process.env.NEXT_PUBLIC_SITE_URL?.trim().replace(/\/+$/, '') ||
+  process.env.WEB_ORIGIN?.trim().replace(/\/+$/, '') ||
+  'https://myfuture-news-web.vercel.app';
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteOrigin),
   title: 'Bản tin | MyFuture News',
   description: 'Tin tức thị trường bất động sản từ MyFuture News.',
+  alternates: {
+    canonical: '/ban-tin',
+  },
   openGraph: {
     type: 'website',
     title: 'Bản tin | MyFuture News',
     description: 'Tin tức thị trường bất động sản từ MyFuture News.',
+    url: '/ban-tin',
   },
 };
 
