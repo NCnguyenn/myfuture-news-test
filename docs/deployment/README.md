@@ -12,7 +12,8 @@
 - GitHub: `https://github.com/NCnguyenn/myfuture-news-test`
 - Vercel frontend project: `myfuture-news-web`, root `apps/frontend`
 - Vercel backend project: `myfuture-news-api`, root `apps/backend`
-- Vercel, Neon PostgreSQL, and Upstash Redis run in Singapore.
+- The Vercel API, Neon PostgreSQL, and Upstash Redis run in Singapore; the
+  frontend uses Vercel's managed web region.
 
 ## Runtime
 

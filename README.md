@@ -44,8 +44,8 @@ it is cached or returned.
 - Backend: NestJS, Fastify, Prisma, TypeScript, and PostgreSQL.
 - Cache: Redis **cache-aside only** (no job queue). Reads fall back to PostgreSQL
   when Redis is unavailable.
-- Production: Vercel frontend and API projects, Neon PostgreSQL, and Upstash
-  Redis in Singapore.
+- Production: Vercel frontend and API projects; the API, Neon PostgreSQL, and
+  Upstash Redis run in Singapore.
 - Runtime: production uses Node.js 22; CI validates Node.js 20 and Node.js 22.
 
 ## Local setup
@@ -123,10 +123,11 @@ HTTP 400, and unknown category or article slugs return HTTP 404.
 
 The stable production frontend is [myfuture-news-web.vercel.app](https://myfuture-news-web.vercel.app),
 and the stable backend API is [myfuture-news-api.vercel.app/api](https://myfuture-news-api.vercel.app/api).
-The frontend and backend are separate Vercel projects in Singapore. Neon
-provides PostgreSQL and Upstash provides Redis; provider values remain only in
-their dashboards. See [the deployment runbook](docs/deployment/README.md) for
-runtime, migration, deployment-order, and rollback guidance.
+The frontend and backend are separate Vercel projects. The API, Neon
+PostgreSQL, and Upstash Redis run in Singapore; the frontend uses Vercel's
+managed web region. Provider values remain only in their dashboards. See
+[the deployment runbook](docs/deployment/README.md) for runtime, migration,
+deployment-order, and rollback guidance.
 
 Secondary verification link: [Production API health](https://myfuture-news-api.vercel.app/api/health).
 
