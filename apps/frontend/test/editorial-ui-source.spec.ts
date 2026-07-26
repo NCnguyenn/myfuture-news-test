@@ -23,8 +23,14 @@ test('editorial UI: uses the complete approved token and font system', () => {
     assert.match(css, new RegExp(`${name}:\\s*${value}`, 'i'));
   }
 
-  assert.match(css, /--font-editorial:.*Georgia.*Cambria.*Times New Roman.*serif/i);
-  assert.match(css, /--font-interface:.*Segoe UI.*Helvetica.*Arial.*sans-serif/i);
+  assert.match(
+    css,
+    /--font-editorial:.*var\(--font-vietnamese\).*Be Vietnam Pro.*sans-serif/i,
+  );
+  assert.match(
+    css,
+    /--font-interface:.*var\(--font-vietnamese\).*Be Vietnam Pro.*sans-serif/i,
+  );
   assert.match(css, /--content-width:\s*1200px/);
   assert.match(css, /--reading-width:\s*760px/);
   assert.doesNotMatch(css, /@import|fonts\.googleapis/i);
