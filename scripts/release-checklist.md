@@ -43,7 +43,7 @@ Expected and observed on 2026-07-26:
 
 | Gate | Result |
 |---|---|
-| Root `npm.cmd test` | PASS — frontend 99/99, backend 67/67, failed 0, skipped 0 |
+| Root `npm.cmd test` | PASS — frontend 99/99, backend 68/68, failed 0, skipped 0 |
 | `npm.cmd run lint` | PASS — 0 errors, 0 warnings |
 | `npm.cmd run db:validate` | PASS |
 | `npm.cmd run typecheck` | PASS — frontend and backend |

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 
@@ -127,6 +127,51 @@ test('frontend lint resolves the App Router from the frontend workspace', () => 
     eslintResult.stdout,
     /@next\/next\/no-html-link-for-pages/,
     'official Next.js rules must resolve App Router routes from workspace commands',
+  );
+});
+
+test('Vercel frontend root owns its ESLint dependencies and flat config', () => {
+  const frontendRoot = path.join(root, 'apps/frontend');
+  const frontendPackageJson = JSON.parse(
+    readFileSync(path.join(frontendRoot, 'package.json'), 'utf8'),
+  ) as { devDependencies?: Record<string, string> };
+  const frontendEslintConfig = path.join(frontendRoot, 'eslint.config.mjs');
+
+  assert.ok(
+    frontendPackageJson.devDependencies?.eslint,
+    'the Vercel frontend root must install ESLint during its isolated install',
+  );
+  assert.ok(
+    frontendPackageJson.devDependencies?.['@next/eslint-plugin-next'],
+    'the Vercel frontend root must install the official Next.js plugin',
+  );
+  assert.equal(
+    existsSync(frontendEslintConfig),
+    true,
+    'the Vercel frontend root must include its own flat ESLint config',
+  );
+
+  const frontendConfigSource = readFileSync(frontendEslintConfig, 'utf8');
+  assert.match(frontendConfigSource, /@next\/eslint-plugin-next/);
+  assert.match(frontendConfigSource, /core-web-vitals/);
+
+  const eslintResult = spawnSync(
+    process.execPath,
+    [
+      path.join(root, 'node_modules/eslint/bin/eslint.js'),
+      '--print-config',
+      'eslint.config.mjs',
+    ],
+    {
+      cwd: frontendRoot,
+      encoding: 'utf8',
+    },
+  );
+  const config = JSON.parse(eslintResult.stdout) as { plugins?: string[] };
+
+  assert.ok(
+    config.plugins?.includes('@next/next'),
+    'Next.js must detect the plugin when it inspects the frontend flat config',
   );
 });
 
