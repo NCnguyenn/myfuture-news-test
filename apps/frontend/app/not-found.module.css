@@ -10,10 +10,10 @@
 }
 
 .wrapper h1 {
-  margin: 10px 0 12px;
+  margin: 10px 0 14px;
   font-size: clamp(2.25rem, 6vw, 4rem);
-  line-height: 1.02;
-  letter-spacing: -0.055em;
+  line-height: 1.05;
+  letter-spacing: normal;
   text-wrap: balance;
 }
 

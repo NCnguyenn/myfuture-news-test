@@ -220,6 +220,54 @@ async function main() {
   await expectStaticImage(web, detail.data.thumbnailUrl);
   await expectOptimizerFromNewsHtml(web, newsHtml);
 
+  const accentSearch = await json<ListResponse>(
+    `${api}/articles?q=${encodeURIComponent('bất động sản')}&page=1&limit=5`,
+  );
+  assert.ok(
+    accentSearch.meta.totalItems >= 1,
+    'accented search must return at least one article',
+  );
+  const plainSearch = await json<ListResponse>(
+    `${api}/articles?q=bat%20dong%20san&page=1&limit=5`,
+  );
+  assert.ok(
+    plainSearch.meta.totalItems >= 1,
+    'unaccented search must return at least one article',
+  );
+  const hungYenSearch = await json<ListResponse>(
+    `${api}/articles?q=hung%20yen&page=1&limit=5`,
+  );
+  assert.ok(
+    hungYenSearch.meta.totalItems >= 1,
+    'hung yen search must return at least one article',
+  );
+
+  const invalidSearch = await fetchWithTimeout(`${api}/articles?q=a`);
+  assert.equal(invalidSearch.status, 400, 'short search query must be 400');
+
+  const bff = await expectOk(
+    `${web}/api/news-search?q=${encodeURIComponent('hung yen')}&limit=6`,
+  );
+  const bffContentType = bff.headers.get('content-type') ?? '';
+  assert.match(bffContentType, /application\/json/i, 'BFF search must return JSON');
+  const bffBody = (await bff.json()) as ListResponse;
+  assert.ok(Array.isArray(bffBody.data), 'BFF search must return a data array');
+
+  const searchHtml = await expectPublicHtml(
+    web,
+    `/ban-tin/tim-kiem?q=${encodeURIComponent('hung yen')}`,
+  );
+  assert.doesNotMatch(
+    searchHtml,
+    /Không tìm thấy nội dung|không tồn tại hoặc bài viết chưa được xuất bản/i,
+    'search page must not fall through to article not-found',
+  );
+  assert.match(
+    searchHtml,
+    /Kết quả tìm kiếm|Tìm thấy/i,
+    'search page must render search chrome',
+  );
+
   console.log(
     JSON.stringify({
       status: 'ok',
@@ -227,6 +275,10 @@ async function main() {
       articles: articles.meta.totalItems,
       category: article.category.slug,
       article: article.slug,
+      searchAccentHits: accentSearch.meta.totalItems,
+      searchPlainHits: plainSearch.meta.totalItems,
+      searchHungYenHits: hungYenSearch.meta.totalItems,
+      bffHits: bffBody.data.length,
     }),
   );
 }

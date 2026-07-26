@@ -9,7 +9,20 @@ test('removes unsafe markup while preserving the article allowlist', () => {
     '<p onclick="alert(1)">Safe</p><script>alert(1)</script><a href="javascript:alert(1)">bad</a><strong>Bold</strong><custom-tag>Unknown</custom-tag>',
   );
 
-  assert.equal(sanitized, '<p>Safe</p><a>bad</a><strong>Bold</strong>Unknown');
+  assert.equal(
+    sanitized,
+    '<p>Safe</p><a rel="noopener noreferrer">bad</a><strong>Bold</strong>Unknown',
+  );
+});
+
+test('forces noopener noreferrer on allowed anchor tags', () => {
+  const service = new ContentSanitizerService();
+  const sanitized = service.sanitize(
+    '<a href="https://example.com" target="_blank">source</a>',
+  );
+  assert.match(sanitized, /href="https:\/\/example\.com"/);
+  assert.match(sanitized, /rel="noopener noreferrer"/);
+  assert.match(sanitized, /target="_blank"/);
 });
 
 test('keeps article markup while excluding foreign-content and raw-text tags', () => {

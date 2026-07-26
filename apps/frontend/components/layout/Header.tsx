@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { SearchLauncher } from '../search/SearchLauncher';
 import styles from './Header.module.css';
 
 export function Header() {
@@ -18,15 +19,18 @@ export function Header() {
           <span className={styles.channel}>Bản tin</span>
         </Link>
         <p className={styles.statement}>Góc nhìn chọn lọc cho quyết định tương lai.</p>
-        <nav className={styles.nav} aria-label="Điều hướng chính">
-          <Link
-            href="/ban-tin"
-            className={pathname === '/ban-tin' ? styles.active : undefined}
-            aria-current={pathname === '/ban-tin' ? 'page' : undefined}
-          >
-            Toàn cảnh
-          </Link>
-        </nav>
+        <div className={styles.actions}>
+          <nav className={styles.nav} aria-label="Điều hướng chính">
+            <Link
+              href="/ban-tin"
+              className={pathname === '/ban-tin' ? styles.active : undefined}
+              aria-current={pathname === '/ban-tin' ? 'page' : undefined}
+            >
+              Toàn cảnh
+            </Link>
+          </nav>
+          <SearchLauncher />
+        </div>
       </div>
     </header>
   );

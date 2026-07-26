@@ -1,5 +1,16 @@
 import { Transform } from 'class-transformer';
-import { IsBoolean, IsIn, IsInt, IsOptional, IsString, Max, Min } from 'class-validator';
+import {
+  IsBoolean,
+  IsIn,
+  IsInt,
+  IsOptional,
+  IsString,
+  Max,
+  MaxLength,
+  Matches,
+  Min,
+  MinLength,
+} from 'class-validator';
 
 export const ARTICLE_SORTS = ['newest', 'oldest', 'popular'] as const;
 export type ArticleSort = (typeof ARTICLE_SORTS)[number];
@@ -16,6 +27,20 @@ const toBoolean = ({ value }: { value: unknown }) => {
 };
 
 export class ArticlesQueryDto {
+  @Transform(({ value }) => {
+    if (typeof value !== 'string') return value;
+    const trimmed = value.trim();
+    return trimmed === '' ? undefined : trimmed;
+  })
+  @IsOptional()
+  @IsString()
+  @MinLength(2)
+  @MaxLength(100)
+  @Matches(/[\p{L}\p{N}].*[\p{L}\p{N}]/u, {
+    message: 'Search query must contain at least two letters or numbers',
+  })
+  q?: string;
+
   @Transform(({ value }) => value === '' ? undefined : value)
   @IsOptional()
   @IsString()

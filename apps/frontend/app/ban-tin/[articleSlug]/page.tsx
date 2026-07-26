@@ -8,6 +8,7 @@ import { NewsImage } from '../../../components/news/NewsImage';
 import { NewsTabs } from '../../../components/news/NewsTabs';
 import { PopularStories } from '../../../components/news/PopularStories';
 import { RelatedNews } from '../../../components/news/RelatedNews';
+import { ScrollToTopOnArticleChange } from '../../../components/news/ScrollToTopOnArticleChange';
 import { SourceEvidence } from '../../../components/news/SourceEvidence';
 import {
   ApiClientError,
@@ -44,10 +45,14 @@ export async function generateMetadata({
     return {
       title: `${article.title} | MyFuture News`,
       description: article.excerpt,
+      alternates: {
+        canonical: `/ban-tin/${article.slug}`,
+      },
       openGraph: {
         type: 'article',
         title: article.title,
         description: article.excerpt,
+        url: `/ban-tin/${article.slug}`,
       },
     };
   } catch (error) {
@@ -86,6 +91,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
   return (
     <div className={`page-shell ${styles.page}`}>
+      <ScrollToTopOnArticleChange articleSlug={article.slug} />
       <NewsTabs
         categories={categoriesResponse.data}
         activeSlug={article.category.slug}

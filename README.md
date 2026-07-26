@@ -42,7 +42,8 @@ it is cached or returned.
 
 - Frontend: Next.js App Router, React, TypeScript, and CSS Modules.
 - Backend: NestJS, Fastify, Prisma, TypeScript, and PostgreSQL.
-- Cache: Redis with cache-aside reads and a PostgreSQL fail-safe path.
+- Cache: Redis **cache-aside only** (no job queue). Reads fall back to PostgreSQL
+  when Redis is unavailable.
 - Production: Vercel frontend and API projects, Neon PostgreSQL, and Upstash
   Redis in Singapore.
 - Runtime: production uses Node.js 22; CI validates Node.js 20 and Node.js 22.
@@ -129,9 +130,14 @@ Secondary verification link: [Production API health](https://myfuture-news-api.v
 
 ## Redis fallback
 
-Redis is an optional read cache. If it is unavailable, the API continues to
-serve reads from PostgreSQL; cache failures do not make the news experience
-unavailable. Health checks report the state of both services.
+Redis is an optional **read cache only** (not a queue). If it is unavailable,
+the API continues to serve reads from PostgreSQL; cache failures do not make
+the news experience unavailable. Health checks report the state of both
+services.
+
+After `npm run db:seed`, the seeder clears `news:*` keys when `REDIS_URL` is
+configured so list/detail/category responses do not serve stale snapshots.
+Manual clear: `npm run cache:clear:news`.
 
 ## Intentional non-goals
 

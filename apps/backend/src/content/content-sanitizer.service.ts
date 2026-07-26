@@ -32,6 +32,16 @@ export class ContentSanitizerService {
         img: ['http', 'https'],
       },
       allowProtocolRelative: false,
+      transformTags: {
+        a: (tagName, attribs) => ({
+          tagName,
+          attribs: {
+            ...attribs,
+            rel: 'noopener noreferrer',
+            ...(attribs.target ? { target: attribs.target } : {}),
+          },
+        }),
+      },
     });
   }
 }

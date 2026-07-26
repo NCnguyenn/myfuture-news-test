@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
   ApiClientError,
+  buildArticlesPath,
   createNewsApiReader,
   resolveApiBaseUrl,
 } from '../lib/api-client';
@@ -144,6 +145,35 @@ test('supplies the 8,000ms abort signal to fetch', async () => {
 
   assert.deepEqual(timeoutDelays, [8_000]);
   assert.equal(receivedSignal, controller.signal);
+});
+
+test('serializes a Vietnamese article search query', () => {
+  assert.match(
+    buildArticlesPath({ q: 'bất động sản', page: 1, limit: 6 }),
+    /q=b%E1%BA%A5t\+%C4%91%E1%BB%99ng\+s%E1%BA%A3n/,
+  );
+});
+
+test('combines a caller abort signal with the upstream timeout', async () => {
+  const caller = new AbortController();
+  const timeout = new AbortController();
+  let receivedSignal: AbortSignal | null | undefined;
+  const fetchImpl: typeof fetch = async (_input, init) => {
+    receivedSignal = init?.signal;
+    return jsonResponse({ data: [] });
+  };
+  const read = createNewsApiReader({
+    cache: createMemoryCache(),
+    fetchImpl,
+    resolveBaseUrl: () => 'https://api.example.test/api',
+    timeoutSignal: () => timeout.signal,
+  });
+
+  await read('/articles?q=ha-noi', { signal: caller.signal });
+  assert.equal(receivedSignal?.aborted, false);
+
+  caller.abort();
+  assert.equal(receivedSignal?.aborted, true);
 });
 
 test('preserves non-2xx status, message, and code in ApiClientError', async () => {

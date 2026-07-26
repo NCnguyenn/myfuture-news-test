@@ -28,11 +28,15 @@ export const metadata: Metadata = {
   title: 'Bản tin | MyFuture News',
   description:
     'Khám phá tin tức, quy hoạch, tài chính và thị trường bất động sản.',
+  alternates: {
+    canonical: '/ban-tin',
+  },
   openGraph: {
     type: 'website',
     title: 'Bản tin | MyFuture News',
     description:
       'Khám phá tin tức, quy hoạch, tài chính và thị trường bất động sản.',
+    url: '/ban-tin',
   },
 };
 

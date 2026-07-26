@@ -97,3 +97,13 @@ test('unknown article returns ARTICLE_NOT_FOUND', async () => {
   assert.equal(response.statusCode, 404);
   assert.equal(response.json().code, 'ARTICLE_NOT_FOUND');
 });
+
+test('search query parameter q is accepted by the articles DTO', async () => {
+  const response = await fastify.inject({
+    method: 'GET',
+    url: '/api/articles?q=bat%20dong%20san&page=1&limit=6',
+  });
+  assert.equal(response.statusCode, 200);
+  assert.equal(Array.isArray(response.json().data), true);
+  assert.equal(typeof response.json().meta?.totalItems, 'number');
+});

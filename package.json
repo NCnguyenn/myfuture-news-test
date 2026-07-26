@@ -22,6 +22,7 @@
     "db:seed": "prisma db seed --schema apps/backend/prisma/schema.prisma",
     "db:verify": "tsx scripts/verify-seed.ts",
     "db:generate": "prisma generate --schema apps/backend/prisma/schema.prisma",
+    "cache:clear:news": "tsx scripts/clear-news-cache.ts",
     "smoke:production": "tsx scripts/smoke-production.ts",
     "lint": "eslint . --max-warnings=0",
     "check": "npm run lint && npm run db:validate && npm run test:web && npm run test:api && npm run typecheck && npm run build"

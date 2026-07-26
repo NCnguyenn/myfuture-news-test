@@ -130,8 +130,14 @@ test('editorial responsive: contains width without masking page overflow', () =>
   assert.match(articleCss, /\.articleGrid\s*\{[^}]*min-width:\s*0/);
   assert.match(featuredCss, /\.featured\s*\{[^}]*min-width:\s*0/);
   assert.match(directoryCss, /\.panel\s*\{[^}]*min-width:\s*0/);
-  assert.match(articleContentCss, /\.content a\s*\{[^}]*overflow-wrap:\s*anywhere/);
-  assert.match(sourceEvidenceCss, /\.evidence a\s*\{[^}]*overflow-wrap:\s*anywhere/);
+  assert.match(
+    articleContentCss,
+    /\.content a\s*\{[^}]*overflow-wrap:\s*break-word/,
+  );
+  assert.match(
+    sourceEvidenceCss,
+    /\.evidence a\s*\{[^}]*overflow-wrap:\s*break-word/,
+  );
 
   const overviewMobile = cssBlock(
     overviewCss,

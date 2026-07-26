@@ -35,14 +35,39 @@ From a trusted shell with temporary environment variables, run Prisma generate,
 `migrate deploy`, seed, and `db:verify`. Never run `migrate dev` against
 production.
 
+`npm run db:seed` clears Redis keys under the `news:` prefix after a successful
+seed when `REDIS_URL` is set. If Redis is unavailable, seed still succeeds and
+PostgreSQL remains the source of truth. To clear cache without reseeding:
+
+```bash
+npm run cache:clear:news
+```
+
+Do not expose a public HTTP endpoint for cache deletion.
+
 ## Deployment order
 
-Provision Neon and Upstash, release and verify the database, deploy the
-backend, verify the API health endpoint, deploy the frontend, then verify the
-public browser routes and production smoke test.
+1. Provision Neon and Upstash.
+2. Release and verify the database (`migrate deploy`, `db:seed`, `db:verify`).
+3. Deploy the **backend** first (required for article search `q` support).
+4. Verify API health and search:
+   - `GET /api/health`
+   - `GET /api/articles?q=bat%20dong%20san`
+5. Deploy the **frontend** (required for `/api/news-search` and `/ban-tin/tim-kiem`).
+6. Verify public routes and `npm run smoke:production`.
+
+Frontend and backend are separate Vercel projects. Deploying only the web app
+while the API lacks `q` will leave search broken.
+
+## Redis role
+
+Redis is a **read cache only** (cache-aside for successful category/list/detail
+responses). There is no job queue. API reads continue from PostgreSQL when Redis
+is down.
 
 ## Rollback
 
 Rollback frontend or backend from Vercel Deployments. Do not reset PostgreSQL
 after sharing the demo. Redis is disposable; clear only `news:*` keys when a
-cache reset is required.
+cache reset is required (`npm run cache:clear:news` with production
+`REDIS_URL`).

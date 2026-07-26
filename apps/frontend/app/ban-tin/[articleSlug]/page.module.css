@@ -46,7 +46,7 @@
 
 .credit span {
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .credit span:last-child {
@@ -70,10 +70,15 @@
 }
 
 .sidebar {
+  position: sticky;
+  top: 24px;
   min-width: 0;
+  max-height: calc(100vh - 48px);
   display: grid;
   gap: 24px;
   padding-top: 28px;
+  overflow-y: auto;
+  scrollbar-width: thin;
 }
 
 .sidebar :global(#category-directory) {
@@ -137,7 +142,7 @@
   font-family: var(--font-editorial);
   font-weight: 750;
   line-height: 1.4;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .articleNav a:hover span {
@@ -151,7 +156,10 @@
   }
 
   .sidebar {
+    position: static;
+    max-height: none;
     padding-top: 0;
+    overflow: visible;
   }
 }
 

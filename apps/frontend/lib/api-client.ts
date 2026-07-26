@@ -34,7 +34,8 @@ export class ApiClientError extends Error {
 }
 
 type ErrorBody = { message?: string; code?: string };
-type NewsRead = (path: string) => Promise<unknown>;
+type RequestOptions = { signal?: AbortSignal };
+type NewsRead = (path: string, options?: RequestOptions) => Promise<unknown>;
 type CacheFactory = (
   reader: NewsRead,
   keyParts?: string[],
@@ -53,10 +54,17 @@ export function createNewsApiReader({
   resolveBaseUrl = resolveApiBaseUrl,
   timeoutSignal = AbortSignal.timeout,
 }: NewsApiReaderDependencies = {}) {
-  async function requestUncached(path: string): Promise<unknown> {
+  async function requestUncached(
+    path: string,
+    options: RequestOptions = {},
+  ): Promise<unknown> {
+    const timeout = timeoutSignal(NEWS_REQUEST_TIMEOUT_MS);
+    const signal = options.signal
+      ? AbortSignal.any([options.signal, timeout])
+      : timeout;
     const response = await fetchImpl(`${resolveBaseUrl()}${path}`, {
       cache: 'no-store',
-      signal: timeoutSignal(NEWS_REQUEST_TIMEOUT_MS),
+      signal,
     });
 
     if (!response.ok) {
@@ -83,7 +91,13 @@ export function createNewsApiReader({
     { revalidate: NEWS_CACHE_SECONDS },
   );
 
-  return async function request<T>(path: string): Promise<T> {
+  return async function request<T>(
+    path: string,
+    options: RequestOptions = {},
+  ): Promise<T> {
+    if (options.signal) {
+      return (await requestUncached(path, options)) as T;
+    }
     return (await requestCached(path)) as T;
   };
 }
@@ -94,15 +108,26 @@ export function getCategories(): Promise<{ data: NewsCategory[] }> {
   return request<{ data: NewsCategory[] }>('/categories');
 }
 
-export function getArticles(query: ArticleQuery = {}): Promise<ArticleListResponse> {
+export function buildArticlesPath(query: ArticleQuery = {}): string {
   const search = new URLSearchParams();
+  if (query.q) search.set('q', query.q);
   if (query.category) search.set('category', query.category);
   if (query.page !== undefined) search.set('page', String(query.page));
   if (query.limit !== undefined) search.set('limit', String(query.limit));
   if (query.featured !== undefined) search.set('featured', String(query.featured));
   if (query.sort) search.set('sort', query.sort);
   const queryString = search.toString();
-  return request<ArticleListResponse>(`/articles${queryString ? `?${queryString}` : ''}`);
+  return `/articles${queryString ? `?${queryString}` : ''}`;
+}
+
+export function getArticles(
+  query: ArticleQuery = {},
+  options: RequestOptions = {},
+): Promise<ArticleListResponse> {
+  return request<ArticleListResponse>(
+    buildArticlesPath(query),
+    options,
+  );
 }
 
 export function getArticleBySlug(slug: string): Promise<ArticleDetailResponse> {

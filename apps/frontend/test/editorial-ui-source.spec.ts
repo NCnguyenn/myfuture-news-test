@@ -23,8 +23,14 @@ test('editorial UI: uses the complete approved token and font system', () => {
     assert.match(css, new RegExp(`${name}:\\s*${value}`, 'i'));
   }
 
-  assert.match(css, /--font-editorial:.*Georgia.*Cambria.*Times New Roman.*serif/i);
-  assert.match(css, /--font-interface:.*Segoe UI.*Helvetica.*Arial.*sans-serif/i);
+  assert.match(
+    css,
+    /--font-editorial:.*var\(--font-vietnamese\).*Be Vietnam Pro.*sans-serif/i,
+  );
+  assert.match(
+    css,
+    /--font-interface:.*var\(--font-vietnamese\).*Be Vietnam Pro.*sans-serif/i,
+  );
   assert.match(css, /--content-width:\s*1200px/);
   assert.match(css, /--reading-width:\s*760px/);
   assert.doesNotMatch(css, /@import|fonts\.googleapis/i);
@@ -52,8 +58,30 @@ test('editorial UI: shared frame stays semantic and contains no fake controls', 
   assert.match(footer, /categories\.slice\(0,\s*6\)/);
   assert.doesNotMatch(
     sharedSource,
-    /Đăng nhập|Tìm kiếm|newsletter|nhận bản tin|MyFuture Pro|type="search"/i,
+    /Đăng nhập|newsletter|nhận bản tin|MyFuture Pro/i,
   );
+});
+
+test('editorial UI: renders the approved prominent search launcher', () => {
+  const launcher = read(
+    'apps/frontend/components/search/SearchLauncher.tsx',
+  );
+  const overlay = read(
+    'apps/frontend/components/search/SearchOverlay.tsx',
+  );
+  const overlayStyles = read(
+    'apps/frontend/components/search/SearchOverlay.module.css',
+  );
+
+  assert.match(launcher, /Tìm kiếm/);
+  assert.match(launcher, /event\.metaKey \|\| event\.ctrlKey/);
+  assert.match(launcher, /event\.key\.toLowerCase\(\) === 'k'/);
+  assert.match(launcher, /createPortal/);
+  assert.match(launcher, /document\.body/);
+  assert.match(overlay, /requestIdRef/);
+  assert.match(overlay, /handleQueryChange/);
+  assert.match(overlay, /aria-label="Từ khóa tìm kiếm"/);
+  assert.match(overlayStyles, /\.searchForm:focus-within/);
 });
 
 test('editorial UI: exposes exactly the five approved story-card variants', () => {
@@ -270,7 +298,7 @@ test('editorial UI: article page composes focused reading and honest discovery p
     css,
     /@media\s*\(max-width:\s*1199px\)[\s\S]*grid-template-columns:\s*1fr/,
   );
-  assert.doesNotMatch(css, /position:\s*sticky/);
+  assert.match(css, /position:\s*sticky/);
   assert.doesNotMatch(source, /<main\b/);
   assert.match(directorySource, /compact\?:\s*boolean/);
   assert.match(directorySource, /compact\s*\?\s*'Chuyên mục'/);

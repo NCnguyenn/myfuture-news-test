@@ -1,4 +1,5 @@
 import { PrismaClient, type Prisma } from '@prisma/client';
+import { clearNewsCache } from '../../../scripts/lib/clear-news-cache';
 import {
   CATEGORY_META,
   loadOfficialArticles,
@@ -162,6 +163,18 @@ async function main() {
   for (const c of perCategory) {
     console.log(`  ${c.slug}: ${c._count.articles} published articles`);
   }
+
+  // Drop API cache-aside entries so the next reads observe the seed snapshot.
+  // Failures are non-fatal: Redis is optional for reads (PostgreSQL remains source of truth).
+  const cacheResult = await clearNewsCache(process.env.REDIS_URL);
+  if (cacheResult.skipped) {
+    console.log(
+      `News cache clear skipped (${cacheResult.reason ?? 'unknown reason'}).`,
+    );
+  } else {
+    console.log(`News cache cleared: deleted ${cacheResult.deleted} key(s).`);
+  }
+
   console.log('Seed completed (official researched articles only).');
 }
 

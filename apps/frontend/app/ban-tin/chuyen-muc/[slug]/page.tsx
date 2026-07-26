@@ -40,10 +40,14 @@ export async function generateMetadata({
       return {
         title: `${category.name} | Bản tin MyFuture`,
         description,
+        alternates: {
+          canonical: `/ban-tin/chuyen-muc/${category.slug}`,
+        },
         openGraph: {
           type: 'website',
           title: `${category.name} | Bản tin MyFuture`,
           description,
+          url: `/ban-tin/chuyen-muc/${category.slug}`,
         },
       };
     }

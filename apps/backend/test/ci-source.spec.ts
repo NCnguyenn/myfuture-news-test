@@ -45,3 +45,16 @@ test('Nest entrypoint imports NestJS directly for Vercel detection', () => {
   assert.match(source, /import\s+\{\s*configureApp\s*\}\s+from\s+'\.\/app\.factory';/);
   assert.doesNotMatch(source, /createApp/);
 });
+
+test('database verifier loads the root environment before creating Prisma', () => {
+  const source = readFileSync(
+    path.join(root, 'scripts/verify-seed.ts'),
+    'utf8',
+  );
+
+  assert.match(source, /import\s+'dotenv\/config';/);
+  assert.ok(
+    source.indexOf("import 'dotenv/config';") <
+      source.indexOf('new PrismaClient()'),
+  );
+});

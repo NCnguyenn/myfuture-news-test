@@ -19,8 +19,8 @@
   margin: 8px 0 12px;
   font-size: clamp(1.65rem, 2.8vw, 2.35rem);
   line-height: 1.12;
-  letter-spacing: -0.04em;
-  overflow-wrap: anywhere;
+  letter-spacing: normal;
+  overflow-wrap: break-word;
 }
 
 .intro > p:last-child {
@@ -52,7 +52,7 @@
 
 .links span {
   min-width: 0;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .links a:hover span {

@@ -3,7 +3,9 @@
   color: #303743;
   font-size: clamp(1.03rem, 1.35vw, 1.1rem);
   line-height: 1.84;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: none;
 }
 
 .content > *:first-child {
@@ -18,7 +20,7 @@
 .content h3 {
   color: var(--ink);
   line-height: 1.25;
-  letter-spacing: -0.025em;
+  letter-spacing: normal;
 }
 
 .content h2 {
@@ -40,7 +42,7 @@
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .content ul,
@@ -67,7 +69,7 @@
   color: #f4f7f8;
   background: #182230;
   white-space: pre-wrap;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .content table {
@@ -82,7 +84,7 @@
   padding: 8px 10px;
   border: 1px solid var(--line);
   text-align: left;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .content video,

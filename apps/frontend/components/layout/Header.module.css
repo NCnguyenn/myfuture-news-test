@@ -26,7 +26,7 @@
 .wordmark {
   font-size: 1.28rem;
   font-weight: 900;
-  letter-spacing: -0.055em;
+  letter-spacing: normal;
 }
 
 .wordmark span {
@@ -55,6 +55,13 @@
   color: var(--color-muted);
   font-size: 0.84rem;
   line-height: 1.4;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 0 0 auto;
 }
 
 .nav {

@@ -17,10 +17,12 @@
 .title {
   margin: 8px 0 18px;
   font-size: clamp(2.35rem, 5vw, 4.25rem);
-  line-height: 1.04;
-  letter-spacing: -0.055em;
+  line-height: 1.08;
+  letter-spacing: normal;
   text-wrap: balance;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: none;
 }
 
 .excerpt {
@@ -46,7 +48,7 @@
   display: inline-flex;
   align-items: center;
   min-height: 32px;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .meta > *:not(:last-child)::after {
@@ -85,7 +87,7 @@
 
   .title {
     font-size: clamp(2.2rem, 11vw, 3.35rem);
-    letter-spacing: -0.045em;
+    letter-spacing: normal;
   }
 
   .meta {

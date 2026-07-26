@@ -77,6 +77,21 @@ test('editorial UI: category pages canonicalize an out-of-range request', () => 
   assert.equal(resolvePageRedirect(2, meta(2, 0), basePath), basePath);
 });
 
+test('editorial UI: search redirects preserve the query string without a second ?', () => {
+  assert.equal(
+    resolvePageRedirect(9, meta(9, 2), '/ban-tin/tim-kiem', {
+      q: 'bat dong san',
+    }),
+    '/ban-tin/tim-kiem?q=bat+dong+san&page=2',
+  );
+  assert.equal(
+    resolvePageRedirect(3, meta(3, 1), '/ban-tin/tim-kiem', {
+      q: 'hung yen',
+    }),
+    '/ban-tin/tim-kiem?q=hung+yen',
+  );
+});
+
 test('editorial UI: overview labels selected positive-view stories as popular', () => {
   const selected = selectPopularStories(
     [article('popular-a', 14), article('popular-b')],
