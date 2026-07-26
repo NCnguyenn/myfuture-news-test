@@ -5,7 +5,9 @@
     "dev": "nest start --watch",
     "build": "nest build",
     "start": "node dist/src/main.js",
-    "typecheck": "tsc --noEmit"
+    "test": "node ../../scripts/run-node-tests.mjs --test-dir test --require ts-node/register/transpile-only",
+    "typecheck": "tsc --noEmit",
+    "postinstall": "prisma generate --schema prisma/schema.prisma"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.0",
@@ -24,9 +26,11 @@
   },
   "devDependencies": {
     "@nestjs/cli": "^11.0.0",
+    "@nestjs/testing": "^11.1.28",
     "@types/ioredis": "^4.28.10",
     "@types/node": "^22.10.0",
     "prisma": "^6.4.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.7.0"
   }
 }

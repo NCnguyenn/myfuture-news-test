@@ -11,10 +11,13 @@ export async function Footer() {
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <div className={styles.about}>
-          <Link href="/ban-tin" className={styles.brand}>
+          <Link href="/ban-tin" className={styles.brand} aria-label="MyFuture - Bản tin">
             <span>my</span>FUTURE
           </Link>
-          <p>Thông tin rõ ràng hơn cho những quyết định về tương lai.</p>
+          <p>
+            myFUTURE — Bản tin thị trường bất động sản với góc nhìn chọn lọc,
+            khách quan và chuyên sâu.
+          </p>
         </div>
         {categories.length > 0 ? (
           <nav className={styles.links} aria-label="Chuyên mục ở chân trang">
@@ -25,6 +28,10 @@ export async function Footer() {
             ))}
           </nav>
         ) : null}
+      </div>
+      <div className={styles.legal}>
+        <small>© 2026 myFUTURE. Mọi quyền được bảo lưu.</small>
+        <Link href="/ban-tin">Bản tin thị trường</Link>
       </div>
     </footer>
   );

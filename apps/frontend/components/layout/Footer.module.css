@@ -1,6 +1,6 @@
 .footer {
   border-top: 1px solid var(--line);
-  background: var(--surface);
+  background: var(--color-surface);
 }
 
 .inner {
@@ -11,7 +11,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 48px;
-  color: var(--muted);
+  color: var(--color-muted);
   font-size: 0.88rem;
 }
 
@@ -20,15 +20,17 @@
 }
 
 .brand {
-  display: inline-block;
-  color: var(--ink);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-ink);
   font-size: 1.1rem;
   font-weight: 900;
   letter-spacing: normal;
 }
 
 .brand span {
-  color: var(--brand);
+  color: var(--color-brand);
 }
 
 .about p {
@@ -43,12 +45,35 @@
 }
 
 .links a {
-  color: var(--ink);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-ink);
   font-weight: 700;
 }
 
 .links a:hover {
-  color: var(--brand);
+  color: var(--color-brand);
+}
+
+.legal {
+  width: min(var(--content-width), calc(100% - 48px));
+  margin: 0 auto;
+  padding: 18px 0 24px;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  border-top: 1px solid var(--line);
+  color: var(--color-muted);
+  font-size: 0.76rem;
+}
+
+.legal a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-brand);
+  font-weight: 700;
 }
 
 @media (max-width: 600px) {
@@ -61,5 +86,11 @@
   .links {
     width: 100%;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .legal {
+    width: min(100% - 28px, var(--content-width));
+    flex-direction: column;
+    gap: 8px;
   }
 }

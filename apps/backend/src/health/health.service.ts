@@ -9,6 +9,10 @@ export class HealthService implements OnModuleDestroy {
 
   constructor(private readonly prisma: PrismaService) {}
 
+  private errorMessage(error: unknown): string {
+    return error instanceof Error ? error.message : String(error);
+  }
+
   private getRedisClient(): Redis {
     if (!this.redisClient) {
       const redisUrl = process.env.REDIS_URL ?? 'redis://localhost:6379';
@@ -34,8 +38,8 @@ export class HealthService implements OnModuleDestroy {
     try {
       await this.prisma.$queryRaw`SELECT 1`;
       postgresStatus = 'up';
-    } catch (err: any) {
-      this.logger.warn(`PostgreSQL probe failed: ${err?.message ?? err}`);
+    } catch (error: unknown) {
+      this.logger.warn(`PostgreSQL probe failed: ${this.errorMessage(error)}`);
       postgresStatus = 'down';
     }
 
@@ -49,8 +53,8 @@ export class HealthService implements OnModuleDestroy {
       if (pong === 'PONG') {
         redisStatus = 'up';
       }
-    } catch (err: any) {
-      this.logger.warn(`Redis probe failed: ${err?.message ?? err}`);
+    } catch (error: unknown) {
+      this.logger.warn(`Redis probe failed: ${this.errorMessage(error)}`);
       redisStatus = 'down';
       if (this.redisClient) {
         try {
@@ -63,12 +67,12 @@ export class HealthService implements OnModuleDestroy {
     }
 
     // 3. Overall status
-    let status: 'ok' | 'degraded' | 'error' = 'ok';
-    if (postgresStatus === 'down' && redisStatus === 'down') {
-      status = 'error';
-    } else if (postgresStatus === 'down' || redisStatus === 'down') {
-      status = 'degraded';
-    }
+    const status =
+      postgresStatus === 'down'
+        ? 'error'
+        : redisStatus === 'down'
+          ? 'degraded'
+          : 'ok';
 
     return {
       data: {

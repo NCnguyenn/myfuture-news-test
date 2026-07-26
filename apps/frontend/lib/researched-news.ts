@@ -1,6 +1,11 @@
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { getResearchedImage } from '../data/researched-images';
+import {
+  EXPECTED_ARTICLE_COUNTS,
+  EXPECTED_FEATURED_ARTICLES,
+  EXPECTED_PUBLISHED_ARTICLES,
+} from '../../../scripts/lib/news-dataset-contract';
 import type {
   ArticleDetail,
   ArticleDetailResponse,
@@ -74,9 +79,7 @@ function findWorkspaceFile(relativePath: string): string {
 function readManifest(): RawManifest {
   return JSON.parse(
     readFileSync(
-      findWorkspaceFile(
-        'docs/research/manifest-codex-2026-07-23.json',
-      ),
+      findWorkspaceFile('data/news/articles.json'),
       'utf8',
     ),
   ) as RawManifest;
@@ -104,10 +107,24 @@ const rawArticles = rawManifest.categories
   .filter(isComplete)
   .sort(
     (left, right) =>
-      Date.parse(right.datePublished) - Date.parse(left.datePublished),
+      Date.parse(right.datePublished) - Date.parse(left.datePublished) ||
+      left.slug.localeCompare(right.slug, 'vi'),
   );
 
-if (rawManifest.categories.length !== 6 || rawArticles.length !== 30) {
+const actualCategoryCounts = Object.fromEntries(
+  rawManifest.categories.map((category) => [
+    category.slug,
+    category.articles.filter(isComplete).length,
+  ]),
+);
+
+if (
+  rawManifest.categories.length !== Object.keys(EXPECTED_ARTICLE_COUNTS).length ||
+  rawArticles.length !== EXPECTED_PUBLISHED_ARTICLES ||
+  Object.entries(EXPECTED_ARTICLE_COUNTS).some(
+    ([slug, expectedCount]) => actualCategoryCounts[slug] !== expectedCount,
+  )
+) {
   throw new Error(
     `Researched-news completeness gate failed: ${rawManifest.categories.length} categories, ${rawArticles.length} articles`,
   );
@@ -206,7 +223,7 @@ export function getResearchedArticleBySlug(
     ),
     sourceName: source.sourceName,
     sourceUrl: source.canonicalUrl,
-    isFeatured: index < 5,
+    isFeatured: index < EXPECTED_FEATURED_ARTICLES,
     author: {
       name: article.author.name,
       slug: article.author.slug,

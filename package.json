@@ -12,27 +12,40 @@
     "build:api": "npm --workspace apps/backend run build",
     "build": "npm run build:web && npm run build:api",
     "typecheck": "npm run typecheck:web && npm run typecheck:api",
-    "test:web": "tsx --test apps/frontend/test/**/*.spec.ts",
-    "test:api": "tsx --tsconfig apps/backend/tsconfig.json --test apps/backend/test/**/*.spec.ts",
+    "test:web": "node scripts/run-node-tests.mjs --test-dir apps/frontend/test --import tsx",
+    "test:api": "npm --workspace apps/backend run test",
     "typecheck:web": "npm --workspace apps/frontend run typecheck",
     "typecheck:api": "npm --workspace apps/backend run typecheck",
     "db:validate": "prisma validate --schema apps/backend/prisma/schema.prisma",
     "db:migrate": "prisma migrate dev --schema apps/backend/prisma/schema.prisma",
     "db:migrate:deploy": "prisma migrate deploy --schema apps/backend/prisma/schema.prisma",
     "db:seed": "prisma db seed --schema apps/backend/prisma/schema.prisma",
+    "db:verify": "tsx scripts/verify-seed.ts",
     "db:generate": "prisma generate --schema apps/backend/prisma/schema.prisma",
-    "sync:news-images": "tsx scripts/sync-researched-news-images.ts",
-    "import:official-news": "tsx scripts/import-official-news.ts",
-    "import:official-news:dry-run": "tsx scripts/import-official-news.ts --dry-run"
+    "smoke:production": "tsx scripts/smoke-production.ts",
+    "lint": "eslint . --max-warnings=0",
+    "check": "npm run lint && npm run db:validate && npm run test:web && npm run test:api && npm run typecheck && npm run build"
   },
   "prisma": {
     "seed": "npx tsx apps/backend/prisma/seed.ts"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "eslint": "^9.39.5",
+    "globals": "^16.5.0",
     "prisma": "^6.4.0",
-    "tsx": "^4.19.3"
+    "tsx": "^4.19.3",
+    "typescript-eslint": "^8.65.0"
   },
   "dependencies": {
     "@prisma/client": "^6.4.0"
+  },
+  "overrides": {
+    "find-my-way": "9.7.0",
+    "postcss": "8.5.23",
+    "sharp": "0.35.3",
+    "sanitize-html": {
+      "htmlparser2": "10.1.0"
+    }
   }
 }

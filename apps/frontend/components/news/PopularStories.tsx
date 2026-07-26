@@ -3,20 +3,14 @@ import { NewsCard } from './NewsCard';
 import styles from './PopularStories.module.css';
 
 type PopularStoriesProps = {
-  popularArticles: ArticleListItem[];
-  featuredFallback: ArticleListItem[];
+  articles: ArticleListItem[];
+  title: 'Đọc nhiều' | 'Đáng chú ý';
 };
 
 export function PopularStories({
-  popularArticles,
-  featuredFallback,
+  articles,
+  title,
 }: PopularStoriesProps) {
-  const hasMeaningfulViews = popularArticles.some(
-    (article) => (article.viewCount ?? 0) > 0,
-  );
-  const title = hasMeaningfulViews ? 'Đọc nhiều' : 'Tin nổi bật';
-  const articles = hasMeaningfulViews ? popularArticles : featuredFallback;
-
   if (articles.length === 0) return null;
 
   return (
@@ -25,11 +19,16 @@ export function PopularStories({
         <p className="eyebrow">ĐỀ XUẤT</p>
         <h2 id="popular-heading">{title}</h2>
       </div>
-      <div className={styles.list}>
-        {articles.slice(0, 5).map((article) => (
-          <NewsCard article={article} variant="compact" key={article.id} />
+      <ol className={styles.list}>
+        {articles.slice(0, 5).map((article, index) => (
+          <li key={article.id}>
+            <span className={styles.rank} aria-hidden="true">
+              {index + 1}
+            </span>
+            <NewsCard article={article} variant="compact" />
+          </li>
         ))}
-      </div>
+      </ol>
     </section>
   );
 }

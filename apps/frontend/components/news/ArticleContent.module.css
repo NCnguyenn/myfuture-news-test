@@ -1,11 +1,19 @@
 .content {
   min-width: 0;
-  color: #2e343c;
-  font-size: clamp(1.02rem, 1.5vw, 1.125rem);
-  line-height: 1.82;
+  color: #303743;
+  font-size: clamp(1.03rem, 1.35vw, 1.1rem);
+  line-height: 1.84;
   overflow-wrap: break-word;
   word-break: normal;
   hyphens: none;
+}
+
+.content > *:first-child {
+  margin-top: 0;
+}
+
+.content > *:last-child {
+  margin-bottom: 0;
 }
 
 .content h2,
@@ -16,17 +24,17 @@
 }
 
 .content h2 {
-  margin: 40px 0 14px;
-  font-size: clamp(1.45rem, 3vw, 1.75rem);
+  margin: 44px 0 15px;
+  font-size: clamp(1.5rem, 3vw, 1.82rem);
 }
 
 .content h3 {
-  margin: 30px 0 12px;
-  font-size: 1.3rem;
+  margin: 34px 0 13px;
+  font-size: clamp(1.25rem, 2.4vw, 1.42rem);
 }
 
 .content p {
-  margin: 0 0 20px;
+  margin: 0 0 21px;
 }
 
 .content a {
@@ -39,11 +47,13 @@
 
 .content ul,
 .content ol {
-  padding-left: 24px;
+  margin: 0 0 24px;
+  padding-left: 26px;
 }
 
 .content li {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  padding-left: 3px;
 }
 
 .content img {
@@ -54,18 +64,18 @@
 
 .content pre {
   max-width: 100%;
-  overflow-x: auto;
   padding: 16px;
   border-radius: var(--radius-sm);
   color: #f4f7f8;
   background: #182230;
-  white-space: pre;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
 }
 
 .content table {
-  display: block;
+  width: 100%;
   max-width: 100%;
-  overflow-x: auto;
+  table-layout: fixed;
   border-collapse: collapse;
 }
 
@@ -74,6 +84,7 @@
   padding: 8px 10px;
   border: 1px solid var(--line);
   text-align: left;
+  overflow-wrap: break-word;
 }
 
 .content video,
@@ -82,8 +93,32 @@
 }
 
 .content blockquote {
-  margin: 28px 0;
-  padding: 18px 22px;
+  margin: 32px 0;
+  padding: 20px 24px;
   border-left: 4px solid var(--brand);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
   background: var(--brand-soft);
+  color: var(--ink);
+  font-family: var(--font-editorial);
+  font-size: 1.08em;
+  line-height: 1.72;
+}
+
+.content blockquote > *:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 640px) {
+  .content {
+    font-size: 1rem;
+    line-height: 1.78;
+  }
+
+  .content h2 {
+    margin-top: 38px;
+  }
+
+  .content blockquote {
+    padding: 18px 18px;
+  }
 }

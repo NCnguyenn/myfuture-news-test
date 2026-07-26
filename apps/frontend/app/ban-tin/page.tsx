@@ -1,13 +1,28 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import { CategoryDirectory } from '../../components/news/CategoryDirectory';
 import { FeaturedNews } from '../../components/news/FeaturedNews';
 import { NewsList } from '../../components/news/NewsList';
 import { NewsTabs } from '../../components/news/NewsTabs';
+import { Pagination } from '../../components/news/Pagination';
 import { PopularStories } from '../../components/news/PopularStories';
 import { getArticles, getCategories } from '../../lib/api-client';
+import {
+  parseOverviewPage,
+  resolvePageRedirect,
+  selectPopularStories,
+} from '../../lib/news-overview';
 import styles from './page.module.css';
 
 export const dynamic = 'force-dynamic';
+
+const LATEST_PAGE_SIZE = 10;
+
+type SearchParams = { [key: string]: string | string[] | undefined };
+type NewsOverviewPageProps = {
+  searchParams: Promise<SearchParams>;
+};
 
 export const metadata: Metadata = {
   title: 'Bản tin | MyFuture News',
@@ -21,7 +36,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function NewsOverviewPage() {
+export default async function NewsOverviewPage({
+  searchParams,
+}: NewsOverviewPageProps) {
+  const query = await searchParams;
+  const page = parseOverviewPage(query.page);
   const [
     categoriesResponse,
     featuredResponse,
@@ -30,17 +49,29 @@ export default async function NewsOverviewPage() {
   ] = await Promise.all([
     getCategories(),
     getArticles({ page: 1, limit: 5, featured: true, sort: 'newest' }),
-    getArticles({ page: 1, limit: 10, sort: 'newest' }),
+    getArticles({
+      page,
+      limit: LATEST_PAGE_SIZE,
+      sort: 'newest',
+    }),
     getArticles({ page: 1, limit: 5, sort: 'popular' }),
   ]);
+
+  const redirectTo = resolvePageRedirect(page, latestResponse.meta, '/ban-tin');
+  if (redirectTo) redirect(redirectTo);
 
   const featuredArticles =
     featuredResponse.data.length > 0
       ? featuredResponse.data
       : latestResponse.data.slice(0, 5);
+  const popularSelection = selectPopularStories(
+    popularResponse.data,
+    latestResponse.data,
+    featuredArticles,
+  );
 
   return (
-    <div className="page-shell">
+    <div className={`page-shell ${styles.page}`}>
       <section className={styles.intro}>
         <p className="eyebrow">MYFUTURE NEWS</p>
         <h1>Bản tin thị trường</h1>
@@ -48,21 +79,28 @@ export default async function NewsOverviewPage() {
           Góc nhìn chọn lọc về thị trường, quy hoạch, tài chính và pháp lý — được
           biên tập đầy đủ từ nguồn tin có thể kiểm chứng.
         </p>
+        {categoriesResponse.data.length > 0 ? (
+          <Link href="#category-directory" className={styles.directoryLink}>
+            Khám phá chuyên mục
+            <span aria-hidden="true">↓</span>
+          </Link>
+        ) : null}
       </section>
       <NewsTabs categories={categoriesResponse.data} activeSlug={null} />
       <FeaturedNews articles={featuredArticles} />
       <div className={styles.contentGrid}>
-        <main className={styles.feed}>
+        <div className={styles.feed}>
           <NewsList articles={latestResponse.data} title="Tin mới nhất" />
-        </main>
-        <aside className={styles.sidebar} aria-label="Nội dung gợi ý">
+          <Pagination meta={latestResponse.meta} basePath="/ban-tin" />
+        </div>
+        <aside className={styles.sidebar} aria-label={popularSelection.title}>
           <PopularStories
-            popularArticles={popularResponse.data}
-            featuredFallback={featuredArticles}
+            articles={popularSelection.articles}
+            title={popularSelection.title}
           />
-          <CategoryDirectory categories={categoriesResponse.data} />
         </aside>
       </div>
+      <CategoryDirectory categories={categoriesResponse.data} />
     </div>
   );
 }

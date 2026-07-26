@@ -35,3 +35,106 @@ test('article metadata only catches ApiClientError 404 and rethrows other errors
   assert.match(articlePage, /isNotFoundError|ApiClientError/);
   assert.match(articlePage, /notFound\(\)/);
 });
+
+test('news route: article requests popular stories and excludes the current article', () => {
+  const articlePage = readFileSync(
+    path.join(
+      workspaceRoot,
+      'apps/frontend/app/ban-tin/[articleSlug]/page.tsx',
+    ),
+    'utf8',
+  );
+
+  assert.match(
+    articlePage,
+    /getArticles\(\{[\s\S]*page:\s*1[\s\S]*limit:\s*6[\s\S]*sort:\s*'popular'/,
+  );
+  assert.match(
+    articlePage,
+    /selectPopularStories\(\s*popularResponse\.data,\s*article\.relatedArticles,\s*\[article\],?\s*\)/,
+  );
+});
+
+test('category pagination uses the demonstrable page size', () => {
+  const source = readFileSync(
+    path.join(
+      workspaceRoot,
+      'apps/frontend/app/ban-tin/chuyen-muc/[slug]/page.tsx',
+    ),
+    'utf8',
+  );
+  const configSource = readFileSync(
+    path.join(workspaceRoot, 'apps/frontend/lib/news-config.ts'),
+    'utf8',
+  );
+
+  assert.match(configSource, /CATEGORY_PAGE_SIZE\s*=\s*4/);
+  assert.match(source, /limit:\s*CATEGORY_PAGE_SIZE/);
+  assert.doesNotMatch(source, /limit:\s*10/);
+});
+
+test('category route preserves first-page lead and later-page feed semantics', () => {
+  const source = readFileSync(
+    path.join(
+      workspaceRoot,
+      'apps/frontend/app/ban-tin/chuyen-muc/[slug]/page.tsx',
+    ),
+    'utf8',
+  );
+
+  assert.match(
+    source,
+    /page === 1\s*\?\s*articlesResponse\.data\[0\]\s*:\s*undefined/,
+  );
+  assert.match(
+    source,
+    /page === 1\s*\?\s*articlesResponse\.data\.slice\(1\)\s*:\s*articlesResponse\.data/,
+  );
+  assert.match(source, /meta\.totalItems/);
+  assert.match(
+    source,
+    /basePath=\{`\/ban-tin\/chuyen-muc\/\$\{category\.slug\}`\}/,
+  );
+});
+
+test('overview pagination parses the selected page and keeps a fixed page size', () => {
+  const source = readFileSync(
+    path.join(workspaceRoot, 'apps/frontend/app/ban-tin/page.tsx'),
+    'utf8',
+  );
+
+  assert.match(source, /const LATEST_PAGE_SIZE = 10/);
+  assert.match(source, /parseOverviewPage/);
+  assert.match(source, /const page = parseOverviewPage\(query\.page\)/);
+  assert.match(source, /page,\s*limit:\s*LATEST_PAGE_SIZE/);
+  assert.match(source, /<Pagination[\s\S]*meta=\{latestResponse\.meta\}/);
+  assert.match(source, /basePath="\/ban-tin"/);
+});
+
+test('overview redirects out-of-range pages after reading response metadata', () => {
+  const source = readFileSync(
+    path.join(workspaceRoot, 'apps/frontend/app/ban-tin/page.tsx'),
+    'utf8',
+  );
+
+  assert.match(source, /import\s+\{\s*redirect\s*\}\s+from\s+'next\/navigation'/);
+  assert.match(source, /resolvePageRedirect\(page,\s*latestResponse\.meta,\s*'\/ban-tin'\)/);
+  assert.match(source, /if\s*\(redirectTo\)\s*redirect\(redirectTo\)/);
+});
+
+test('category redirects out-of-range pages after validating the slug and reading response metadata', () => {
+  const source = readFileSync(
+    path.join(
+      workspaceRoot,
+      'apps/frontend/app/ban-tin/chuyen-muc/[slug]/page.tsx',
+    ),
+    'utf8',
+  );
+
+  assert.match(source, /import\s+\{\s*notFound,\s*redirect\s*\}\s+from\s+'next\/navigation'/);
+  assert.match(
+    source,
+    /resolvePageRedirect\(\s*page,\s*articlesResponse\.meta,\s*`\/ban-tin\/chuyen-muc\/\$\{category\.slug\}`\s*,?\s*\)/,
+  );
+  assert.match(source, /if\s*\(redirectTo\)\s*redirect\(redirectTo\)/);
+});

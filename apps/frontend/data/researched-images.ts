@@ -9,7 +9,7 @@ type ImageRecord = Omit<ImageProvenance, 'localPath'> & {
 let records: Record<string, ImageRecord> = {};
 
 try {
-  records = require('../public/images/news/researched/manifest.json') as Record<
+  records = require('../../../data/news/images.json') as Record<
     string,
     ImageRecord
   >;

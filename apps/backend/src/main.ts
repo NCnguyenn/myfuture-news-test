@@ -1,34 +1,23 @@
 import 'reflect-metadata';
 import * as dotenv from 'dotenv';
 import * as path from 'path';
+import { NestFactory } from '@nestjs/core';
+import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
+import { configureApp } from './app.factory';
+import { AppModule } from './app.module';
+import { getRuntimeEnv } from './config/runtime-env';
 
-// Load environment variables from repo root .env and local .env
 dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 dotenv.config({ path: path.resolve(process.cwd(), '../../.env') });
 
-import { NestFactory } from '@nestjs/core';
-import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
-import { AppModule } from './app.module';
-import { ApiExceptionFilter } from './common/api-exception.filter';
-import { ValidationPipe } from '@nestjs/common';
-
 async function bootstrap() {
+  const runtime = getRuntimeEnv();
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter(),
   );
-
-  app.setGlobalPrefix('api');
-  app.useGlobalPipes(new ValidationPipe({
-    transform: true,
-    whitelist: true,
-    forbidNonWhitelisted: true,
-  }));
-  app.useGlobalFilters(new ApiExceptionFilter());
-  app.enableCors({ origin: process.env.WEB_ORIGIN ?? 'http://localhost:3000' });
-
-  const port = Number(process.env.API_PORT ?? 4000);
-  await app.listen(port, '0.0.0.0');
+  configureApp(app, runtime.webOrigin);
+  await app.listen(runtime.port, '0.0.0.0');
 }
 
 void bootstrap();

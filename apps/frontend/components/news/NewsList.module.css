@@ -1,1 +1,8 @@
-.list { border-top: 1px solid var(--line); }
+.section {
+  min-width: 0;
+}
+
+.list {
+  min-width: 0;
+  border-top: 1px solid var(--line);
+}

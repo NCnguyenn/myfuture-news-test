@@ -1,6 +1,11 @@
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { estimateReadingTimeMinutes, markdownToSafeHtml } from './markdown-to-html';
+import {
+  EXPECTED_ARTICLE_COUNTS,
+  EXPECTED_FEATURED_ARTICLES,
+  EXPECTED_PUBLISHED_ARTICLES,
+} from './news-dataset-contract';
 
 export const OFFICIAL_CATEGORY_ORDER = [
   'phap-ly-du-an',
@@ -100,6 +105,14 @@ type ImageRecord = {
   isPlaceholder: boolean;
 };
 
+const FEATURED_ARTICLE_SLUGS = new Set([
+  'hung-yen-truc-bac-nam-89km-thanh-pho-truc-thuoc-trung-uong',
+  'bac-ninh-do-thi-da-cuc-bon-hanh-lang-phat-trien-2075',
+  'luat-phat-trien-do-thi-khu-kinh-te-dac-biet-2026',
+  'gia-can-ho-neo-cao-nguoi-mua-chon-loc-2026',
+  'quy-hoach-duong-bo-2050-bo-sung-nam-tuyen-cao-toc',
+]);
+
 export type OfficialArticleSeed = {
   title: string;
   slug: string;
@@ -136,13 +149,11 @@ function findWorkspaceRoot(): string {
     path.resolve(process.cwd(), '../..'),
   ];
   for (const candidate of candidates) {
-    if (
-      existsSync(path.join(candidate, 'docs/research/manifest-codex-2026-07-23.json'))
-    ) {
+    if (existsSync(path.join(candidate, 'data/news/articles.json'))) {
       return candidate;
     }
   }
-  throw new Error('Could not locate workspace root (manifest-codex-2026-07-23.json missing)');
+  throw new Error('Could not locate workspace root (data/news/articles.json missing)');
 }
 
 function isComplete(article: RawArticle): boolean {
@@ -183,24 +194,30 @@ function webPathToPublicFile(workspaceRoot: string, webPath: string): string {
   if (!webPath.startsWith('/')) {
     throw new Error(`Image localPath must be a relative web path starting with /: ${webPath}`);
   }
-  return path.join(
-    workspaceRoot,
-    'apps/frontend/public',
-    webPath.replace(/^\//, ''),
-  );
+  const publicRoot = path.resolve(workspaceRoot, 'apps/frontend/public');
+  const filePath = path.resolve(publicRoot, webPath.replace(/^[/\\]+/, ''));
+  const relativePath = path.relative(publicRoot, filePath);
+  if (
+    !relativePath ||
+    relativePath.startsWith('..') ||
+    path.isAbsolute(relativePath)
+  ) {
+    throw new Error(
+      `Image localPath escapes apps/frontend/public: ${webPath}`,
+    );
+  }
+  return filePath;
 }
 
 function loadImageManifest(
-  workspaceRoot: string,
+  imageManifestPath: string,
 ): Record<string, ImageRecord> {
-  const manifestPath = path.join(
-    workspaceRoot,
-    'apps/frontend/public/images/news/researched/manifest.json',
-  );
-  if (!existsSync(manifestPath)) {
-    throw new Error(`Image manifest not found: ${manifestPath}`);
+  if (!existsSync(imageManifestPath)) {
+    throw new Error(`Image manifest not found: ${imageManifestPath}`);
   }
-  return JSON.parse(readFileSync(manifestPath, 'utf8')) as Record<string, ImageRecord>;
+  return JSON.parse(
+    readFileSync(imageManifestPath, 'utf8'),
+  ) as Record<string, ImageRecord>;
 }
 
 function auditImages(
@@ -208,14 +225,21 @@ function auditImages(
   imageManifest: Record<string, ImageRecord>,
   articleSlugs: string[],
 ): void {
+  const expectedSlugs = [...articleSlugs].sort();
+  const imageSlugs = Object.keys(imageManifest).sort();
+  const missing = expectedSlugs.filter((slug) => !imageManifest[slug]);
+  const extra = imageSlugs.filter((slug) => !articleSlugs.includes(slug));
+  if (missing.length || extra.length) {
+    throw new Error(
+      `Article/image slug sets differ (missing: ${missing.join(', ') || 'none'}; extra: ${extra.join(', ') || 'none'})`,
+    );
+  }
+
   const entries = articleSlugs.map((slug) => {
     const record = imageManifest[slug];
-    if (!record) {
-      throw new Error(`Missing image manifest entry for slug: ${slug}`);
-    }
-    if (!record.localPath?.startsWith('/images/')) {
+    if (!record.localPath?.startsWith('/images/news/')) {
       throw new Error(
-        `Image localPath must be a relative web path under /images/: ${slug} -> ${record.localPath}`,
+        `Image localPath must be under /images/news/: ${slug} -> ${record.localPath}`,
       );
     }
     const filePath = webPathToPublicFile(workspaceRoot, record.localPath);
@@ -226,16 +250,11 @@ function auditImages(
   });
 
   const placeholders = entries.filter((e) => e.isPlaceholder);
-  const sources = entries.filter((e) => !e.isPlaceholder);
 
-  if (entries.length !== 30) {
-    throw new Error(`Image audit expected 30 mapped articles, got ${entries.length}`);
-  }
-  if (sources.length !== 26) {
-    throw new Error(`Image audit expected 26 source images, got ${sources.length}`);
-  }
-  if (placeholders.length !== 4) {
-    throw new Error(`Image audit expected 4 placeholders, got ${placeholders.length}`);
+  if (entries.length !== EXPECTED_PUBLISHED_ARTICLES) {
+    throw new Error(
+      `Image audit expected ${EXPECTED_PUBLISHED_ARTICLES} mapped articles, got ${entries.length}`,
+    );
   }
 
   for (const record of placeholders) {
@@ -248,35 +267,52 @@ function auditImages(
 }
 
 /**
- * Load, validate, and map the official 30 Codex articles for DB import/seed.
+ * Load, validate, and map the official Codex articles for DB import/seed.
  */
 export function loadOfficialArticles(): OfficialArticleSeed[] {
   const workspaceRoot = findWorkspaceRoot();
-  const manifestPath = path.join(
+  const articleManifestPath = path.join(
     workspaceRoot,
-    'docs/research/manifest-codex-2026-07-23.json',
+    'data/news/articles.json',
   );
-  const rawManifest = JSON.parse(readFileSync(manifestPath, 'utf8')) as RawManifest;
-  const imageManifest = loadImageManifest(workspaceRoot);
+  const imageManifestPath = path.join(
+    workspaceRoot,
+    'data/news/images.json',
+  );
+  const rawManifest = JSON.parse(
+    readFileSync(articleManifestPath, 'utf8'),
+  ) as RawManifest;
+  const imageManifest = loadImageManifest(imageManifestPath);
 
-  if (rawManifest.categories.length !== 6) {
+  const expectedCategorySlugs = Object.keys(EXPECTED_ARTICLE_COUNTS);
+  if (rawManifest.categories.length !== expectedCategorySlugs.length) {
     throw new Error(
-      `Completeness gate failed: expected 6 categories, got ${rawManifest.categories.length}`,
+      `Completeness gate failed: expected ${expectedCategorySlugs.length} categories, got ${rawManifest.categories.length}`,
     );
   }
 
   const categorySlugs = rawManifest.categories.map((c) => c.slug);
-  for (const expected of OFFICIAL_CATEGORY_ORDER) {
-    if (!categorySlugs.includes(expected)) {
-      throw new Error(`Missing approved category: ${expected}`);
+  if (new Set(categorySlugs).size !== expectedCategorySlugs.length) {
+    throw new Error('Duplicate category slugs detected in official manifest');
+  }
+  for (const expectedSlug of expectedCategorySlugs) {
+    if (!categorySlugs.includes(expectedSlug)) {
+      throw new Error(`Missing approved category: ${expectedSlug}`);
     }
   }
 
   const completeArticles = rawManifest.categories.flatMap((category) => {
     const articles = category.articles.filter(isComplete);
-    if (articles.length !== 5) {
+    const expectedCount =
+      EXPECTED_ARTICLE_COUNTS[
+        category.slug as keyof typeof EXPECTED_ARTICLE_COUNTS
+      ];
+    if (expectedCount === undefined) {
+      throw new Error(`Unknown category in official manifest: ${category.slug}`);
+    }
+    if (articles.length !== expectedCount) {
       throw new Error(
-        `Category ${category.slug} expected 5 complete articles, got ${articles.length}`,
+        `Category ${category.slug} expected ${expectedCount} complete articles, got ${articles.length}`,
       );
     }
     for (const article of articles) {
@@ -290,14 +326,14 @@ export function loadOfficialArticles(): OfficialArticleSeed[] {
     return articles;
   });
 
-  if (completeArticles.length !== 30) {
+  if (completeArticles.length !== EXPECTED_PUBLISHED_ARTICLES) {
     throw new Error(
-      `Completeness gate failed: expected 30 articles, got ${completeArticles.length}`,
+      `Completeness gate failed: expected ${EXPECTED_PUBLISHED_ARTICLES} articles, got ${completeArticles.length}`,
     );
   }
 
   const slugs = completeArticles.map((a) => a.slug);
-  if (new Set(slugs).size !== 30) {
+  if (new Set(slugs).size !== EXPECTED_PUBLISHED_ARTICLES) {
     throw new Error('Duplicate article slugs detected in official manifest');
   }
 
@@ -315,10 +351,16 @@ export function loadOfficialArticles(): OfficialArticleSeed[] {
 
   auditImages(workspaceRoot, imageManifest, slugs);
 
-  const sortedByDate = [...completeArticles].sort(
-    (left, right) => Date.parse(right.datePublished) - Date.parse(left.datePublished),
-  );
-  const featuredSlugs = new Set(sortedByDate.slice(0, 5).map((a) => a.slug));
+  if (FEATURED_ARTICLE_SLUGS.size !== EXPECTED_FEATURED_ARTICLES) {
+    throw new Error(
+      `Featured selection expected ${EXPECTED_FEATURED_ARTICLES} slugs, got ${FEATURED_ARTICLE_SLUGS.size}`,
+    );
+  }
+  for (const slug of FEATURED_ARTICLE_SLUGS) {
+    if (!slugs.includes(slug)) {
+      throw new Error(`Featured article is missing from official manifest: ${slug}`);
+    }
+  }
 
   return completeArticles
     .map((article): OfficialArticleSeed => {
@@ -336,7 +378,7 @@ export function loadOfficialArticles(): OfficialArticleSeed[] {
         publishedAt: new Date(article.datePublished),
         dateModified: article.dateModified ? new Date(article.dateModified) : null,
         isPublished: true,
-        isFeatured: featuredSlugs.has(article.slug),
+        isFeatured: FEATURED_ARTICLE_SLUGS.has(article.slug),
         readingTime: estimateReadingTimeMinutes(article.bodyMarkdown),
         sourceName: source.sourceName,
         sourceUrl: source.canonicalUrl,
@@ -356,7 +398,9 @@ export function loadOfficialArticles(): OfficialArticleSeed[] {
       };
     })
     .sort(
-      (left, right) => right.publishedAt.getTime() - left.publishedAt.getTime(),
+      (left, right) =>
+        right.publishedAt.getTime() - left.publishedAt.getTime() ||
+        left.slug.localeCompare(right.slug, 'vi'),
     );
 }
 
