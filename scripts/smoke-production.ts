@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { visibleServerMarkup } from './lib/production-smoke-html';
 import {
   EXPECTED_ARTICLE_COUNTS,
   EXPECTED_PUBLISHED_ARTICLES,
@@ -257,13 +258,15 @@ async function main() {
     web,
     `/ban-tin/tim-kiem?q=${encodeURIComponent('hung yen')}`,
   );
+  const visibleSearchHtml = visibleServerMarkup(searchHtml);
+
   assert.doesNotMatch(
-    searchHtml,
+    visibleSearchHtml,
     /Không tìm thấy nội dung|không tồn tại hoặc bài viết chưa được xuất bản/i,
-    'search page must not fall through to article not-found',
+    'search page must not render article not-found chrome',
   );
   assert.match(
-    searchHtml,
+    visibleSearchHtml,
     /Kết quả tìm kiếm|Tìm thấy/i,
     'search page must render search chrome',
   );

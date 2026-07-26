@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
@@ -57,4 +58,104 @@ test('database verifier loads the root environment before creating Prisma', () =
     source.indexOf("import 'dotenv/config';") <
       source.indexOf('new PrismaClient()'),
   );
+});
+
+test('root npm test runs both application test suites', () => {
+  const packageJson = JSON.parse(
+    readFileSync(path.join(root, 'package.json'), 'utf8'),
+  ) as { scripts?: Record<string, string> };
+
+  assert.equal(
+    packageJson.scripts?.test,
+    'npm run test:web && npm run test:api',
+  );
+});
+
+test('frontend lint enables the official Next.js rules', () => {
+  const packageJson = JSON.parse(
+    readFileSync(path.join(root, 'package.json'), 'utf8'),
+  ) as { devDependencies?: Record<string, string> };
+  const eslintSource = readFileSync(
+    path.join(root, 'eslint.config.mjs'),
+    'utf8',
+  );
+
+  assert.ok(packageJson.devDependencies?.['@next/eslint-plugin-next']);
+  assert.match(eslintSource, /@next\/eslint-plugin-next/);
+  assert.match(eslintSource, /'@next\/next'/);
+  assert.match(eslintSource, /core-web-vitals/);
+
+  const eslintResult = spawnSync(
+    process.execPath,
+    [
+      path.join(root, 'node_modules/eslint/bin/eslint.js'),
+      '--stdin',
+      '--stdin-filename',
+      'apps/frontend/lint-contract.tsx',
+    ],
+    {
+      cwd: root,
+      encoding: 'utf8',
+      input: '<a href="/ban-tin">Bản tin</a>',
+    },
+  );
+
+  assert.match(
+    eslintResult.stdout,
+    /@next\/next\/no-html-link-for-pages/,
+    'official Next.js rules must detect internal HTML links in the App Router',
+  );
+});
+
+test('frontend lint resolves the App Router from the frontend workspace', () => {
+  const eslintResult = spawnSync(
+    process.execPath,
+    [
+      path.join(root, 'node_modules/eslint/bin/eslint.js'),
+      '--stdin',
+      '--stdin-filename',
+      'lint-contract.tsx',
+    ],
+    {
+      cwd: path.join(root, 'apps/frontend'),
+      encoding: 'utf8',
+      input: '<a href="/ban-tin">Bản tin</a>',
+    },
+  );
+
+  assert.match(
+    eslintResult.stdout,
+    /@next\/next\/no-html-link-for-pages/,
+    'official Next.js rules must resolve App Router routes from workspace commands',
+  );
+});
+
+test('Next build detects the official plugin in the flat config', () => {
+  const eslintResult = spawnSync(
+    process.execPath,
+    [
+      path.join(root, 'node_modules/eslint/bin/eslint.js'),
+      '--print-config',
+      'eslint.config.mjs',
+    ],
+    {
+      cwd: root,
+      encoding: 'utf8',
+    },
+  );
+  const config = JSON.parse(eslintResult.stdout) as { plugins?: string[] };
+
+  assert.ok(
+    config.plugins?.includes('@next/next'),
+    'the Next.js build must see the official plugin when it inspects the config file',
+  );
+});
+
+test('frontend build does not bypass ESLint failures', () => {
+  const nextConfigSource = readFileSync(
+    path.join(root, 'apps/frontend/next.config.ts'),
+    'utf8',
+  );
+
+  assert.doesNotMatch(nextConfigSource, /ignoreDuringBuilds\s*:\s*true/);
 });

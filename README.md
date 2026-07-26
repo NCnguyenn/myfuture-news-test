@@ -93,14 +93,16 @@ Run these commands from the repository root after dependencies are installed:
 npm run lint
 npm run db:validate
 npm run db:generate
+npm test
 npm run test:web
 npm run test:api
 npm run typecheck
 npm run build
 ```
 
-CI runs the quality gates on Node.js 20 and Node.js 22; Vercel production
-builds use Node.js 22.
+`npm test` runs both application suites; `test:web` and `test:api` remain
+available for focused debugging. CI runs the quality gates on Node.js 20 and
+Node.js 22; Vercel production builds use Node.js 22.
 
 ## API examples
 
